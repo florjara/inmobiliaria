@@ -8,8 +8,8 @@ import javax.persistence.Id;
 public class Usuario {
 
     @Id
-    @Column(name = "id", length = 100, nullable = false)
-    private Integer id;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
@@ -20,25 +20,33 @@ public class Usuario {
     @Column(name = "correo", length = 100, nullable = false)
     private String correo;
 
-    @Column(name = "telefono", length = 100, nullable = false)
-    private Integer telefono;
+    @Column(name = "telefono", nullable = false)
+    private Long telefono;
+
+    @Column(name = "contrasena", nullable = false)
+    private String contrasena;
+
+    @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean eliminado;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombre, String apellido, String correo, Integer telefono) {
+    public Usuario(Long id, String nombre, String apellido, String correo, Long telefono, String contrasena, Boolean eliminado) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.telefono = telefono;
+        this.contrasena = contrasena;
+        this.eliminado = eliminado;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -66,11 +74,28 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public Integer getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public Boolean getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(Boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
 }

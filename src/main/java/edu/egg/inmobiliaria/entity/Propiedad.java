@@ -10,7 +10,7 @@ public class Propiedad {
     @Id
     @Column(name = "id", length = 100, nullable = false)
     @GeneratedValue(strategy = IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "titulo", length = 100, nullable = false)
     private String titulo;
@@ -18,45 +18,64 @@ public class Propiedad {
     @Column(name = "precio", length = 100, nullable = false)
     private Double precio;
 
-    @Column(name = "habitacion", length = 100, nullable = false)
-    private Integer habitacion;
+    @Column(name = "ambiente", length = 100, nullable = false)
+    private Integer ambiente;
 
     @Column(name = "banos", length = 100, nullable = false)
     private Integer banos;
 
-    @Column(name = "descripcion", length = 100, nullable = false)
+    @Column(name = "descripcion", length = 100)
     private String descripcion;
 
-    @Column(name = "estacionamiento", nullable = false)
+    @Column(name = "tipo", nullable = false)
+    private String tipo;
+
+    @Column(name = "tipo_transaccion", nullable = false)
+    private String tipoTransaccion;
+
+    @Column(name = "estacionamiento")
     private Boolean estacionamiento;
 
-    @Column(name = "patio", nullable = false)
+    @Column(name = "patio")
     private Boolean patio;
 
+    @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean eliminado;
+
+    @Column(name = "direccion")
+    private String direccion;
+
+    //@Column(name = "imagen")
+    //private String imagen;
+
     @ManyToOne
-    @JoinColumn(name = "Usuario", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "Usuario", referencedColumnName = "id")
     private Usuario usuario;
 
     public Propiedad() {
     }
 
-    public Propiedad(Integer id, String titulo, Double precio, Integer habitacion, Integer banos, String descripcion, Boolean estacionamiento, Boolean patio, Usuario usuario) {
+    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, Boolean eliminado, String direccion, Usuario usuario) {
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
-        this.habitacion = habitacion;
+        this.ambiente = ambiente;
         this.banos = banos;
         this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.tipoTransaccion = tipoTransaccion;
         this.estacionamiento = estacionamiento;
         this.patio = patio;
+        this.eliminado = eliminado;
+        this.direccion = direccion;
         this.usuario = usuario;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,12 +95,12 @@ public class Propiedad {
         this.precio = precio;
     }
 
-    public Integer getHabitacion() {
-        return habitacion;
+    public Integer getAmbiente() {
+        return ambiente;
     }
 
-    public void setHabitacion(Integer habitacion) {
-        this.habitacion = habitacion;
+    public void setAmbiente(Integer ambiente) {
+        this.ambiente = ambiente;
     }
 
     public Integer getBanos() {
@@ -98,6 +117,22 @@ public class Propiedad {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipoTransaccion() {
+        return tipoTransaccion;
+    }
+
+    public void setTipoTransaccion(String tipoTransaccion) {
+        this.tipoTransaccion = tipoTransaccion;
     }
 
     public Boolean getEstacionamiento() {
@@ -118,6 +153,22 @@ public class Propiedad {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public Boolean getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(Boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public void setUsuario(Usuario usuario) {

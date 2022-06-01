@@ -13,7 +13,7 @@
                 <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
 
                 <div th:if="${usuarios.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
-                    You must enter people.
+                    no hay usuarios.
                     <a th:href="@{/usuarios/form}" class="alert-link">Crear Usuario.</a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -40,7 +40,7 @@
                             <td><a class="btn btn-warning" th:href="@{/usuarios/form/__${usuario.id}__}">Actualizar</a></td>
                             <td>
                                 <form th:action="@{/usuarios/delete/__${usuario.id}__}" method="POST">
-                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    <button class="btn btn-danger" type="submit">Borrar</button>
                                 </form>
                             </td>
                         </tr>

@@ -22,6 +22,7 @@ public class UsuarioService {
 
         usuario.setNombre(dto.getNombre());
         usuario.setApellido(dto.getApellido());
+        usuario.setContrasena(dto.getContrasena());
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
 
@@ -36,6 +37,7 @@ public class UsuarioService {
 
         usuario.setNombre(dto.getNombre());
         usuario.setApellido(dto.getApellido());
+        usuario.setContrasena(dto.getContrasena());
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
 
@@ -45,7 +47,7 @@ public class UsuarioService {
 
     //busca un usuario por id
     @Transactional(readOnly = true)
-    public Usuario getById(Integer id){
+    public Usuario getById(Long id){
         return usuarioRepository.findById(id).get();
     }
 
@@ -57,13 +59,13 @@ public class UsuarioService {
 
     //habilita un usuario
     @Transactional
-    public void enableById(Integer id){
+    public void enableById(Long id){
         usuarioRepository.getReferenceById(id);
     }
 
     //borra un usuario por id
     @Transactional
-    public void deleteById(Integer id){
+    public void deleteById(Long id){
         usuarioRepository.deleteById(id);
     }
 
