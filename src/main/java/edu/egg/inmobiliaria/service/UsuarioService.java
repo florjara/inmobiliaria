@@ -16,7 +16,7 @@ public class UsuarioService {
 
     //crea un usuario
     @Transactional
-    public void crear (Usuario dto){
+    public void create (Usuario dto){
 
         Usuario usuario = new Usuario();
 
