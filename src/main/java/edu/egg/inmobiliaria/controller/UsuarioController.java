@@ -43,7 +43,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/form/{id}")
-    public ModelAndView getForm(@PathVariable Integer id){
+    public ModelAndView getForm(@PathVariable Long id){
         ModelAndView mav = new ModelAndView("usuarios-form");
         mav.addObject("usuario", usuarioService.getById(id));
         mav.addObject("action", "update");
@@ -67,7 +67,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/delete/{id}")
-    public RedirectView delete(@PathVariable Integer id) {
+    public RedirectView delete(@PathVariable Long id) {
         RedirectView redirect = new RedirectView("/usuarios");
         usuarioService.deleteById(id);
         return redirect;
