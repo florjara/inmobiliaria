@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragmentos/head :: head"></head>
+
+<body>
+<header th:replace="fragmentos/header :: header"></header>
+
+<main>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6">
+                <form th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post" autocomplete="off"
+                      class="needs-validation" novalidate>
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="form-floating mb-3">
+                        <input type="text" th:field="*{titulo}" id="titulo" class="form-control" placeholder="titulo"
+                               required>
+                        <label for="titulo">titulo</label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="number" th:field="*{precio}" id="precio" class="form-control" placeholder="precio"
+                               required>
+                        <label for="precio">precio</label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="number" th:field="*{ambiente}" id="ambiente" class="form-control" placeholder="ambiente"
+                               required>
+                        <label for="ambiente">ambiente</label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="number" th:field="*{banos}" id="banos" class="form-control" placeholder="banos"
+                               required>
+                        <label for="banos">baños</label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" th:field="*{descripcion}" id="descripcion" class="form-control" placeholder="descripcion"
+                               required>
+                        <label for="descripcion">descripcion</label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" th:field="*{tipo}" id="tipo" class="form-control" placeholder="tipo"
+                               required>
+                        <label for="tipo">tipo</label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" th:field="*{tipoTransaccion}" id="tipoTransaccion" class="form-control" placeholder="tipoTransaccion"
+                               required>
+                        <label for="tipoTransaccion">tipo transaccion</label>
+
+                    </div>
+
+
+
+                    <div class="form-floating mb-3">
+                        <select  th:field="*{estacionamiento}" class="select" id="estacionamiento" >
+                            <option value="1" >si</option>
+                            <option value="0" >no</option>
+                        </select>
+                        <label for="estacionamiento">estacionamiento</label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select  th:field="*{patio}" class="select" id="patio" >
+                            <option value="1" >si</option>
+                            <option value="0" >no</option>
+                        </select>
+                        <label for="patio">patio</label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select th:field="*{usuario}" id="usuario" class="form-select" aria-label="Select usuario"
+                                required>
+                            <option selected value="">Dueño</option>
+                            <option th:each="usuario : ${usuarios}" th:text="|${usuario.nombre} ${usuario.apellido}|"
+                                    th:value="${usuario.id}"></option>
+                        </select>
+                        <label for="usuario">Select dueño</label>
+                        <div class="invalid-feedback">Author is required</div>
+                    </div>
+
+
+                    <div class="form-floating mb-3">
+                        <input type="text" th:field="*{direccion}" id="direccion" class="form-control" placeholder="direccion"
+                               required>
+                        <label for="direccion">direccion</label>
+                    </div>
+
+
+
+                    <button th:text="${action == 'create' ? 'Create' : 'Update'}" type="submit"
+                            class="btn btn-primary"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/validation.js}"></script>
+</body>
+
+</html>

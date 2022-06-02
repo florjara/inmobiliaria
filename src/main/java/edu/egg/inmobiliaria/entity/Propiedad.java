@@ -33,14 +33,14 @@ public class Propiedad {
     @Column(name = "tipo_transaccion", nullable = false)
     private String tipoTransaccion;
 
-    @Column(name = "estacionamiento")
+    @Column(name = "estacionamiento", columnDefinition = "BOOLEAN")
     private Boolean estacionamiento;
 
-    @Column(name = "patio")
+    @Column(name = "patio",columnDefinition = "BOOLEAN" )
     private Boolean patio;
 
-    @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
-    private Boolean eliminado;
+    //@Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
+    //private Boolean eliminado; agregar despues
 
     @Column(name = "direccion")
     private String direccion;
@@ -55,7 +55,7 @@ public class Propiedad {
     public Propiedad() {
     }
 
-    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, Boolean eliminado, String direccion, Usuario usuario) {
+    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, String direccion, Usuario usuario) {
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
@@ -66,7 +66,6 @@ public class Propiedad {
         this.tipoTransaccion = tipoTransaccion;
         this.estacionamiento = estacionamiento;
         this.patio = patio;
-        this.eliminado = eliminado;
         this.direccion = direccion;
         this.usuario = usuario;
     }
@@ -155,13 +154,6 @@ public class Propiedad {
         return usuario;
     }
 
-    public Boolean getEliminado() {
-        return eliminado;
-    }
-
-    public void setEliminado(Boolean eliminado) {
-        this.eliminado = eliminado;
-    }
 
     public String getDireccion() {
         return direccion;
