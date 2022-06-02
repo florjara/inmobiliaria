@@ -14,7 +14,10 @@
 
                 <div th:if="${propiedades.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
                     No hay ninguna propiedad.
+                    <a th:href="@{/propiedades/form}" class="alert-link">Crear Propiedad.</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+
 
                 <div th:unless="${propiedades.isEmpty()}" class="table-responsive">
                     <table class="table table-hover table-bordered">
@@ -38,11 +41,21 @@
                             <td th:text="${propiedad.descripcion}"></td>
                             <td th:text="|${propiedad.usuario.nombre} ${propiedad.usuario.apellido}|"></td>
                             <td th:text="${propiedad.precio}"></td>
-                            <td th:text="${propiedad.habitacion}"></td>
+                            <td th:text="${propiedad.ambiente}"></td>
                             <td th:text="${propiedad.banos}"></td>
+                            <td th:text="${propiedad.patio}"></td>
                             <td th:text="${propiedad.estacionamiento}"></td>
+
+                            <td><a class="btn btn-warning" th:href="@{/propiedades/form/__${propiedad.id}__}">Actualizar</a></td>
+                            <td>
+                                <form th:action="@{/propiedades/delete/__${propiedad.id}__}" method="POST">
+                                    <button class="btn btn-danger" type="submit">Borrar</button>
+                                </form>
+                            </td>
+
                         </tr>
                         </tbody>
+
                     </table>
                 </div>
             </div>

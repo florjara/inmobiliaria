@@ -44,7 +44,7 @@ public class UsuarioController {
 
     @GetMapping("/form/{id}")
     public ModelAndView getForm(@PathVariable Long id){
-        ModelAndView mav = new ModelAndView("usuarios-form");
+        ModelAndView mav = new ModelAndView("usuario-form");
         mav.addObject("usuario", usuarioService.getById(id));
         mav.addObject("action", "update");
         return mav;
@@ -53,7 +53,7 @@ public class UsuarioController {
     @PostMapping("/create")
     public RedirectView create(Usuario usuarioDto, RedirectAttributes attributes){
         RedirectView redirect = new RedirectView("/usuarios");
-        usuarioService.crear(usuarioDto);
+        usuarioService.create(usuarioDto);
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }
