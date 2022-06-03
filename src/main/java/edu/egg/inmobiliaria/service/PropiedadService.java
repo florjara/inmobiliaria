@@ -1,7 +1,9 @@
 package edu.egg.inmobiliaria.service;
 
 import edu.egg.inmobiliaria.entity.Propiedad;
+import edu.egg.inmobiliaria.entity.Usuario;
 import edu.egg.inmobiliaria.repository.PropiedadRepository;
+import edu.egg.inmobiliaria.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,16 +15,18 @@ public class PropiedadService {
 
     @Autowired
     private PropiedadRepository propiedadRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository; //linea modificada para poner el usuario por defecto en 1
 
     @Transactional
-    public void crear (Propiedad dto){
+    public void crear(Propiedad dto) {
 
         Propiedad propiedad = new Propiedad();
 
         propiedad.setTitulo(dto.getTitulo());
         propiedad.setDescripcion(dto.getDescripcion());
         propiedad.setPrecio(dto.getPrecio());
-        propiedad.setUsuario(dto.getUsuario());
+        
         propiedad.setAmbiente(dto.getAmbiente());
         propiedad.setBanos(dto.getBanos());
         propiedad.setPatio(dto.getPatio());
@@ -30,13 +34,15 @@ public class PropiedadService {
         propiedad.setDireccion(dto.getDireccion());
         propiedad.setTipo(dto.getTipo());
         propiedad.setTipoTransaccion(dto.getTipoTransaccion());
-
+        
+        Usuario usuario = usuarioRepository.findById(1L).get(); //linea modificada para poner el usuario por defecto en 1
+        propiedad.setUsuario(usuario); //linea modificada para poner el usuario por defecto en 1
         propiedadRepository.save(propiedad);
 
     }
 
     @Transactional
-    public void update (Propiedad dto){
+    public void update(Propiedad dto) {
 
         Propiedad propiedad = propiedadRepository.findById(dto.getId()).get();
 
@@ -56,17 +62,17 @@ public class PropiedadService {
     }
 
     @Transactional(readOnly = true)
-    public Propiedad getById(Long id){
+    public Propiedad getById(Long id) {
         return propiedadRepository.findById(id).get();
     }
 
     @Transactional(readOnly = true)
-    public List<Propiedad> getAll(){
+    public List<Propiedad> getAll() {
         return propiedadRepository.findAll();
     }
 
     @Transactional
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         propiedadRepository.deleteById(id);
     }
 

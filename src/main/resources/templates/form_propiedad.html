@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-   <head th:replace="fragments/head :: head"></head>
-  
+    <head th:replace="fragments/head :: head"></head>
+
     <body >
 
         <main>
             <div class="contenedor">
                 <div class="row mt-5">
                     <div class="col-3">
-    
-                        <form class="formulario"  th:action="@{/propiedad/__${action}__}" th:object="${propiedades}" method="post" autocomplete="off">
+
+                        <form class="formulario"  th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post" autocomplete="off">
                             <input type="hidden" th:field="*{id}">
                             <h1>Formulario de Registro de propiedades</h1>
-                              
+
                             <div class="contenedor_input" >
                                 <label for="titulo" >Titulo(*)</label>
                                 <input type="text" maxlength="30" class="form-control"  th:field="*{titulo}" id="titulo" required placeholder="Casa a estrenar"> 
                             </div>
-        
+
                             <br>
 
                             <div class="contenedor_input">
                                 <label for="tipo_trans" >Tipo de transacción(*)</label>
-                                <select name="tipo_trans" id="tipo_trans" th:field="*{tipo_trans}" id="tipo_trans">
-                                    <option> Venta </option>
-                                    <option > Alquiler</option>
+                                <select name="tipo_trans" th:field="*{tipoTransaccion}" id="tipo_trans">
+                                    <option value="Venta"> Venta </option>
+                                    <option value="Alquiler" > Alquiler</option>
                                 </select>
 
                             </div>
@@ -32,7 +32,7 @@
 
                             <div class="contenedor_input">
                                 <label for="tipo_propiedad" >Tipo de propiedad(*)</label>
-                                <select name="tipo_propiedad" id="tipo_propiedad" th:field="*{tipo_propiedad}" id="tipo_propiedad" required>
+                                <select name="tipo_propiedad" id="tipo_propiedad" th:field="*{tipo}" required>
                                     <option value="Casa"> Casa </option>
                                     <option value="Departamento"> Departamento</option>
                                     <option value="Local"> Local</option>
@@ -43,39 +43,40 @@
 
                             <div class="contenedor_input">
                                 <label for="ambientes" >Ambientes(*)</label>
-                                <input type="number" max="10" min="1" class="form-control" th:field="*{ambientes}" id="ambientes" required>
-                                <div class="text-danger mt-2" th:if="${#fields.hasErrors('ambientes')}" th:errors="*{ambientes}"></div>
+                                <input type="number" max="10" min="1" class="form-control" th:field="*{ambiente}" id="ambientes" required>
+                                <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('ambientes')}" th:errors="*{ambientes}"></div>-->
                             </div>
                             <br>
 
                             <div class="contenedor_input">
                                 <label for="banio">Baños(*)</label>
-                                <input type="number" max="10" min="1" class="form-control" th:field="*{banio}" id="banio" required>
-                                <div class="text-danger mt-2" th:if="${#fields.hasErrors('banio')}" th:errors="*{banio}"></div>
+                                <input type="number" max="10" min="1" class="form-control" th:field="*{banos}" id="banio" required>
+                                <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('banio')}" th:errors="*{banio}"></div>-->
+                                
                             </div>
                             <br>
 
                             <div class="contenedor_input">
                                 <label for="garage" >Garage/Estacionamiento</label>
-                                <select name="garage" id="garage" th:field="*{garage}" id="garage" >
-                                    <option value="Si"> Si </option>
-                                    <option value="No"> No</option>
+                                <select name="garage" id="garage" th:field="*{estacionamiento}">
+                                    <option value="1"> Si </option>
+                                    <option value="0"> No</option>
                                 </select>
                             </div>
                             <br>
 
                             <div class="contenedor_input">
                                 <label for="patio" >Patio/Balcon</label>
-                                <select name="patio" id="patio" th:field="*{patio}" id="patio" >
-                                    <option value="Si"> Si </option>
-                                    <option value="No"> No</option>
+                                <select name="patio" th:field="*{patio}" id="patio" >
+                                    <option value="1"> Si </option>
+                                    <option value="0"> No</option>
                                 </select>
                             </div>
                             <br>
-                            
+
                             <div class="contenedor_input"  >
                                 <label for="precio">Precio de la propiedad (*)</label>
-                                <input type="text" maxlength="15" class="form-control" th:field="*{precio}" id="precio" required> 
+                                <input type="number" maxlength="15" class="form-control" th:field="*{precio}" id="precio" required> 
                             </div>
                             <br>
 
@@ -84,29 +85,28 @@
                                 <input type="text" maxlength="30" class="form-control" th:field="*{direccion}" id="precio" > 
                             </div>
                             <br>
-                              
-                            
+
+
                             <div class="contenedor_input">
                                 <label for="descripcion">Descripción extra de la propiedad</label> <br>
-                                <textarea  id="descripcion" cols="25" rows="5"  th:field="*{descripcion}" id="descripcion"></textarea>
-                               
-                            </div>
-                            <br>
-                            
-                            <div class="contenedor_input">
-                                <label for="fotos">Cargue aquí las fotos de la propiedad(*) </label>  
-                                <label class="leyenda"> (Presione Ctrl para cargar más Fotos) </label>
-                                <input type="file" multiple accept="image/png, image/jpeg"  class="form-control" th:field="*{fotos}" id="fotos" required >
-                                <div class="text-danger mt-2" th:if="${#fields.hasErrors('fotos')}" th:errors="*{fotos}"></div>
-                            </div>
-                            <br>
+                                <textarea cols="25" rows="5"  th:field="*{descripcion}" id="descripcion"></textarea>
 
-                            <button type="submit"  th:text="${action == }"> Cargar Propiedad</button>
+                            </div>
+                            <!--   <br>
+                               
+                               <div class="contenedor_input">
+                                   <label for="fotos">Cargue aquí las fotos de la propiedad(*) </label>  
+                                   <label class="leyenda"> (Presione Ctrl para cargar más Fotos) </label>
+                                   <input type="file" multiple accept="image/png, image/jpeg"  class="form-control" th:field="*{fotos}" id="fotos" required >
+                                   <div class="text-danger mt-2" th:if="${#fields.hasErrors('fotos')}" th:errors="*{fotos}"></div>
+                               </div>
+                               <br> -->
+                            <button type="submit">Cargar Propiedad</button>
                         </form>
                     </div>
                 </div>
             </div>
-          
+
         </main>
 
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

@@ -25,7 +25,7 @@ public class UsuarioController {
 
     @GetMapping
     public ModelAndView getUsuarios (HttpServletRequest request){
-        ModelAndView mav = new ModelAndView("usuario-tabla");
+        ModelAndView mav = new ModelAndView("index");
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (inputFlashMap != null) mav.addObject("success", inputFlashMap.get("success"));
@@ -36,21 +36,21 @@ public class UsuarioController {
 
     @GetMapping("/form")
     public ModelAndView getForm(){
-        ModelAndView mav = new ModelAndView("usuario-form");
+        ModelAndView mav = new ModelAndView("form_usuario");
         mav.addObject("usuario", new Usuario());
-        mav.addObject("action", "create");
+        mav.addObject("action", "registrar");
         return mav;
     }
 
     @GetMapping("/form/{id}")
     public ModelAndView getForm(@PathVariable Long id){
-        ModelAndView mav = new ModelAndView("usuario-form");
+        ModelAndView mav = new ModelAndView("form_usuario");
         mav.addObject("usuario", usuarioService.getById(id));
-        mav.addObject("action", "update");
+        mav.addObject("action", "actualizar");
         return mav;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/registrar")
     public RedirectView create(Usuario usuarioDto, RedirectAttributes attributes){
         RedirectView redirect = new RedirectView("/usuarios");
         usuarioService.create(usuarioDto);
@@ -58,16 +58,16 @@ public class UsuarioController {
         return redirect;
     }
 
-    @PostMapping("/update")
-    public RedirectView update(Usuario usuarioDto, RedirectAttributes attributes) {
+    @PostMapping("/actualizar")
+    public RedirectView actualizar(Usuario usuarioDto, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/usuarios");
         usuarioService.update(usuarioDto);
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }
 
-    @PostMapping("/delete/{id}")
-    public RedirectView delete(@PathVariable Long id) {
+    @PostMapping("/eliminar/{id}")
+    public RedirectView eliminar(@PathVariable Long id) {
         RedirectView redirect = new RedirectView("/usuarios");
         usuarioService.deleteById(id);
         return redirect;

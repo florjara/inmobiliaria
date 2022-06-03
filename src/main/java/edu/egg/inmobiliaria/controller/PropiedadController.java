@@ -30,7 +30,7 @@ public class PropiedadController {
 
     @GetMapping
     public ModelAndView getBooks(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("propiedad-tabla");
+        ModelAndView mav = new ModelAndView("index");
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (inputFlashMap != null) mav.addObject("success", inputFlashMap.get("success"));
@@ -41,40 +41,40 @@ public class PropiedadController {
 
     @GetMapping("/form")
     public ModelAndView getForm(){
-        ModelAndView mav = new ModelAndView("propiedad-form");
+        ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("propiedad", new Propiedad());
         mav.addObject("usuarios", usuarioService.getAll());
-        mav.addObject("action", "create");
+        mav.addObject("action", "crear");
         return mav;
     }
 
     @GetMapping("/form/{id}")
     public ModelAndView getForm(@PathVariable Long id){
-        ModelAndView mav = new ModelAndView("propiedad-form");
+        ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("propiedad", propiedadService.getById(id));
-        mav.addObject("action", "update");
+        mav.addObject("action", "actualizar");
         return mav;
     }
 
-    @PostMapping("/create")
-    public RedirectView create(Propiedad propiedadDto, RedirectAttributes attributes){
+    @PostMapping("/crear")
+    public RedirectView crear(Propiedad propiedadDto, RedirectAttributes attributes){
         RedirectView redirect = new RedirectView("/propiedades");
         propiedadService.crear(propiedadDto);
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }
 
-    @PostMapping("/update")
-    public RedirectView update(Propiedad propiedadDto, RedirectAttributes attributes) {
+    @PostMapping("/actualizar")
+    public RedirectView actualizar(Propiedad propiedadDto, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/propiedades");
         propiedadService.update(propiedadDto);
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }
 
-    @PostMapping("/delete/{id}")
-    public RedirectView delete(@PathVariable Long id) {
+    @PostMapping("/eliminar/{id}")
+    public RedirectView eliminar(@PathVariable Long id) {
         RedirectView redirect = new RedirectView("/propiedades");
         propiedadService.deleteById(id);
         return redirect;
