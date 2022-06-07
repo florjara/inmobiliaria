@@ -23,11 +23,11 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
         this.encriptador = encriptador;
     }
 
-    public AppSecurity(boolean disableDefaults, UsuarioService usuarioService, BCryptPasswordEncoder encriptador) {
-        super(disableDefaults);
-        this.usuarioService = usuarioService;
-        this.encriptador = encriptador;
-    }
+//    public AppSecurity(boolean disableDefaults, UsuarioService usuarioService, BCryptPasswordEncoder encriptador) {
+//        super(disableDefaults);
+//        this.usuarioService = usuarioService;
+//        this.encriptador = encriptador;
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,14 +40,14 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/usuarios/sign-up", "/usuarios/register", "/","/css/*", "/js/*").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()//.authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/usuarios/login")
                 .loginProcessingUrl("/logincheck")
                 .usernameParameter("correo")
                 .passwordParameter("contrasena")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/",true)
                 .failureUrl("/usuarios/login?error=true")
                 .permitAll()
                 .and()

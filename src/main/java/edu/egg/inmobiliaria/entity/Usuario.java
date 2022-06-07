@@ -9,6 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "usuario", indexes = {@Index(name = "idx_correo", columnList = "correo")})
 @SQLDelete(sql = "UPDATE usuario SET eliminado = true WHERE id = ?")
+//@Where()--> para que los eliminados no aparezcan en las consultas tipo find all
 public class Usuario {
 
     @Id

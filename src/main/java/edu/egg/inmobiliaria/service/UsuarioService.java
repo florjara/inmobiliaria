@@ -44,6 +44,7 @@ public class UsuarioService implements UserDetailsService {
         usuario.setContrasena(encriptador.encode(dto.getContrasena()));
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
+        usuario.setEliminado(Boolean.FALSE);
 
         usuarioRepository.save(usuario);
     }
