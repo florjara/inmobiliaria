@@ -77,7 +77,7 @@ public class UsuarioController{
 
     @PostMapping("/registrar")
     public RedirectView signup(Usuario usuarioDto, RedirectAttributes atributos) {
-        RedirectView redireccion = new RedirectView("/");
+        RedirectView redireccion = new RedirectView("/login");
 
 
         try {
