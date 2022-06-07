@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+html {
+    height: 100%;
+}
+
+
+body {
+font-family: georgia, times, serif;
+color: #333;
+font-size: 1.2rem;
+line-height: 1.6em;
+margin: 0;
+
+
+display: grid;
+
+min-height: 100%;
+grid-template-rows: auto 1fr auto;
+
+
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 1.3em;  
+}
+
+p {
+    margin-bottom: 1.6em;
+}
+
+.container {
+    width: 85%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.header {
+    background: #320000;
+    color: white;
+    padding: 2rem 0;
+
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+
+.header a {
+    color: #ffb48a;
+    text-decoration: none;
+
+}
+
+.logo-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 1.4em;
+}
+
+
+.navigation ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navigation ul li {
+    display: inline-block;
+}
+
+.navigation ul li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    transition: all 0.4s linear;
+    border-radius: 5px;
+}
+
+.navigation ul li a:hover {
+    text-decoration-line: underline;
+}
+
+.main {
+    padding-top: 12rem;
+}
+
+
+/* Botón registro e Inicio Sesión */
+
+.get-started-btn {
+    margin-left: 25px;
+    color: black;
+    border-radius: 4px;
+    padding: 6px 25px 8px 25px;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 13px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    border: 2px solid #c57d56;
+}
+
+.get-started-btn:hover {
+    background: #c57d56;
+    color: #fff;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: auto;
+
+
+}
+
+.pie_de_pagina {
+    width: 100%;
+    background-color: #320000;
+}
+
+.pie_de_pagina .area_1 .box figure img {
+    width: 250px;
+}
+
+.pie_de_pagina .area_1 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 50px;
+    padding: 45px 0 px;
+}
+
+.pie_de_pagina .area_1 .box figure {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.pie_de_pagina .area_1 .box h2 {
+    color: #c57d56;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+.pie_de_pagina .area_1 .box p {
+    color: #ffb48a;
+    margin-bottom: 10px;
+}
+
+.pie_de_pagina .area_1 .redes_sociales a {
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: #fff;
+    margin-right: 10px;
+    background-color: #8d4925;
+    text-align: center;
+    transition: all 300ms ease;
+}
+
+.pie_de_pagina .area_1 .redes_sociales a:hover {
+    color: #5d2417;
+}
+
+.pie_de_pagina .area_2 {
+    background-color: #5d2417;
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.pie_de_pagina .area_2 small {
+    font-size: 15px;
+}
+
+@media screen and (max-width:800px) {
+    .pie_de_pagina .area_1 {
+        width: 90%;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 30px;
+        padding: 35px 0 px;
+    }
+}
+
+/* FORMULARIO */
+
+form label {
+    color: #38a8ca;
+    font-weight: bold;
+}
