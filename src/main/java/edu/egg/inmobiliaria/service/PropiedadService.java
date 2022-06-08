@@ -13,10 +13,15 @@ import java.util.List;
 @Service
 public class PropiedadService {
 
+
+    private final PropiedadRepository propiedadRepository;
+    private final UsuarioRepository usuarioRepository; //linea modificada para poner el usuario por defecto en 1
+
     @Autowired
-    private PropiedadRepository propiedadRepository;
-    @Autowired
-    private UsuarioRepository usuarioRepository; //linea modificada para poner el usuario por defecto en 1
+    public PropiedadService(PropiedadRepository propiedadRepository, UsuarioRepository usuarioRepository) {
+        this.propiedadRepository = propiedadRepository;
+        this.usuarioRepository = usuarioRepository;
+    }
 
     @Transactional
     public void crear(Propiedad dto) {

@@ -1,13 +1,14 @@
 package edu.egg.inmobiliaria.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.SQLDelete;
+
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "usuario", indexes = {@Index(name = "idx_correo", columnList = "correo")})
+@SQLDelete(sql = "UPDATE usuario SET eliminado = true WHERE id = ?")
 public class Usuario {
 
     @Id
@@ -21,7 +22,7 @@ public class Usuario {
     @Column(name = "apellido", length = 100, nullable = false)
     private String apellido;
 
-    @Column(name = "correo", length = 100, nullable = false)
+    @Column(name = "correo", length = 100, nullable = false, unique = true)
     private String correo;
 
     @Column(name = "telefono", nullable = false)
@@ -30,8 +31,8 @@ public class Usuario {
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
 
-    //@Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
-    //private Boolean eliminado;
+    @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean eliminado;
 
 
     public Usuario() {
@@ -92,5 +93,13 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public Boolean getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(Boolean eliminado) {
+        this.eliminado = eliminado;
     }
 }

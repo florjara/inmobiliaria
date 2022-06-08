@@ -40,7 +40,7 @@ public class PropiedadController {
     }
 
     @GetMapping("/form")
-    public ModelAndView getForm(){
+    public ModelAndView getForm() {
         ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("propiedad", new Propiedad());
         mav.addObject("usuarios", usuarioService.getAll());
@@ -49,7 +49,7 @@ public class PropiedadController {
     }
 
     @GetMapping("/form/{id}")
-    public ModelAndView getForm(@PathVariable Long id){
+    public ModelAndView getForm(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("propiedad", propiedadService.getById(id));
@@ -58,7 +58,7 @@ public class PropiedadController {
     }
 
     @PostMapping("/crear")
-    public RedirectView crear(Propiedad propiedadDto, RedirectAttributes attributes){
+    public RedirectView crear(Propiedad propiedadDto, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/propiedades");
         propiedadService.crear(propiedadDto);
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
