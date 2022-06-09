@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head :: head"></head>
+    <head th:replace="fragments/head :: head"></head> 
+    <header th:replace="fragments/header :: header"></header>
 
-<body>
-<main class="main-container">
+    <body>
+        <main class="main-container">
 
 
-    <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
+            <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
 
-    <div th:if="${propiedades.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
-        Debe subir una propiedad.
-        <a th:href="@{/propiedades/form}" class="alert-link">Subir Propiedad.</a>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-    <div th:unless="${propiedades.isEmpty()}">
-
-        <form th:action="@{propiedades}" class="buscador">
-            <div>
-                <label>Buscador</label>
+            <div th:if="${propiedades.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
+                Debe subir una propiedad.
+                <a th:href="@{/propiedades/form}" class="alert-link">Subir Propiedad.</a>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
-            <div>
-                <input type="text" name="ciudad" id="ciudad" th:value="${ciudad}" placeholder="Ciudad">
-            </div>
+            <div th:unless="${propiedades.isEmpty()}">
 
-            <div>
-                <select name="tipo" id="tipo" th:value="${tipo}">
-
-                    <option value="casa">Casa</option>
-                    <option value="departamento">Departamento</option>
-                </select>
-            </div>
-
-
-            <div>
-                <select name="tipoTransaccion" id="tipoTransaccion" th:value="${tipoTransaccion}">
-
-                    <option value="alquiler">Alquiler</option>
-                    <option value="venta">Venta</option>
-                </select>
-            </div>
-
-
-            <label>Precios</label>
-            <div>
-                <input type="number" name="min" id="min" th:value="${precio}" >
-                <input type="number" name="max" id="max" th:value="${precio}" >
-            </div>
-
-            <input type="submit" value="Buscar">
-            &nbsp;&nbsp;
-            <input type="button" value="Limpiar" onclick="limpiarCampos()">
-        </form>
-
-        <div class="anuncio">
-            <div class="anuncio-contenido"  th:each="propiedad : ${propiedades}">
-                <div class="card-body text-center my-2">
-                    <div class="imagen">
-                        <img th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}"
-                             width="200" height="200">
+                <form th:action="@{propiedades}" class="buscador">
+                    <div>
+                        <label>Buscador</label>
                     </div>
 
-                    <h4 th:text="${propiedad.titulo}">Titulo</h4>
-                    <p th:text="${propiedad.precio}"></p>
-                    <p th:text="${propiedad.tipo}"></p>
-                    <p th:text="${propiedad.tipoTransaccion}"></p>
-                    <p th:text="${propiedad.ciudad}"></p>
-                    <a href="form_propiedad.html">Ver Propiedad</a>
+                    <div>
+                        <input type="text" name="ciudad" id="ciudad" th:value="${ciudad}" placeholder="Ciudad">
+                    </div>
+
+                    <div>
+                        <select name="tipo" id="tipo" th:value="${tipo}">
+
+                            <option value="casa">Casa</option>
+                            <option value="departamento">Departamento</option>
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <select name="tipoTransaccion" id="tipoTransaccion" th:value="${tipoTransaccion}">
+
+                            <option value="alquiler">Alquiler</option>
+                            <option value="venta">Venta</option>
+                        </select>
+                    </div>
+
+
+                    <label>Precios</label>
+                    <div>
+                        <input type="number" name="min" id="min" th:value="${precio}" >
+                        <input type="number" name="max" id="max" th:value="${precio}" >
+                    </div>
+
+                    <input type="submit" value="Buscar">
+                    &nbsp;&nbsp;
+                    <input type="button" value="Limpiar" onclick="limpiarCampos()">
+                </form>
+
+                <div class="anuncio">
+                    <div class="anuncio-contenido"  th:each="propiedad : ${propiedades}">
+                        <div class="card-body text-center my-2">
+                            <div class="imagen">
+                                <img th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}"
+                                     width="200" height="200">
+                            </div>
+
+                            <h4 th:text="${propiedad.titulo}">Titulo</h4>
+                            <p th:text="${propiedad.precio}"></p>
+                            <p th:text="${propiedad.tipo}"></p>
+                            <p th:text="${propiedad.tipoTransaccion}"></p>
+                            <p th:text="${propiedad.ciudad}"></p>
+                            <a href="form_propiedad.html">Ver Propiedad</a>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
+
         </div>
 
-    </div>
-
-    </div>
-
-</main>
+    </main>
 
 
 
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         function limpiarCampos() {
-            window.location = 'propiedades';
+        window.location = 'propiedades';
         }
     </script>
 </body>
+<footer th:replace="fragments/footer :: footer"></footer>
 
 </html>
