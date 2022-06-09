@@ -4,22 +4,27 @@ body {
     font-size: 11px;
     background-size: cover;
     background-attachment: fixed;
-  
+    
 }
 
 
 h1 {
     font-size: 20px;
-    margin-top: 0px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     text-align: center;
-    
 }
+
+
+h2{
+    text-align: center;
+    font-size: 15px;
+}
+
+
 * {
     box-sizing: border-box ;
 }
-
-
 
 .formulario{
 width: 300px;
@@ -53,4 +58,202 @@ button{
     line-height: 25px;
     margin-top: 20px;
     margin-left: 84px;
+}
+.button_link{
+    margin-left: 2px;
+    margin-right: 10px;
+    width: 100px;
+    height: 60px;
+}
+.cargaPropiedad_btn{
+    clear: both;
+    width: 100%;
+}
+.cargaPropiedad_btn a {
+    padding: 15px;
+    background-color: rgb(128, 128, 128);
+    border-radius: 6px;
+    box-shadow: 0px 1px 10px 1px #000;
+    width: 100%;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+
+.container_vertical {
+ width: 300px;
+ float: left;
+ margin-left: 20px;
+}
+
+.contenedor_prop{
+height: 100%;
+ }
+
+img{
+    width: 150px;
+    height: 150px;
+    
+}
+.portada {
+    width: 100%;
+    height: 220px;
+    background-image:url(imagenes/portada.png);
+    background-size: auto;
+}
+.cont_imagen{
+    margin:auto;
+   display:block;  
+   text-align: center;
+}
+.card-container{
+    width: 300px;
+    height: 310px;
+    background: #FFF;
+    border-radius: 6px;
+    box-shadow: 0px 1px 10px 1px #000;
+    overflow: hidden;
+    float: left;
+}
+
+.card-container.perfil{
+    transform: translate(0px,-60px);
+ 
+}
+.card-container.propiedad {
+  
+    margin: 10px;
+    font-size: 9px;
+    text-align: left;
+}
+
+.superior-container.propiedad{
+    height: 150px;
+}
+.superior-container.propiedad img{
+    height: 150px !important;
+    width: 300px !important;
+    }
+
+.superior-container.perfil{
+    background:#00aeff;
+    height: 100px;
+}
+.image-container{
+    background: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    padding: 0px;
+    transform: translate(100px,70px);
+    }
+.image-container img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    }
+.lower-container{
+    height: 280px;
+    background: #FFF;
+    padding: 15px;
+    padding-top: 40px;
+    text-align: left;
+    }
+.lower-container.perfil p{
+    padding-top: 0px;
+    font-size: 16px;
+    color: gray;
+    margin-bottom: 15px;
+}
+.lower-container.propiedad{
+    padding-top: 5px;
+}
+.infoPerfil{
+    margin-bottom: 27px;
+}
+
+.lower-container .btn{
+    padding: 12px 20px;
+    background:#00aeff;
+    border: none;
+    color: white;
+    border-radius: 30px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 80px;
+    }
+.lower-container .btn:hover{
+    background: transparent;
+    color: #00aeff;
+    border: 2px solid #00aeff;
+}
+.btn_crearPropiedad{
+    padding: 12px 20px;
+    background: gray;
+    font-size: 14px;
+    border-radius: 30px;
+
+}   
+.icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.icon.banio{
+    background-image:url(imagenes/banio.png) ;
+}
+.icon.garage{
+    background-image: url(imagenes/garage.png);
+}
+.icon.transaccion{
+    background-image: url(imagenes/transac.png);
+}
+.icon.ubicacion{
+    background-image: url(imagenes/direccion.png);
+   
+}
+.icon.precio{
+    background-image: url(imagenes/precio.png);
+}
+.icon.whatsapp{
+    background-image: url(imagenes/whatsapp.png);
+    
+}
+.icon.mail{
+    background-image: url(imagenes/email.png);
+}
+.icon.tipo{
+    background-image: url(imagenes/edificio.png);
+}
+
+.text_imagen{
+   margin-right: 10px;
+    color: #000;
+}
+.text_imagen.ubicacion, .text_imagen.precio {
+    font-size: 12px;
+    font-weight: bold;
+    
+}
+.text_imagen.perfil{
+    text-align:left ;
+    padding-top: 0px;
+    font-size: 16px;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+.br_cardPropiedad{
+    margin-bottom: 10px;
+}
+
+fieldset{
+    margin: 0px;
+    border-color: transparent;
 }

@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+   <head th:replace="fragments/head :: head"></head>
+   
+<body >
 
+        <div class="portada"> </div>
+        
+        <fieldset class="container_vertical"> 
+       
+            <div class="card-container perfil">
+                <div class="superior-container perfil">
+                    <div class="image-container">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtfQXLByf0A0O8V5gbJaaYnGRJVLE5Q7pI5YAkYvbfSIgPJHbrsIL2_bcSwgbLcl9oQLU&usqp=CAU" />
+                    </div>
+                </div>
+
+                <div class="lower-container perfil">
+                    <div>
+                        <h1 th:text="${usuario.NombreApellido">Nombre Apellido</h1>
+                    </div>
+                    <div class="infoPerfil">
+                        <span class="icon whatsapp"></span><span class="text_imagen perfil" th:text="${usuario.telefono}">3755-506070 </span> <br class="br_cardPropiedad">
+                        <span class="icon mail"></span><span class="text_imagen perfil" th:text="${usuario.email}">nombreapellido@gmail.com</span>
+                    </div>
+                    <div>
+                        <a th:href="@{/ }" class="btn">Editar Perfil</a>
+                    </div>
+                </div>
+            </div>
+            <div class="cargaPropiedad_btn"> 
+                <a th:href="@{/ }"  >Cargar Propiedad</a>
+            </div>
+        </fieldset>
+
+        <fieldset class="contenedor_prop">
+
+            <div class="card-container propiedad" th:each="propiedad  : ${propiedades}">
+                <div class="superior-container propiedad " >
+                    <img src="https://i.blogs.es/c68014/casa-3d/450_1000.jpeg">
+                </div>
+
+                <div class="lower-container propiedad" >
+                    <h2 th:text="${propiedad.titulo}"></h2> 
+                    <span class="icon ubicacion"></span><span class="text_imagen ubicacion" th:text="${propiedad.ciudad"></span> <br>
+                    <span class="icon precio"></span><span class="text_imagen precio" th:text="${propiedad.precio}">$</span> <br class="br_cardPropiedad">
+                    <span class="icon tipo"></span><span class="text_imagen" th:text="${propiedad.tipo}"></span>
+                    <span class="icon transaccion"></span><span class="text_imagen"  th:text="${propiedad.tipoTransaccion}"></span>
+                    <span class="icon banio"></span><span class="text_imagen" th:text="${propiedad.banio"></span>
+                    <span class="icon garage"></span><span class="text_imagen" h:text="${propiedad.garage"></span>
+                </div>
+            </div>
+        </fieldset>
+</body>
