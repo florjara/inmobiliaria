@@ -1,0 +1,15 @@
+<header th:fragment="header" class="header">
+    <div class="container logo-nav-container">
+        <a th:href="@{/}" class="logo">INICIO</a>
+        <nav class="navigation">
+            <ul>
+                <li><a th:href="@{/}">Texto1</a></li>
+                <li><a th:href="@{/}">Texto2</a></li>
+                <li><a th:href="@{/}">Texto3</a></li>
+                <li><a th:href="@{/}">Texto4</a></li>
+            </ul>
+        </nav>
+        <a th:href="@{/usuarios/form}" class="get-started-btn scrollto">Iniciar Sesión</a>
+        <a th:href="@{/usuarios/login}" class="get-started-btn scrollto">Registrarse</a>
+    </div>
+</header>

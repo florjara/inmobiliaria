@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragments/head :: head"></head>
+    <header th:replace="fragments/header :: header"></header>
+
+
+    <body>
+        <main>
+            <div>
+                <form th:action="@{propiedades}">
+                    <div>
+                        <label>Filtrar</label>
+                    </div>
+
+                    <div>
+                        <input type="text" name="ciudad" id="ciudad" th:value="${ciudad}" placeholder="Ciudad">
+                    </div>
+
+                    <div>
+                        <select name="tipo" id="tipo" th:value="${tipo}">
+
+                            <option value="casa">Casa</option>
+                            <option value="departamento">Departamento</option>
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <select name="tipoTransaccion" id="tipoTransaccion" th:value="${tipoTransaccion}">
+
+                            <option value="alquiler">Alquiler</option>
+                            <option value="venta">Venta</option>
+                        </select>
+                    </div>
+
+                    <input type="submit" value="Buscar">
+                    &nbsp;&nbsp;
+                    <input type="button" value="Limpiar" onclick="limpiarCampos()">
+                </form>
+            </div>
+        </main>
+
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+        <script type="text/javascript">
+            function limpiarCampos(){
+            window.location = 'propiedades';
+            }
+
+        </script>
+    </body>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+</html>
