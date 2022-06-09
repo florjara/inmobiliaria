@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<<<<<<< HEAD
     <head th:replace="fragments/head :: head"></head> 
 
     <header th:replace="fragments/header :: header"></header>
-=======
-    <head th:replace="fragments/head :: head"></head>
->>>>>>> Error
-
     <body >
 
         <main>
@@ -15,17 +10,17 @@
                 <div class="row mt-5">
                     <div class="col-3">
 
-                        <form class="formulario"  th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post" autocomplete="off">
+                        <form th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post" autocomplete="off"
+                              class="needs-validation" enctype="multipart/form-data" novalidate>
                             <input type="hidden" th:field="*{id}">
                             <h1>Formulario de Registro de propiedades</h1>
 
                             <div class="contenedor_input" >
                                 <label for="titulo" >Titulo(*)</label>
-                                <input type="text" maxlength="30" class="form-control"  th:field="*{titulo}" id="titulo" required placeholder="Casa a estrenar"> 
+                                <input type="text" maxlength="30" class="form-control"  th:field="*{titulo}" id="titulo" required placeholder="Casa a estrenar">
                             </div>
 
                             <br>
-
                             <div class="contenedor_input">
                                 <label for="tipo_trans" >Tipo de transacción(*)</label>
                                 <select name="tipo_trans" th:field="*{tipoTransaccion}" id="tipo_trans">
@@ -58,11 +53,7 @@
                                 <label for="banio">Baños(*)</label>
                                 <input type="number" max="10" min="1" class="form-control" th:field="*{banos}" id="banio" required>
                                 <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('banio')}" th:errors="*{banio}"></div>-->
-<<<<<<< HEAD
 
-=======
-                                
->>>>>>> Error
                             </div>
                             <br>
 
@@ -86,13 +77,13 @@
 
                             <div class="contenedor_input"  >
                                 <label for="precio">Precio de la propiedad (*)</label>
-                                <input type="number" maxlength="15" class="form-control" th:field="*{precio}" id="precio" required> 
+                                <input type="number" maxlength="15" class="form-control" th:field="*{precio}" id="precio" required>
                             </div>
                             <br>
 
                             <div class="contenedor_input"  >
-                                <label for="direccion">Dirección de la propiedad(*)</label>
-                                <input type="text" maxlength="30" class="form-control" th:field="*{direccion}" id="precio" > 
+                                <label for="ciudad">Ciudad(*)</label>
+                                <input type="text" maxlength="30" class="form-control" th:field="*{ciudad}" id="ciudad" >
                             </div>
                             <br>
 
@@ -102,15 +93,12 @@
                                 <textarea cols="25" rows="5"  th:field="*{descripcion}" id="descripcion"></textarea>
 
                             </div>
-                            <!--   <br>
-                               
-                               <div class="contenedor_input">
-                                   <label for="fotos">Cargue aquí las fotos de la propiedad(*) </label>  
-                                   <label class="leyenda"> (Presione Ctrl para cargar más Fotos) </label>
-                                   <input type="file" multiple accept="image/png, image/jpeg"  class="form-control" th:field="*{fotos}" id="fotos" required >
-                                   <div class="text-danger mt-2" th:if="${#fields.hasErrors('fotos')}" th:errors="*{fotos}"></div>
-                               </div>
-                               <br> -->
+
+                            <div class="mb-3">
+                                <label for="photo">Subir imagen</label>
+                                <input class="form-control mt-2" type="file" name="photo" accept="image/*">
+                            </div>
+
                             <button type="submit">Cargar Propiedad</button>
                         </form>
                     </div>
@@ -121,10 +109,5 @@
 
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     </body>
-<<<<<<< HEAD
-    
-    <footer th:replace="fragments/header :: footer"></footer>
-    
-=======
->>>>>>> Error
+    <footer th:replace="fragments/footer :: footer"></footer>
 </html>

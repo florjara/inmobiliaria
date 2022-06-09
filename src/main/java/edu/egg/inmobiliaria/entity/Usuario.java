@@ -30,6 +30,9 @@ public class Usuario {
 
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
+        
+    @Column(name = "imagen")
+    private String image;
 
     @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
     private Boolean eliminado;
@@ -38,13 +41,15 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombre, String apellido, String correo, Long telefono, String contrasena) {
+    public Usuario(Long id, String nombre, String apellido, String correo, Long telefono, String contrasena, String image, Boolean eliminado) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.telefono = telefono;
         this.contrasena = contrasena;
+        this.image = image;
+        this.eliminado = eliminado;
     }
 
     public Long getId() {
@@ -95,6 +100,14 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Boolean getEliminado() {
         return eliminado;
     }
@@ -102,4 +115,5 @@ public class Usuario {
     public void setEliminado(Boolean eliminado) {
         this.eliminado = eliminado;
     }
+
 }

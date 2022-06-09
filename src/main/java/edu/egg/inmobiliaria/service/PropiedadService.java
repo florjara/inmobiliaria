@@ -9,29 +9,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PropiedadService {
 
-
     private final PropiedadRepository propiedadRepository;
     private final UsuarioRepository usuarioRepository; //linea modificada para poner el usuario por defecto en 1
+    private ImageService imageService;
 
     @Autowired
-    public PropiedadService(PropiedadRepository propiedadRepository, UsuarioRepository usuarioRepository) {
+    public PropiedadService(PropiedadRepository propiedadRepository, UsuarioRepository usuarioRepository, ImageService imageService) {
         this.propiedadRepository = propiedadRepository;
         this.usuarioRepository = usuarioRepository;
+        this.imageService = imageService;
     }
 
     @Transactional
-    public void crear(Propiedad dto) {
+    public void crear(Propiedad dto, MultipartFile photo) {
 
         Propiedad propiedad = new Propiedad();
 
         propiedad.setTitulo(dto.getTitulo());
         propiedad.setDescripcion(dto.getDescripcion());
         propiedad.setPrecio(dto.getPrecio());
-        
         propiedad.setAmbiente(dto.getAmbiente());
         propiedad.setBanos(dto.getBanos());
         propiedad.setPatio(dto.getPatio());
@@ -39,7 +40,12 @@ public class PropiedadService {
         propiedad.setDireccion(dto.getDireccion());
         propiedad.setTipo(dto.getTipo());
         propiedad.setTipoTransaccion(dto.getTipoTransaccion());
-        
+        propiedad.setCiudad(dto.getCiudad());
+
+        if (!photo.isEmpty()) {
+            propiedad.setImage(imageService.copy(photo));
+        }
+
         Usuario usuario = usuarioRepository.findById(1L).get(); //linea modificada para poner el usuario por defecto en 1
         propiedad.setUsuario(usuario); //linea modificada para poner el usuario por defecto en 1
         propiedadRepository.save(propiedad);
@@ -47,7 +53,7 @@ public class PropiedadService {
     }
 
     @Transactional
-    public void update(Propiedad dto) {
+    public void update(Propiedad dto, MultipartFile photo) {
 
         Propiedad propiedad = propiedadRepository.findById(dto.getId()).get();
 
@@ -62,9 +68,15 @@ public class PropiedadService {
         propiedad.setDireccion(dto.getDireccion());
         propiedad.setTipo(dto.getTipo());
         propiedad.setTipoTransaccion(dto.getTipoTransaccion());
+        propiedad.setCiudad(dto.getCiudad());
+
+        if (!photo.isEmpty()) {
+            propiedad.setImage(imageService.copy(photo));
+        }
 
         propiedadRepository.save(propiedad);
     }
+
 
     @Transactional(readOnly = true)
     public Propiedad getById(Long id) {
@@ -72,7 +84,10 @@ public class PropiedadService {
     }
 
     @Transactional(readOnly = true)
-    public List<Propiedad> getAll() {
+    public List<Propiedad> getAll(String ciudad, String tipo, String tipoTransaccion) {
+        if (ciudad != null || tipo != null || tipoTransaccion != null) {
+            return propiedadRepository.findAll(ciudad, tipo, tipoTransaccion);
+        }
         return propiedadRepository.findAll();
     }
 
