@@ -1,5 +1,6 @@
 package edu.egg.inmobiliaria.entity;
 
+import java.util.List;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
@@ -50,8 +51,9 @@ public class Propiedad {
     @Column(name = "direccion")
     private String direccion;
 
-    @Column(name = "image")
-    private String image;
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "image")
+    private List<String> image;
 
     @Column(name = "Ciudad")
     private String ciudad;
@@ -63,7 +65,7 @@ public class Propiedad {
     public Propiedad() {
     }
 
-    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, Boolean eliminado, String direccion, String image, String ciudad, Usuario usuario) {
+    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, Boolean eliminado, String direccion, List<String> image, String ciudad, Usuario usuario) {
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
@@ -177,11 +179,11 @@ public class Propiedad {
         this.direccion = direccion;
     }
 
-    public String getImage() {
+    public List<String> getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(List<String> image) {
         this.image = image;
     }
 

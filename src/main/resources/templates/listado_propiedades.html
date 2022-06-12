@@ -18,27 +18,24 @@
 
             <div th:unless="${propiedades.isEmpty()}">
 
-                <form th:action="@{propiedades}" class="buscador">
+                <form th:action="@{/propiedades}" class="buscador">
                     <div>
                         <label>Buscador</label>
                     </div>
 
                     <div>
-                        <input type="text" name="ciudad" id="ciudad" th:value="${ciudad}" placeholder="Ciudad">
+                        <input type="text" name="ciudad" id="ciudad" placeholder="Ciudad">
                     </div>
 
                     <div>
-                        <select name="tipo" id="tipo" th:value="${tipo}">
-
+                        <select name="tipo" id="tipo" >
                             <option value="casa">Casa</option>
                             <option value="departamento">Departamento</option>
                         </select>
                     </div>
 
-
                     <div>
-                        <select name="tipoTransaccion" id="tipoTransaccion" th:value="${tipoTransaccion}">
-
+                        <select name="tipoTransaccion" id="tipoTransaccion" >
                             <option value="alquiler">Alquiler</option>
                             <option value="venta">Venta</option>
                         </select>
@@ -47,12 +44,12 @@
 
                     <label>Precios</label>
                     <div>
-                        <input type="number" name="min" id="min" th:value="${precio}" >
-                        <input type="number" name="max" id="max" th:value="${precio}" >
+                        <input type="number" name="min" id="min" >
+                        <input type="number" name="max" id="max" >
                     </div>
 
-                    <input type="submit" value="Buscar">
-                    &nbsp;&nbsp;
+                    <button class="btn btn-primary" type="submit">Buscarr</button>
+                    
                     <input type="button" value="Limpiar" onclick="limpiarCampos()">
                 </form>
 
@@ -69,7 +66,7 @@
                             <p th:text="${propiedad.tipo}"></p>
                             <p th:text="${propiedad.tipoTransaccion}"></p>
                             <p th:text="${propiedad.ciudad}"></p>
-                            <a href="form_propiedad.html">Ver Propiedad</a>
+                            <a th:href="@{/propiedades/__${propiedad.id}__}">Ver Propiedad</a>
                         </div>
 
                     </div>

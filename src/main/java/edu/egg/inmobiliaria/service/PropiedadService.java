@@ -4,11 +4,13 @@ import edu.egg.inmobiliaria.entity.Propiedad;
 import edu.egg.inmobiliaria.entity.Usuario;
 import edu.egg.inmobiliaria.repository.PropiedadRepository;
 import edu.egg.inmobiliaria.repository.UsuarioRepository;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -26,7 +28,7 @@ public class PropiedadService {
     }
 
     @Transactional
-    public void crear(Propiedad dto, MultipartFile photo) {
+    public void crear(Propiedad dto, List<MultipartFile> listaFotos) {
 
         Propiedad propiedad = new Propiedad();
 
@@ -41,9 +43,15 @@ public class PropiedadService {
         propiedad.setTipo(dto.getTipo());
         propiedad.setTipoTransaccion(dto.getTipoTransaccion());
         propiedad.setCiudad(dto.getCiudad());
+        propiedad.setEliminado(Boolean.FALSE);
+        propiedad.setDireccion(dto.getDireccion());
 
-        if (!photo.isEmpty()) {
-            propiedad.setImage(imageService.copy(photo));
+        if (!listaFotos.isEmpty()) {
+            List<String> lista = new ArrayList<>();
+            for (MultipartFile foto : listaFotos) {
+                lista.add(imageService.copy(foto));
+                propiedad.setImage(lista);
+            }
         }
 
         Usuario usuario = usuarioRepository.findById(1L).get(); //linea modificada para poner el usuario por defecto en 1
@@ -53,14 +61,13 @@ public class PropiedadService {
     }
 
     @Transactional
-    public void update(Propiedad dto, MultipartFile photo) {
+    public void update(Propiedad dto, List<MultipartFile> listaFotos) {
 
         Propiedad propiedad = propiedadRepository.findById(dto.getId()).get();
 
         propiedad.setTitulo(dto.getTitulo());
         propiedad.setDescripcion(dto.getDescripcion());
         propiedad.setPrecio(dto.getPrecio());
-        propiedad.setUsuario(dto.getUsuario());
         propiedad.setAmbiente(dto.getAmbiente());
         propiedad.setBanos(dto.getBanos());
         propiedad.setPatio(dto.getPatio());
@@ -69,14 +76,19 @@ public class PropiedadService {
         propiedad.setTipo(dto.getTipo());
         propiedad.setTipoTransaccion(dto.getTipoTransaccion());
         propiedad.setCiudad(dto.getCiudad());
+        propiedad.setEliminado(Boolean.FALSE);
+        propiedad.setDireccion(dto.getDireccion());
 
-        if (!photo.isEmpty()) {
-            propiedad.setImage(imageService.copy(photo));
+        if (!listaFotos.isEmpty()) {
+            List<String> lista = new ArrayList<>();
+            for (MultipartFile foto : listaFotos) {
+                lista.add(imageService.copy(foto));
+                propiedad.setImage(lista);
+            }
         }
-
+        
         propiedadRepository.save(propiedad);
     }
-
 
     @Transactional(readOnly = true)
     public Propiedad getById(Long id) {
@@ -84,11 +96,17 @@ public class PropiedadService {
     }
 
     @Transactional(readOnly = true)
-    public List<Propiedad> getAll(String ciudad, String tipo, String tipoTransaccion) {
-        if (ciudad != null || tipo != null || tipoTransaccion != null) {
-            return propiedadRepository.findAll(ciudad, tipo, tipoTransaccion);
+    public List<Propiedad> getAll(String ciudad, String tipo, String tipoTransaccion, Double min, Double max) {
+
+        Optional<String> ciudadOpt = Optional.ofNullable(ciudad);
+        Optional<Double> minOpt = Optional.ofNullable(min);
+        Optional<Double> maxOpt = Optional.ofNullable(max);
+
+        if (minOpt.isPresent() || maxOpt.isPresent()) {
+            return propiedadRepository.findAll(ciudad, tipo, tipoTransaccion, minOpt.orElse(0d), maxOpt.orElse(Double.MAX_VALUE));
         }
-        return propiedadRepository.findAll();
+
+        return propiedadRepository.findAll(ciudadOpt.orElse(""), tipo, tipoTransaccion);
     }
 
     @Transactional
@@ -96,4 +114,8 @@ public class PropiedadService {
         propiedadRepository.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
+    public List<Propiedad> obtenerPorIdUsuario(Long id) {
+        return propiedadRepository.obtenerPorIdUsuario(id);
+    }
 }
