@@ -1,30 +1,29 @@
-<footer th:fragment="footer" class="pie_de_pagina">
+<!DOCTYPE html>
+<link rel="stylesheet" href="../../static/css/styles.css">
+
+<footer th:fragment="footer">
     <div class="area_1">
-        <div class="box">
-            <figure>
-                <a href="">
-                    <img src="@{/images/Logo.png}" alt="Logo del proyecto">
-                </a>
-            </figure>
-        </div>
-        <div class="box">
-            <h2>SOBRE NOSOTROS</h2>
-            <p>Buscamos resolver problemas de la sociedad a través de la cooperación humana. Trabajamos para conectar a
-                la humanidad en una sola red.</p>
+       
+        <div class="box box_logo">
+            <img  src="../../static/img/3Egg.png" alt="logo">
         </div>
 
-        <div class="box">
+        <div class="box box_contacto">
             <h2>CONTACTO</h2>
-            <p>+54 9 261 237 8812</p>
-            <p>+54 9 261 253 7925</p>
-            <p>hola@eggeducacion.com</p>
+            <span class="iconFooter phone"></span><span class="text_imagen footer">+54 9 261 237 8812</span> <br>
+            <span class="iconFooter phone"></span><span class="text_imagen footer">+54 9 261 237 8812</span> <br>
+            <span class="iconFooter correo"></span><span class="text_imagen footer">hola@eggeducacion.com</span>
+            
+            
         </div>
 
-        <div class="box">
-            <h2>SEGUINOS</h2>
+        <div class="box box_redesSociales">
+            <h2>SEGUINOS EN REDES</h2>
             <div class="redes_sociales">
-                <a th:href="@{https://www.facebook.com/EggTechDigital}" target="_blank" class="fa fa-facebook"></a>
-                <a th:href="@{https://www.instagram.com/eggcooperation/}" target="_blank" class="fa fa-instagram"></a>
+                <span class="iconFooter facebook" th:href="@{https://www.facebook.com/EggTechDigital}"></span>
+                <span class="iconFooter instagram" th:href="@{https://www.instagram.com/eggcooperation/}"></span>
+                <span class="iconFooter linkedin" th:href="@{https://www.linkedin.com/company/eggcooperation/}"></span>
+                <span class="iconFooter twitter" th:href="@{https://www.instagram.com/eggcooperation/}"></span>
             </div>
 
         </div>
@@ -32,7 +31,7 @@
     </div>
 
     <div class="area_2">
-        <small>&copy; 2022 <b>Texto de prueba</b> - Todos los derechos reservados.</small>
+            <small>&copy; 2022 <b>Three Egg.</b> - Todos los derechos reservados.</small>
     </div>
 
 </footer>
