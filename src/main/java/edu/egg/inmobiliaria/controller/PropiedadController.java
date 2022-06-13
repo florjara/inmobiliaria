@@ -81,7 +81,7 @@ public class PropiedadController {
             propiedadService.crear(propiedadDto, photo);
             attributes.addFlashAttribute("success", "La operacion ha sido exitosa");
         } catch (IllegalArgumentException e) {
-            attributes.addFlashAttribute("author", propiedadDto);
+            attributes.addFlashAttribute("propiedad", propiedadDto);
             attributes.addFlashAttribute("exception", e.getMessage());
             redirect.setUrl("/propiedades/form");
         }

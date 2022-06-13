@@ -46,14 +46,16 @@ public class PropiedadService {
         propiedad.setEliminado(Boolean.FALSE);
         propiedad.setDireccion(dto.getDireccion());
 
-        if (!listaFotos.isEmpty()) {
+        if (listaFotos != null) {
             List<String> lista = new ArrayList<>();
-            for (MultipartFile foto : listaFotos) {
-                lista.add(imageService.copy(foto));
-                propiedad.setImage(lista);
+            if (!listaFotos.isEmpty()) {
+
+                for (MultipartFile foto : listaFotos) {
+                    lista.add(imageService.copy(foto));
+                    propiedad.setImage(lista);
+                }
             }
         }
-
         Usuario usuario = usuarioRepository.findById(1L).get(); //linea modificada para poner el usuario por defecto en 1
         propiedad.setUsuario(usuario); //linea modificada para poner el usuario por defecto en 1
         propiedadRepository.save(propiedad);
@@ -79,14 +81,17 @@ public class PropiedadService {
         propiedad.setEliminado(Boolean.FALSE);
         propiedad.setDireccion(dto.getDireccion());
 
-        if (!listaFotos.isEmpty()) {
+        if (listaFotos != null) {
             List<String> lista = new ArrayList<>();
-            for (MultipartFile foto : listaFotos) {
-                lista.add(imageService.copy(foto));
-                propiedad.setImage(lista);
+            if (!listaFotos.isEmpty()) {
+
+                for (MultipartFile foto : listaFotos) {
+                    lista.add(imageService.copy(foto));
+                    propiedad.setImage(lista);
+                }
             }
         }
-        
+
         propiedadRepository.save(propiedad);
     }
 
