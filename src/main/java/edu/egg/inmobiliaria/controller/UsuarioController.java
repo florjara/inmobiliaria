@@ -1,6 +1,7 @@
 package edu.egg.inmobiliaria.controller;
 
 import edu.egg.inmobiliaria.entity.Usuario;
+import edu.egg.inmobiliaria.service.PropiedadService;
 import edu.egg.inmobiliaria.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,18 +16,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/usuarios")
-public class UsuarioController{
+public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final PropiedadService propiedadService;
 
     @Autowired
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(UsuarioService usuarioService, PropiedadService propiedadService) {
         this.usuarioService = usuarioService;
+        this.propiedadService = propiedadService;
     }
-
 
     @GetMapping("/login")
     public ModelAndView login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
@@ -36,7 +39,6 @@ public class UsuarioController{
         if (logout != null) mav.addObject("logout", "Saliste satisfactoriamente de la sesion");
         if (principal != null) mav.setViewName("redirect:/");
 
-
         return mav;
     }
 
@@ -45,7 +47,9 @@ public class UsuarioController{
         ModelAndView mav = new ModelAndView("index");
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
-        if (inputFlashMap != null) mav.addObject("success", inputFlashMap.get("success"));
+        if (inputFlashMap != null) {
+            mav.addObject("success", inputFlashMap.get("success"));
+        }
 
         mav.addObject("usuarios", usuarioService.getAll());
         return mav;
@@ -56,7 +60,9 @@ public class UsuarioController{
         ModelAndView mav = new ModelAndView("form_usuario");
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(solicitud);
 
-        if (principal != null) mav.setViewName("redirect:/");
+        if (principal != null) {
+            mav.setViewName("redirect:/");
+        }
 
         if (inputFlashMap != null) {
             mav.addObject("excepcion", inputFlashMap.get("excepcion"));
@@ -79,11 +85,26 @@ public class UsuarioController{
         return mav;
     }
 
+    @GetMapping("/perfil")
+    public ModelAndView obtenerPerfilUsuario(HttpSession session) {
+        ModelAndView mav = new ModelAndView("perfil");
+        Long idUsuario = 1L;//session.getId();
+        mav.addObject("usuario", usuarioService.getById(idUsuario));
+        mav.addObject("propiedad", propiedadService.obtenerPorIdUsuario(idUsuario));
+        return mav;
+    }
+
+    @GetMapping("/perfil/{id}")
+    public ModelAndView obtenerUsuarioPorId(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("perfil");
+        mav.addObject("usuario", usuarioService.getById(id));
+        mav.addObject("propiedades", propiedadService.obtenerPorIdUsuario(id));
+        return mav;
+    }
 
     @PostMapping("/registrar")
     public RedirectView signup(Usuario usuarioDto, RedirectAttributes atributos) {
         RedirectView redireccion = new RedirectView("/login");
-
 
         try {
             usuarioService.create(usuarioDto);
@@ -103,7 +124,6 @@ public class UsuarioController{
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }
-
 
 
     @PostMapping("/eliminar/{id}")
