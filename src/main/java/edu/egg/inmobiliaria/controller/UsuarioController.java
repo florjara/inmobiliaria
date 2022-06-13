@@ -4,6 +4,7 @@ import edu.egg.inmobiliaria.entity.Usuario;
 import edu.egg.inmobiliaria.service.PropiedadService;
 import edu.egg.inmobiliaria.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -73,7 +75,10 @@ public class UsuarioController {
     }
 
     @GetMapping("/form/{id}")
-    public ModelAndView getForm(@PathVariable Long id) {
+    public ModelAndView getForm(@PathVariable Long id, HttpSession session) {
+        if (!session.getId().equals(id)) return new ModelAndView("redirect:/");
+
+
         ModelAndView mav = new ModelAndView("form_usuario");
         mav.addObject("usuario", usuarioService.getById(id));
         mav.addObject("action", "actualizar");
@@ -119,6 +124,7 @@ public class UsuarioController {
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }
+
 
     @PostMapping("/eliminar/{id}")
     public RedirectView eliminar(@PathVariable Long id) {
