@@ -1,5 +1,6 @@
 package edu.egg.inmobiliaria.entity;
 
+import java.util.List;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
@@ -7,7 +8,8 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "usuario", indexes = {@Index(name = "idx_correo", columnList = "correo")})
+@Table(name = "usuario", indexes = {
+    @Index(name = "idx_correo", columnList = "correo")})
 @SQLDelete(sql = "UPDATE usuario SET eliminado = true WHERE id = ?")
 public class Usuario {
 
@@ -30,8 +32,8 @@ public class Usuario {
 
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
-        
-    @Column(name = "imagen")
+
+    @Column(name = "image")
     private String image;
 
     @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")

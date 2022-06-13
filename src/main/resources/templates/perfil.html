@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
    <head th:replace="fragments/head :: head"></head>
-   
+   <header th:replace="fragments/header :: header"></header>
 <body >
 
         <div class="portada"> </div>
@@ -17,11 +17,11 @@
 
                 <div class="lower-container perfil">
                     <div>
-                        <h1 th:text="${usuario.NombreApellido">Nombre Apellido</h1>
+                        <h1 th:text="${usuario.nombre}"></h1>
                     </div>
                     <div class="infoPerfil">
                         <span class="icon whatsapp"></span><span class="text_imagen perfil" th:text="${usuario.telefono}">3755-506070 </span> <br class="br_cardPropiedad">
-                        <span class="icon mail"></span><span class="text_imagen perfil" th:text="${usuario.email}">nombreapellido@gmail.com</span>
+                        <span class="icon mail"></span><span class="text_imagen perfil" th:text="${usuario.correo}">nombreapellido@gmail.com</span>
                     </div>
                     <div>
                         <a th:href="@{/ }" class="btn">Editar Perfil</a>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="cargaPropiedad_btn"> 
-                <a th:href="@{/ }"  >Cargar Propiedad</a>
+                <a th:href="@{/propiedades/form}"  >Cargar Propiedad</a>
             </div>
         </fieldset>
 
@@ -42,13 +42,16 @@
 
                 <div class="lower-container propiedad" >
                     <h2 th:text="${propiedad.titulo}"></h2> 
-                    <span class="icon ubicacion"></span><span class="text_imagen ubicacion" th:text="${propiedad.ciudad"></span> <br>
+                    <span class="icon ubicacion"></span><span class="text_imagen ubicacion" th:text="${propiedad.ciudad}"></span> <br>
                     <span class="icon precio"></span><span class="text_imagen precio" th:text="${propiedad.precio}">$</span> <br class="br_cardPropiedad">
                     <span class="icon tipo"></span><span class="text_imagen" th:text="${propiedad.tipo}"></span>
                     <span class="icon transaccion"></span><span class="text_imagen"  th:text="${propiedad.tipoTransaccion}"></span>
-                    <span class="icon banio"></span><span class="text_imagen" th:text="${propiedad.banio"></span>
-                    <span class="icon garage"></span><span class="text_imagen" h:text="${propiedad.garage"></span>
+                    <span class="icon banio"></span><span class="text_imagen" th:text="${propiedad.banos}"></span>
+                    <span class="icon garage"></span><span class="text_imagen" h:text="${propiedad.estacionamiento}"></span>
                 </div>
             </div>
         </fieldset>
 </body>
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</html>
