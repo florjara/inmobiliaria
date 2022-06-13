@@ -1,8 +1,11 @@
 package edu.egg.inmobiliaria.service;
 
 import edu.egg.inmobiliaria.entity.Usuario;
+import edu.egg.inmobiliaria.repository.RolRepository;
 import edu.egg.inmobiliaria.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,11 +13,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static java.util.Collections.emptyList;
+
+import static java.util.Collections.singletonList;
 
 @Service
 public class UsuarioService implements UserDetailsService {
@@ -22,11 +29,13 @@ public class UsuarioService implements UserDetailsService {
 
     private final UsuarioRepository usuarioRepository;
     private final BCryptPasswordEncoder encriptador;
+    private final RolRepository rolRepository;
 
     @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder encriptador) {
+    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder encriptador, RolRepository rolRepository) {
         this.usuarioRepository = usuarioRepository;
         this.encriptador = encriptador;
+        this.rolRepository = rolRepository;
     }
 
 
@@ -45,6 +54,9 @@ public class UsuarioService implements UserDetailsService {
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
         usuario.setEliminado(Boolean.FALSE);
+
+        if (dto.getRol() == null)
+            usuario.setRol(rolRepository.findByNombre("USUARIO").orElseThrow(() -> new IllegalArgumentException("Error")));
 
         usuarioRepository.save(usuario);
     }
@@ -94,6 +106,20 @@ public class UsuarioService implements UserDetailsService {
         Supplier<UsernameNotFoundException> supplier = () -> new UsernameNotFoundException("No existe un usuario registrado con este correo");
         Usuario usuario = usuarioRepository.findByCorreo(correo).orElseThrow(supplier);
 
-        return new User(usuario.getCorreo(), usuario.getContrasena(), emptyList());
+        GrantedAuthority autorizacion= new SimpleGrantedAuthority("ROLE_" + usuario.getNombre());
+
+
+        ServletRequestAttributes atributos = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = atributos.getRequest().getSession(true);
+
+        session.setAttribute("id", usuario.getId());
+        session.setAttribute("nombre", usuario.getNombre());
+        session.setAttribute("apellido", usuario.getApellido());
+        session.setAttribute("correo", usuario.getCorreo());
+        session.setAttribute("rol", usuario.getRol());
+        session.setAttribute("imagen", usuario.getImage());
+        session.setAttribute("telefono", usuario.getTelefono());
+
+        return new User(usuario.getCorreo(), usuario.getContrasena(), singletonList(autorizacion));
     }
 }

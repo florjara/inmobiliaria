@@ -4,6 +4,7 @@ import edu.egg.inmobiliaria.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class AppSecurity extends WebSecurityConfigurerAdapter {
 
@@ -34,25 +36,25 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .authorizeRequests()
-                .antMatchers("/usuarios/sign-up", "/usuarios/registrar", "/","/css/*", "/js/*").permitAll()
-                .antMatchers("/**").authenticated()
+                    .antMatchers("/usuarios/sign-up", "/usuarios/registrar", "/","/css/*", "/js/*").permitAll()
+                    .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/usuarios/login")
-                .loginProcessingUrl("/logincheck")
-                .usernameParameter("correo")
-                .passwordParameter("contrasena")
-                .defaultSuccessUrl("/",true)
-                .failureUrl("/usuarios/login?error=true")
-                .permitAll()
+                    .loginPage("/usuarios/login")
+                        .loginProcessingUrl("/logincheck")
+                        .usernameParameter("correo")
+                        .passwordParameter("contrasena")
+                        .defaultSuccessUrl("/",true)
+                        .failureUrl("/usuarios/login?error=true")
+                        .permitAll()
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/usuarios/login?logout=true")
-                .permitAll()
+                    .logout()
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/usuarios/login?logout=true")
+                        .permitAll()
                 .and()
-                .csrf()
-                .disable();
+                    .csrf()
+                    .disable();
         // @formatter:on
     }
 }

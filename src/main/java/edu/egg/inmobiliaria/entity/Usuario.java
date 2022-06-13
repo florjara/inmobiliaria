@@ -4,6 +4,7 @@ import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -37,11 +38,14 @@ public class Usuario {
     @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
     private Boolean eliminado;
 
+    @ManyToOne(fetch = EAGER)
+    @JoinColumn(name = "rol_usuario", referencedColumnName = "rol_id", nullable = false)
+    private Rol rol;
 
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombre, String apellido, String correo, Long telefono, String contrasena, String image, Boolean eliminado) {
+    public Usuario(Long id, String nombre, String apellido, String correo, Long telefono, String contrasena, String image, Boolean eliminado, Rol rol) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -50,6 +54,7 @@ public class Usuario {
         this.contrasena = contrasena;
         this.image = image;
         this.eliminado = eliminado;
+        this.rol = rol;
     }
 
     public Long getId() {
@@ -116,4 +121,11 @@ public class Usuario {
         this.eliminado = eliminado;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 }
