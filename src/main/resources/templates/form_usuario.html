@@ -1,79 +1,76 @@
 <!DOCTYPE html>
-<html lang="es">
-    <html xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 
-        <head th:replace="fragments/head :: head"></head> 
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
+        rel="stylesheet">
+    <title> Inmobiliaria </title>
+</head>
 
-        <header th:replace="fragments/header :: header"></header>
+<body>
+    <main>
+        <div class="car-sign-up">
 
-        <body>
-            <div class="container-fluid">
-                <h1 align="center">Bienvenido</h1>
-                <h2 align="center">Regístrese</h2>
-                <br>
-                <form th:action="@{/usuarios/__${action}__}" method="post" th:object="${usuario}"
-                      style="max-width:350px; margin: 0 auto;" class="needs-validation" novalidate autocomplete="off">
+            <div class="fondo-sign-up">
 
-                    <div class="border border-secondary p-3 rounded">
+            </div>
 
-                        <label class="control-label" for="nombre">Nombre:</label>
-                        <br>
-                        <input class="form-control" id="nombre" type="text" name="nombre" placeholder="Juan" th:field="*{nombre}"
-                               required>
+            <div class="section_sign-up">
+                <h1>Bienvenido</h1>
+                <p class="descripcion">¡Estamos emocionados de verte!</p>
 
-                        <div class="valid-feedback">Campo válido</div>
-                        <div class="invalid-feedback">Campo incompleto</div>
-                        <br>
+                <form class="form" th:action="@{/usuarios/__${action}__}" method="post" th:object="${usuario}">
+                    <div class="form-sign-up">
 
-                        <label class="control-label" for="apellido">Apellido:</label>
-                        <br>
-                        <input class="form-control" id="apellido" type="text" name="apellido" placeholder="Perez" th:field="*{apellido}"
-                               required>
-
-                        <div class="valid-feedback">Campo válido</div>
-                        <div class="invalid-feedback">Campo incompleto</div>
-                        <br>
-
-                        <label class="control-label" for="correo"> Email:</label>
-                        <br>
-                        <input class="form-control" id="correo" type="email" name="correo" placeholder="ejemplo@hotmail.com"
-                               th:field="*{correo}" required>
-
-                        <div class="valid-feedback">Campo válido</div>
-                        <div class="invalid-feedback">Campo incompleto</div>
-
-                        <br>
-
-                        <label class="control-label" for="telefono"> Teléfono:</label>
-                        <br>
-                        <input class="form-control" id="telefono" type="number" name="telefono" placeholder="3764953174"
-                               th:field="*{telefono}" required>
-
-                        <div class="valid-feedback">Campo válido</div>
-                        <div class="invalid-feedback">Campo incompleto</div>
-
-                        <br>
-
-                        <label for="contrasena"> Contraseña:</label>
-                        <br>
-                        <input class="form-control" id="contrasena" type="password" name="contrasena" placeholder="*****"
-                               th:field="*{contrasena}" required>
-
-                        <div class="valid-feedback">Campo válido</div>
-                        <div class="invalid-feedback">Campo incompleto</div>
-
-                        <br>
-                        <div class="text-center">
-                            <button class="btn btn-primary" type="submit"> Registrar</button>
-                            <br>
-                            <br>
-                            <span>Si ya tiene una cuenta <a href="login_usuario.html">inicie sesión aquí</a></span>
+                        <div class="input_group">
+                            <label  for="nombre">Nombre:</label>
+                            <input  id="nombre" type="text" name="nombre" placeholder="Juan"
+                                th:field="*{nombre}" required>
                         </div>
+        
+                        <div class="input_group">
+                                <label for="apellido">Apellido:</label>
+                                <input  id="apellido" type="text" name="apellido" placeholder="Perez"
+                                    th:field="*{apellido}" required>
+                        </div>
+        
+                        <div class="input_group">
+                                <label  for="correo"> Email:</label>
+                                <input  id="correo" type="email" name="correo" placeholder="ejemplo@hotmail.com"
+                                    th:field="*{correo}" required>
+                        </div>
+        
+                        <div class="input_group">
+                                <label  for="telefono"> Teléfono:</label>
+                                <input  id="telefono" type="number" name="telefono" placeholder="3764-953174"
+                                    th:field="*{telefono}" required>
+                        </div>
+    
+                        <div class="input_group">
+                                <label for="contrasena"> Contraseña:</label>
+                                <input  id="contrasena" type="password" name="contrasena" placeholder="*****"
+                                    th:field="*{contrasena}" required>
+                        </div>
+        
+                        <button class="boton_submit" type="submit"> Registrar</button>
+                        <p class="descripcion_form">Si ya tiene una cuenta <a th:href="@{/usuarios/login}">inicie sesión aquí</a></p>
+                         
+                    </div>
+                    
+
                 </form>
             </div>
-        </body>
 
-        <footer th:replace="fragments/footer :: footer"></footer>
+        </div>
+    </main>
 
-    </html>
+</body>
 
+
+
+</html>

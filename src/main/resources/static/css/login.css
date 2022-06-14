@@ -1,10 +1,10 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
 
     font-family: 'Poppins', sans-serif;
 
@@ -14,129 +14,217 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 
 
-.car{
+.car {
     width: 1000px;
     height: 500px;
     background: #fff;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    
+
     padding-right: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.section_login{
+.section_login {
     width: 45%;
 }
 
-.section_login h1{
+.section_login h1 {
     font-size: 25px;
     line-height: height 100.7%;
+    color: #707070;
 }
 
-.section_login .descripcion{
-    font-size:18px;
-    line-height:100.7%;
+.section_login .descripcion {
+    font-size: 18px;
+    line-height: 100.7%;
     color: #464444;
     margin-bottom: 25px;
 }
 
-.form .input_group label{
-    font-size:16px;
-    color:#707070;
-    font-weight:bold;
-    display:block;
-    margin-bottom:8px;
-  }
+.form .input_group label {
+    font-size: 16px;
+    color: #707070;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
 
-.input_group{
+.input_group {
     margin-bottom: 25px;
 }
 
-.form{
+.form {
     padding-right: 50px;
 }
 
-.form .input_group input{
-    font-family: 'DM Sans', sans-serif;
+.form .input_group input {
+    font-family: 'Poppins', sans-serif;
     background: #f1f1f1;
     border: none;
     height: 40px;
     width: 100%;
     border-radius: 10px;
     padding: 0 10px;
-    font-size:16px;
+    font-size: 16px;
     color: #222;
     outline: none;
     transition: all 0.3s ease;
 }
 
-.form .input_group input:focus{
-    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+.form .input_group input:focus {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
-.form .boton_submit{
-    height:40px;
+.form .boton_submit {
+    height: 40px;
     background: #7bc6d3;
     border-radius: 10px;
     color: #fff;
     border: none;
     width: 100%;
-    font-size:16px;
-    font-family: "DM Sans", sans-serif;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    transition:all 0.3s ease
+    transition: all 0.3s ease
 }
 
-.form .boton_submit:hover{
+.form .boton_submit:hover {
     opacity: 0.5;
 }
 
-.form .descripcion_form{
+.form .descripcion_form {
     margin-top: 15px;
     font-size: 14px;
     color: #222;
-    
+
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.form .link_form{
+.form .link_form {
     font-size: 14px;
     background: #7bc6d3;
     text-decoration: none;
 }
 
-.section_img{
+.section_img {
     height: 500px;
     width: 500px;
     border-radius: 10px;
 }
 
-.contenedor-imagen{
+.contenedor-imagen {
     height: 100%;
     width: 100%;
     background-image: url(../imagenes/20945159.jpg);
     background-size: cover;
-    background-repeat: no-repeat ;
+    background-repeat: no-repeat;
     border-radius: 10px;
 }
 
 
+/* estilo sign-up */
+
+.car-sign-up {
+    width: 1200px;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding-right: 10px;
+    
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+}
+
+.section_sign-up{
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.section_sign-up h1{
+    color: #707070;
+}
+
+.section_sign-up *{
+    font-family: 'Poppins', sans-serif;
+}
 
 
 
+.section_sign-up p{
+    font-size: 23px;
+    line-height: 100.7%;
+    color: #707070;
+    margin-bottom: 25px;
+}
+
+.form-sign-up .input_group label {
+    font-size: 14px;
+    color: #707070;
+    font-weight: bold;
+    display: block;
+    
+}
 
 
+.form-sign-up .input_group input {
+    font-family: 'Poppins', sans-serif;
+    background: #f1f1f1;
+    border: none;
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #222;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-sign-up .input_group input:focus {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.form-sign-up .boton_submit {
+    height: 40px;
+    background: #7bc6d3;
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease
+}
+
+.form-sign-up .boton_submit:hover {
+    opacity: 0.5;
+}
 
 
+.fondo-sign-up {
+    height: 100%;
+    width: 100%;
+    background-image: url(../imagenes/fondoFormUsuario.jpg);
+    
+    background-position: center;
+    background-repeat: no-repeat;
 
+}
