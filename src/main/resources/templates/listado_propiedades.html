@@ -1,93 +1,189 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head th:replace="fragments/head :: head"></head> 
-    <header th:replace="fragments/header :: header"></header>
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/anuncioPropiedades.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/anuncioPropiedades.css">
 
-    <body>
-        <main class="main-container">
+    <title> Inmobiliaria </title>
+</head>
 
+<!-- <header th:replace="fragments/header :: header"></header> -->
 
-            <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
+<header class="encabezado">
+    <div class="logo">
+        <!-- <img th:src="@{/imagenes/Logo.jpg}" width="250px" height="100px"> -->
+    </div>
+    <nav class="nav">
+        <a href="">Home</a>
+        <a href="">Explorar</a>
+        <a href="">Nosotros</a>
+        <a href="">Iniciar sesión</a>
+        <a href="">Registrarse</a>
+    </nav>
+</header>
 
-            <div th:if="${propiedades.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
-                Debe subir una propiedad.
-                <a th:href="@{/propiedades/form}" class="alert-link">Subir Propiedad.</a>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<body>
+
+    <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
+
+    <div th:if="${propiedades.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
+        Debe subir una propiedad.
+        <a th:href="@{/propiedades/form}" class="alert-link">Subir Propiedad.</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div th:unless="${propiedades.isEmpty()}">
+
+        <form th:action="@{propiedades}" class="buscador-form">
+
+            <div class="buscador">
+
+                <input class="buscador-input" type="text" name="ciudad" id="ciudad" th:value="${ciudad}"
+                    placeholder="Ciudad">
+
+                <select class="buscador-select" name="tipo" id="tipo" th:value="${tipo}">
+                    <option value="casa">Casa</option>
+                    <option value="departamento">Departamento</option>
+                </select>
+
+                <select class="buscador-select" name="tipoTransaccion" id="tipoTransaccion"
+                    th:value="${tipoTransaccion}">
+                    <option value="alquiler">Alquiler</option>
+                    <option value="venta">Venta</option>
+                </select>
+
+                <input class="buscador-input" type="number" name="min" id="min" th:value="${precio}"
+                    placeholder="Precio minimo">
+                <input class="buscador-input" type="number" name="max" id="max" th:value="${precio}"
+                    placeholder="Precio maximo">
+
+                <input class="buscador-boton" type="submit" value="Buscar">
+                <input class="buscador-boton" type="button" value="Limpiar" onclick="limpiarCampos()">
             </div>
 
-            <div th:unless="${propiedades.isEmpty()}">
 
-                <form th:action="@{/propiedades}" class="buscador">
-                    <div>
-                        <label>Buscador</label>
+        </form>
+
+        <div class="anuncio">
+            <div th:each="propiedad : ${propiedades}">
+                <div class="anuncio-contenido">
+                    <div class="imagen">
+                        <img
+                            th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}">
                     </div>
 
-                    <div>
-                        <input type="text" name="ciudad" id="ciudad" placeholder="Ciudad">
-                    </div>
+                    <div class="anuncio-informacion">
 
-                    <div>
-                        <select name="tipo" id="tipo" >
-                            <option value="casa">Casa</option>
-                            <option value="departamento">Departamento</option>
-                        </select>
-                    </div>
+                        <dvi class="anuncio-titu">
+                            <h3 th:text="${propiedad.titulo}">Titulo</h3>
+                        </dvi>
 
-                    <div>
-                        <select name="tipoTransaccion" id="tipoTransaccion" >
-                            <option value="alquiler">Alquiler</option>
-                            <option value="venta">Venta</option>
-                        </select>
-                    </div>
-
-
-                    <label>Precios</label>
-                    <div>
-                        <input type="number" name="min" id="min" >
-                        <input type="number" name="max" id="max" >
-                    </div>
-
-                    <button class="btn btn-primary" type="submit">Buscarr</button>
-                    
-                    <input type="button" value="Limpiar" onclick="limpiarCampos()">
-                </form>
-
-                <div class="anuncio">
-                    <div class="anuncio-contenido"  th:each="propiedad : ${propiedades}">
-                        <div class="card-body text-center my-2">
-                            <div class="imagen">
-                                <img th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}"
-                                     width="200" height="200">
-                            </div>
-
-                            <h4 th:text="${propiedad.titulo}">Titulo</h4>
-                            <p th:text="${propiedad.precio}"></p>
-                            <p th:text="${propiedad.tipo}"></p>
-                            <p th:text="${propiedad.tipoTransaccion}"></p>
-                            <p th:text="${propiedad.ciudad}"></p>
-                            <a th:href="@{/propiedades/__${propiedad.id}__}">Ver Propiedad</a>
+                        <div class="anuncio-descr">
+                            <p th:text="${propiedad.descripcion}"></p>
                         </div>
 
+                        <div class="anuncio-precio">
+                            <span>$</span>
+                            <h4 th:text="${propiedad.precio}"></h4>
+                        </div>
+
+
+                        <div class="anuncio-iconos">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shredder"
+                                width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="4" y="10" width="16" height="5" rx="1" />
+                                <path d="M17 10v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4m5 5v5m4 -5v2m-8 -2v3" />
+                            </svg>
+                            <p th:text="${propiedad.banos}"></p>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bed" width="44"
+                                height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
+                                <circle cx="7" cy="10" r="1" />
+                            </svg>
+                            <p th:text="${propiedad.ambiente}"></p>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-car" width="44"
+                                height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <circle cx="7" cy="17" r="2" />
+                                <circle cx="17" cy="17" r="2" />
+                                <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
+                            </svg>
+                            <p th:text="${propiedad.estacionamiento}"></p>
+
+                        </div>
+
+                        <div class="anuncio-verPropiedad">
+                            
+                            <a class="anuncio-link" th:href="@{/propiedades/__${propiedad.id}__}">Ver Propiedad</a>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
-    </main>
-
-
-
+    </div>
+    </div>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
     <script type="text/javascript">
         function limpiarCampos() {
-        window.location = 'propiedades';
+            window.location = 'propiedades';
         }
     </script>
 </body>
-<footer th:replace="fragments/footer :: footer"></footer>
+
+<footer>
+    <div class="contenedor-footer">
+        <h1>gola</h1>
+        <div class="area_1">
+
+            <div class="box box_logo">
+                <img src="../../static/img/3Egg.png" alt="logo">
+            </div>
+    
+            <div class="box box_contacto">
+                <h2>CONTACTO</h2>
+                <span class="iconFooter phone"></span><span class="text_imagen footer">+54 9 261 237 8812</span> <br>
+                <span class="iconFooter phone"></span><span class="text_imagen footer">+54 9 261 237 8812</span> <br>
+                <span class="iconFooter correo"></span><span class="text_imagen footer">hola@eggeducacion.com</span>
+    
+    
+            </div>
+    
+            <div class="box box_redesSociales">
+                <h2>SEGUINOS EN REDES</h2>
+                <div class="redes_sociales">
+                    <span class="iconFooter facebook" th:href="@{https://www.facebook.com/EggTechDigital}"></span>
+                    <span class="iconFooter instagram" th:href="@{https://www.instagram.com/eggcooperation/}"></span>
+                    <span class="iconFooter linkedin" th:href="@{https://www.linkedin.com/company/eggcooperation/}"></span>
+                    <span class="iconFooter twitter" th:href="@{https://www.instagram.com/eggcooperation/}"></span>
+                </div>
+    
+            </div>
+    
+        </div>
+    
+        <div class="area_2">
+            <small>&copy; 2022 <b>Three Egg.</b> - Todos los derechos reservados.</small>
+        </div>
+    </div>
+   
+
+</footer>
 
 </html>

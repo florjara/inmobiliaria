@@ -2,38 +2,50 @@
 <html lang="es">
 <html xmlns:th="https://www.thymeleaf.org">
 
-    <head th:replace="fragments/head :: head"></head> 
-
-    <header th:replace="fragments/header :: header"></header>
-
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
+        rel="stylesheet">
+    <title> Inmobiliaria </title>
+</head>
 
 <body>
-    <div class="container-fluid text-center">
-        <h1>Bienvenido</h1>
-        <br>
-        <form th:action="@{/logincheck}" method="post" style="max-width:350px; margin: 0 auto;">
-
-            <div class="border border-secondary p-3 rounded">
-                <p>Inicie Sesión</p>
-
-                <input class="form-control" id="correo" type="email" name="correo" placeholder="E-mail" required>
-
-                <br>
-                <input class="form-control" id="contrasena" type="password" name="contrasena" placeholder="Contraseña"
-                    required>
-
-                <br>
-                <div>
-                    <button class="btn btn-primary" type="submit"> Ingresar</button>
-                    <br>
-                    <br>
-                    <span>Si no tiene cuenta <a href="form_usuario.html">regístrese aquí</a></span>
-                </div>
+<main>
+    <div class="car">
+        <div class="section_img">
+            <div class="contenedor-imagen">
+    
             </div>
-        </form>
+        </div>
+        <div class="section_login">
+            <h1>Bienvenido de nuevo</h1>
+            <p class="descripcion">¡Estamos emocionados de verte de nuevo!</p>
+            <form class="form"  th:action="@{/logincheck}" method="post">
+                <div class="input_group">
+                    <label for="correo">Correo / Usuario</label>
+                    <input id="correo" type="email" name="correo" placeholder="E-mail" required>
+                </div>
+    
+                <div class="input_group">
+                    <label for="contrasena">Contraseña</label>
+                    <input id="contrasena" type="password" name="contrasena" placeholder="Contraseña"
+                           required>
+                </div>
+    
+                <button class="boton_submit" type="submit">Iniciar Sesión</button>
+    
+                <p class="descripcion_form">No tienes una cuenta? <a href="">regístrese aquí</a></p>
+            </form>
+        </div>
     </div>
-</body>
+</main>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+
+
+</body>
 
 </html>
