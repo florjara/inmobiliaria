@@ -258,18 +258,17 @@ fieldset{
     border-color: transparent;
 }
 
- /*--------------Estilo de footer -----------------------*/
+ /*--------------Estilo de footer / header-----------------------*/
+.clear{ clear: both !important;}
 
-footer{
-    
+footer,  header {
     width: 100%;
     background-color: rgb(194, 194, 194);
+    padding: 5px;
 }
 
 .area_1{
-    
     clear: both;
-
 }
 
 .area_2{
@@ -302,7 +301,6 @@ footer{
     height: 24px;
     margin-right: 15px;
     margin-top: 10px;
-   
 }
 
 .iconFooter.phone{
@@ -330,4 +328,22 @@ footer{
     font-size: 16px;
     color: black;
     margin-bottom: 15px;
+}
+.nav_header{
+float: right;
+padding-top: 25px;
+}
+.text_header{
+  padding-right: 35px; 
+  font-size: 12px; 
+}
+
+.text_header:hover{
+    font-weight:  bolder;
+}
+.img_header{
+    width: 60px;
+    height: 60px;
+    margin-left: 35px;
+    
 }
