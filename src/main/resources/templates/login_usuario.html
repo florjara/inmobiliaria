@@ -18,12 +18,11 @@
     <div class="car">
         <div class="section_img">
             <div class="contenedor-imagen">
-    
             </div>
         </div>
         <div class="section_login">
             <h1>Bienvenido de nuevo</h1>
-            <p class="descripcion">¡Estamos emocionados de verte de nuevo!</p>
+            <p class="descripcion">¡Estamos emocionados de verte aqui!</p>
             <form class="form"  th:action="@{/logincheck}" method="post">
                 <div class="input_group">
                     <label for="correo">Correo / Usuario</label>
@@ -38,7 +37,7 @@
     
                 <button class="boton_submit" type="submit">Iniciar Sesión</button>
     
-                <p class="descripcion_form">No tienes una cuenta? <a href="">regístrese aquí</a></p>
+                <p class="descripcion_form">No tienes una cuenta? <a th:href="@{/usuarios/sign-up}">regístrese aquí</a></p>
             </form>
         </div>
     </div>

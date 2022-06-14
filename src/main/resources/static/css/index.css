@@ -25,7 +25,7 @@ body {
 
 .nav {
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
     grid-template-rows: auto;
     grid-column-gap: 10px;
     text-align: center;
@@ -106,8 +106,6 @@ body {
     
 }
 
-
-
 .buscador-select {
     font-family: 'Poppins', sans-serif;
     background: #f1f1f1;
@@ -177,8 +175,9 @@ body {
     grid-area: 1 / 1 / 2 / 2;
     width: 500px;
     height:500px;
-    background-image: url(../imagenes/Casa\ de\ Lago.jpg);
+    background-image: url(../imagenes/vincent-ledvina-znH6W7mpW9g-unsplash.jpg);
     background-size: cover;
+    background-position: 50% 50%;
     background-repeat: no-repeat ;
     border-radius: 50px;
     margin-right: 10px;
@@ -208,6 +207,75 @@ body {
    border-radius:50px;
 }
 
+
+.contenedor-footer {
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
+    background: #f4fafa;
+    width: 100%;
+
+    margin-top: 50px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.contenedor-footer * {
+    background: none;
+}
+
+.area_1 {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.logofooter {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.logofooter *{
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+}
+
+
+
+.contactos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    align-items: center;
+    padding-left: 25%;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.contactos *{
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+}
+.facebook a{
+    text-decoration: none;
+    border: none;
+}
+.instagram  a{
+    text-decoration: none;
+    border: none;
+}
+.whatsapp{
+    text-decoration: none;
+    border: none;
+}
 
 
 
