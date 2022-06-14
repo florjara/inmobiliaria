@@ -18,7 +18,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,8 +50,9 @@ public class PropiedadController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/form")
-    public ModelAndView getForm() {
+    public ModelAndView formCrearPropiedad() {
         ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("propiedad", new Propiedad());
         mav.addObject("usuarios", usuarioService.getAll());
@@ -57,8 +60,9 @@ public class PropiedadController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/form/{id}")
-    public ModelAndView getForm(@PathVariable Long id) {
+    public ModelAndView formActualizarPropiedad(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("propiedad", propiedadService.getById(id));
@@ -66,6 +70,7 @@ public class PropiedadController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/{id}")
     public ModelAndView obtenerPropiedad(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("propiedad");
@@ -73,12 +78,13 @@ public class PropiedadController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/crear")
-    public RedirectView crear(Propiedad propiedadDto, @RequestParam(required = false) List<MultipartFile> photo, RedirectAttributes attributes) {
+    public RedirectView crear(Propiedad propiedadDto, @RequestParam(required = false) List<MultipartFile> photo, RedirectAttributes attributes, HttpSession session) {
         RedirectView redirect = new RedirectView("/propiedades");
 
         try {
-            propiedadService.crear(propiedadDto, photo);
+            propiedadService.crear(propiedadDto, photo, session);
             attributes.addFlashAttribute("success", "La operacion ha sido exitosa");
         } catch (IllegalArgumentException e) {
             attributes.addFlashAttribute("propiedad", propiedadDto);
@@ -89,6 +95,7 @@ public class PropiedadController {
         return redirect;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/actualizar")
     public RedirectView actualizar(Propiedad propiedadDto, @RequestParam(required = false) List<MultipartFile> photo, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/propiedades");
@@ -97,6 +104,7 @@ public class PropiedadController {
         return redirect;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/eliminar/{id}")
     public RedirectView eliminar(@PathVariable Long id) {
         RedirectView redirect = new RedirectView("/propiedades");

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 import java.security.Principal;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -35,16 +35,23 @@ public class UsuarioController {
     public ModelAndView login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
         ModelAndView mav = new ModelAndView("login_usuario");
 
-        if (error != null) mav.addObject("error", "Correo o contraseña erroneos");
-        if (logout != null) mav.addObject("logout", "Saliste satisfactoriamente de la sesion");
-        if (principal != null) mav.setViewName("redirect:/");
+        if (error != null) {
+            mav.addObject("error", "Correo o contraseña erroneos");
+        }
+        if (logout != null) {
+            mav.addObject("logout", "Saliste satisfactoriamente de la sesion");
+        }
+        if (principal != null) {
+            mav.setViewName("redirect:/");
+        }
 
         return mav;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ModelAndView getUsuarios(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("index"); // armar html con tabla para q el admin vea los usuarios
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (inputFlashMap != null) {
@@ -55,6 +62,7 @@ public class UsuarioController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/sign-up")
     public ModelAndView signup(HttpServletRequest solicitud, Principal principal) {
         ModelAndView mav = new ModelAndView("form_usuario");
@@ -74,10 +82,12 @@ public class UsuarioController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/form/{id}")
-    public ModelAndView getForm(@PathVariable Long id, HttpSession session) {
-        if (!session.getId().equals(id)) return new ModelAndView("redirect:/");
-
+    public ModelAndView formActualizar(@PathVariable Long id, HttpSession session) {
+        if (!session.getAttribute("id").equals(id)) {
+            return new ModelAndView("redirect:/");
+        }
 
         ModelAndView mav = new ModelAndView("form_usuario");
         mav.addObject("usuario", usuarioService.getById(id));
@@ -85,15 +95,17 @@ public class UsuarioController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/perfil")
     public ModelAndView obtenerPerfilUsuario(HttpSession session) {
         ModelAndView mav = new ModelAndView("perfil");
-        Long idUsuario = 1L;//session.getId();
+        Long idUsuario = (Long) session.getAttribute("id");
         mav.addObject("usuario", usuarioService.getById(idUsuario));
-        mav.addObject("propiedad", propiedadService.obtenerPorIdUsuario(idUsuario));
+        mav.addObject("propiedades", propiedadService.obtenerPorIdUsuario(idUsuario));
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/perfil/{id}")
     public ModelAndView obtenerUsuarioPorId(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("perfil");
@@ -117,6 +129,7 @@ public class UsuarioController {
         return redireccion;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/actualizar")
     public RedirectView actualizar(Usuario usuarioDto, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/usuarios");
@@ -125,7 +138,7 @@ public class UsuarioController {
         return redirect;
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/eliminar/{id}")
     public RedirectView eliminar(@PathVariable Long id) {
         RedirectView redirect = new RedirectView("/usuarios");

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="fragments/head :: head"></head> 
     <header th:replace="fragments/header :: header"></header>
@@ -60,7 +60,7 @@
                                 <img th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}"
                                      width="200" height="200">
                             </div>
-
+                            
                             <h4 th:text="${propiedad.titulo}">Titulo</h4>
                             <p th:text="${propiedad.precio}"></p>
                             <p th:text="${propiedad.tipo}"></p>

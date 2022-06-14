@@ -24,7 +24,7 @@
                         <span class="icon mail"></span><span class="text_imagen perfil" th:text="${usuario.correo}">nombreapellido@gmail.com</span>
                     </div>
                     <div>
-                        <a th:href="@{/ }" class="btn">Editar Perfil</a>
+                        <a th:href="@{/usuarios/form/__${usuario.id}__ }" class="btn">Editar Perfil</a>
                     </div>
                 </div>
             </div>

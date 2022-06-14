@@ -106,7 +106,7 @@ public class UsuarioService implements UserDetailsService {
         Supplier<UsernameNotFoundException> supplier = () -> new UsernameNotFoundException("No existe un usuario registrado con este correo");
         Usuario usuario = usuarioRepository.findByCorreo(correo).orElseThrow(supplier);
 
-        GrantedAuthority autorizacion= new SimpleGrantedAuthority("ROLE_" + usuario.getNombre());
+        GrantedAuthority autorizacion= new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre());
 
 
         ServletRequestAttributes atributos = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -117,7 +117,7 @@ public class UsuarioService implements UserDetailsService {
         session.setAttribute("apellido", usuario.getApellido());
         session.setAttribute("correo", usuario.getCorreo());
         session.setAttribute("rol", usuario.getRol());
-        session.setAttribute("imagen", usuario.getImage());
+        
         session.setAttribute("telefono", usuario.getTelefono());
 
         return new User(usuario.getCorreo(), usuario.getContrasena(), singletonList(autorizacion));
