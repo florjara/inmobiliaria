@@ -62,7 +62,7 @@ public class UsuarioController {
         return mav;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
+   
     @GetMapping("/sign-up")
     public ModelAndView signup(HttpServletRequest solicitud, Principal principal) {
         ModelAndView mav = new ModelAndView("form_usuario");
@@ -132,6 +132,7 @@ public class UsuarioController {
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/actualizar")
     public RedirectView actualizar(Usuario usuarioDto, RedirectAttributes attributes) {
+        
         RedirectView redirect = new RedirectView("/usuarios");
         usuarioService.update(usuarioDto);
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
@@ -140,7 +141,10 @@ public class UsuarioController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/eliminar/{id}")
-    public RedirectView eliminar(@PathVariable Long id) {
+    public RedirectView eliminar(@PathVariable Long id, HttpSession session) {
+        if (!session.getAttribute("id").equals(id)) {
+            return new RedirectView("/");
+        }
         RedirectView redirect = new RedirectView("/usuarios");
         usuarioService.deleteById(id);
         return redirect;
