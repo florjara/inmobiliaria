@@ -11,13 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PropiedadService {
 
     private final PropiedadRepository propiedadRepository;
-    private final UsuarioRepository usuarioRepository; //linea modificada para poner el usuario por defecto en 1
+    private final UsuarioRepository usuarioRepository; 
     private ImageService imageService;
 
     @Autowired
@@ -28,7 +29,7 @@ public class PropiedadService {
     }
 
     @Transactional
-    public void crear(Propiedad dto, List<MultipartFile> listaFotos) {
+    public void crear(Propiedad dto, List<MultipartFile> listaFotos, HttpSession session) {
 
         Propiedad propiedad = new Propiedad();
 
@@ -56,8 +57,8 @@ public class PropiedadService {
                 }
             }
         }
-        Usuario usuario = usuarioRepository.findById(1L).get(); //linea modificada para poner el usuario por defecto en 1
-        propiedad.setUsuario(usuario); //linea modificada para poner el usuario por defecto en 1
+        Usuario usuario = usuarioRepository.findById((Long)session.getAttribute("id")).get();
+        propiedad.setUsuario(usuario);
         propiedadRepository.save(propiedad);
 
     }
