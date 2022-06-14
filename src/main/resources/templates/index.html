@@ -1,55 +1,104 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head th:replace="fragments/head :: head"></head>
-    <header th:replace="fragments/header :: header"></header>
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/index.css">
+
+    <title> Inmobiliaria </title>
+</head>
+
+<header class="encabezado">
+    <div class="logo">
+        <!-- <img th:src="@{/imagenes/Logo.jpg}" width="250px" height="100px"> -->
+    </div>
+    <nav class="nav">
+        <a href="">Home</a>
+        <a href="">Explorar</a>
+        <a href="">Nosotros</a>
+        <a href="">Iniciar sesión</a>
+        <a href="">Registrarse</a>
+    </nav>
+</header>
 
 
-    <body>
-        <main>
-            <div>
-                <form th:action="@{/propiedades}">
-                    <div>
-                        <label>Filtrar</label>
-                    </div>
 
-                    <div>
-                        <input type="text" name="ciudad" id="ciudad" th:value="${ciudad}" placeholder="Ciudad">
-                    </div>
+<body>
 
-                    <div>
-                        <select name="tipo" id="tipo" th:value="${tipo}">
-
-                            <option value="casa">Casa</option>
-                            <option value="departamento">Departamento</option>
-                        </select>
-                    </div>
-
-
-                    <div>
-                        <select name="tipoTransaccion" id="tipoTransaccion" th:value="${tipoTransaccion}">
-
-                            <option value="alquiler">Alquiler</option>
-                            <option value="venta">Venta</option>
-                        </select>
-                    </div>
-
-                    <input type="submit" value="Buscar">
-                    
-                    <input type="button" value="Limpiar" onclick="limpiarCampos()">
-                </form>
+    <main class="contenedor">
+        <div class="fondo-tamaño">
+            <div class="fondo">
+                <p>Your perfect home is waiting for you</p>
             </div>
-        </main>
+        </div>
+          
+        <div class="contenedor-form">
+            <form th:action="@{propiedades}" class="buscador-form">
 
-        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
-        <script type="text/javascript">
-            function limpiarCampos(){
-            window.location = 'propiedades';
-            }
+                <input class="buscador-input" type="text" name="ciudad" id="ciudad" th:value="${ciudad}"
+                    placeholder="Ciudad">
 
-        </script>
-    </body>
+                <select class="buscador-select" name="tipo" id="tipo" th:value="${tipo}" >
+                    <option value="casa">Casa</option>
+                    <option value="departamento">Departamento</option>
+                </select>
 
-    <footer th:replace="fragments/footer :: footer"></footer>
+                <select class="buscador-select" name="tipoTransaccion" id="tipoTransaccion"
+                    th:value="${tipoTransaccion}">
+                    <option value="alquiler">Alquiler</option>
+                    <option value="venta">Venta</option>
+                </select>
+
+                <input class="buscador-boton" type="submit" value="Buscar">
+                <!-- <input class="buscador-boton" type="button" value="Limpiar" onclick="limpiarCampos()"> -->
+
+            </form>
+        </div>
+
+        <div class="nosotros">
+            <div class="contenedor-imagen"></div>
+            <div class="imagen">
+            </div>
+
+            <div class="nosotros-titulo">
+
+                <h2>Sobre nosotros</h2>
+
+                <p>
+                    Damos valor a las experiencias de vida, entendemos que estas nos hacen ser quienes somos y moldean nuestro pensar y sentir. Tenemos pasión por lo que se hace, por lo que se vive.
+                    <br>
+                    <br>
+                    Nos gusta saber que contribuimos al buen vivir de las personas. Entendiendo que la vida cerca de las oportunidades, es tiempo.
+                    <br>
+                    <br>
+                    Buscamos ser referentes en el mercado inmobiliario, haciendo que nuestro proyecto sea un real aporte a las personas, entendiendo que el resultado es consecuencia de hacer las cosas bien, de generar disfrute y amar la vida urbana.
+                    <br>
+                    <br>
+                    <b>Existimos para construir espacios de vida, donde hay vida.</b>
+                </p>
+                
+            </div>
+
+            
+
+        </div>
+
+        
+    </main>
+
+
+
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
 </html>

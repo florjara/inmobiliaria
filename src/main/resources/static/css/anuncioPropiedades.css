@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #f4fafa;
+}
+
+body {
+
+    font-family: 'Poppins', sans-serif;
+}
+
+.buscador {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    margin-right: 40px;
+}
+
+.buscador-input {
+    font-family: 'Poppins', sans-serif;
+    background: #f1f1f1;
+    border: none;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #222;
+}
+
+.buscador-select {
+    font-family: 'Poppins', sans-serif;
+    background: #f1f1f1;
+    border: none;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #222;
+}
+
+.buscador-boton {
+    /* background: #7c60ea; */
+    background: #7bc6d3;
+    border-radius: 10px;
+    height: 40px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease
+}
+
+.buscador-boton:hover {
+    opacity: 0.5;
+}
+
+.anuncio {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 100px;
+    grid-row-gap: 30px;
+}
+
+.imagen{
+    border-radius: 20px;
+}
+
+.imagen img {
+
+    width: 350px;
+    height: 250px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+.anuncio-contenido {
+    width: 350px;
+    height: 550px;
+    background: #fff;
+    border-radius: 20px;
+
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
+}
+
+.anuncio-informacion {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.anuncio-informacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 12px;
+    grid-row-gap: 6px;
+    width: 350px;
+    height: 250px;
+}
+
+.anuncio-titu {
+    grid-area: 1 / 1 / 2 / 4;
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.anuncio-titu h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+}
+
+.anuncio-descr {
+    grid-area: 2 / 1 / 3 / 4;
+    width: 100%;
+    padding-left: 10px;
+
+}
+
+.anuncio-descr p {
+    color: gray;
+}
+
+
+
+.anuncio-precio {
+    grid-area: 3 / 1 / 4 / 3;
+    width: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 10px;
+    align-items: center;
+}
+
+.anuncio-precio h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+}
+
+.anuncio-precio span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: black;
+}
+
+.anuncio-iconos {
+    grid-area: 4 / 1 / 5 / 4;
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    padding-left: 10px;
+
+}
+
+.anuncio-verPropiedad {
+    grid-area: 5 / 1 / 6 / 4;
+    display: grid;
+    width: 50%;
+    border-radius: 10px;
+    height: 40px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-items: center;
+    background: #7bc6d3;
+    margin-top: 30px;
+    margin-left: 25%;
+   
+
+}
+
+.anuncio-link{
+    background: #7bc6d3;
+    text-decoration: none;
+    color: #fff;
+    
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease
+}
+
+.anuncio-verPropiedad:hover{
+    opacity: 0.5;
+}
+
+
+
+.encabezado {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1f;
+    padding-top: 10px;
+    height: 100px;
+}
+
+.nav {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-template-rows: auto;
+    grid-column-gap: 10px;
+    text-align: center;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.nav a {
+    background: #f1f1f1;
+    border-radius: 10px;
+    height: 40px;
+    color: black;
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
+
+.nav a:hover {
+    background: #7bc6d3;
+}

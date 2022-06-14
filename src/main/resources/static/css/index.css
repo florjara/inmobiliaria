@@ -1,0 +1,214 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #f4fafa;
+    
+}
+
+
+body {
+
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+
+
+.encabezado {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1f;
+    padding-top: 10px;
+    height: 100px;
+}
+
+.nav {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-template-rows: auto;
+    grid-column-gap: 10px;
+    text-align: center;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.nav a {
+    background: #f1f1f1;
+    border-radius: 10px;
+    height: 40px;
+    color: black;
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
+
+.nav a:hover {
+    background: #7bc6d3;
+}
+
+
+.separacion{
+    margin-top:50px;
+}
+
+.contenedor-form{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+
+
+.buscador-form {
+    width: 800px;
+    height: 120px;
+    background-color: #fff;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
+    margin: -2rem auto 0 auto;
+    position: absolute;
+	z-index: 2;
+    
+}
+
+
+.titulo{
+    margin: -20rem auto 0 auto;
+    position: absolute;
+	z-index: 2;
+}
+
+.buscador-input {
+    
+    font-family: 'Poppins', sans-serif;
+    background: #f1f1f1;
+    border: none;
+    width: 90%;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 20px;
+    color: #222;
+    
+}
+
+
+
+.buscador-select {
+    font-family: 'Poppins', sans-serif;
+    background: #f1f1f1;
+    border: none;
+    width: 90%;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #222;
+}
+
+.buscador-boton {
+    /* background: #7c60ea; */
+    grid-area: 2 / 2 / 3 / 3;
+    background: #7bc6d3;
+    border-radius: 10px;
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease
+}
+
+.buscador-boton:hover {
+    opacity: 0.5;
+}
+
+.fondo-tamaño {
+    display: grid;
+    align-items: center;
+    text-align: center;
+    border-radius: 50px;
+    margin: 0 10px 0 10px;
+    
+
+}
+
+.fondo p {
+    background-image: url(../imagenes/Casa\ de\ noche.jpg);
+    height:45rem;
+    border-radius: 50px;
+    background-size: cover;
+    background-repeat: no-repeat ;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-size: 40px;
+    color: white
+}
+
+.nosotros{
+    margin-top:200px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: 1fr;
+    border-radius: 50px;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
+    margin-left: 50px;
+    margin-right: 50px;
+    
+}
+
+.contenedor-imagen{
+    grid-area: 1 / 1 / 2 / 2;
+    width: 500px;
+    height:500px;
+    background-image: url(../imagenes/Casa\ de\ Lago.jpg);
+    background-size: cover;
+    background-repeat: no-repeat ;
+    border-radius: 50px;
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.nosotros-titulo{
+    grid-area: 1 / 2 / 2 / 3;
+   display: grid;
+   align-items: center;
+   justify-items: center;
+   border-radius: 50px;
+    
+}
+
+.nosotros-titulo h2{
+    
+    font-family: 'Poppins', sans-serif;
+   font-size: 30px;
+}
+
+.nosotros-titulo p{
+    color: gray;
+   font-family: 'Poppins', sans-serif;
+   font-size: 20px;
+   border-radius:50px;
+}
+
+
+
+
+
