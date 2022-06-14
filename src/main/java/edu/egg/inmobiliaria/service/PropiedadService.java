@@ -101,10 +101,12 @@ public class PropiedadService {
         return propiedadRepository.findById(id).get();
     }
 
-    @Transactional(readOnly = true)
+        @Transactional(readOnly = true)
     public List<Propiedad> getAll(String ciudad, String tipo, String tipoTransaccion, Double min, Double max) {
 
         Optional<String> ciudadOpt = Optional.ofNullable(ciudad);
+        Optional<String> tipoOpt = Optional.ofNullable(tipo);
+        Optional<String> transaccionOpt = Optional.ofNullable(tipoTransaccion);
         Optional<Double> minOpt = Optional.ofNullable(min);
         Optional<Double> maxOpt = Optional.ofNullable(max);
 
@@ -112,7 +114,7 @@ public class PropiedadService {
             return propiedadRepository.findAll(ciudad, tipo, tipoTransaccion, minOpt.orElse(0d), maxOpt.orElse(Double.MAX_VALUE));
         }
 
-        return propiedadRepository.findAll(ciudadOpt.orElse(""), tipo, tipoTransaccion);
+        return propiedadRepository.findAll(ciudadOpt.orElse(""), tipoOpt.orElse(""), transaccionOpt.orElse(""));
     }
 
     @Transactional
