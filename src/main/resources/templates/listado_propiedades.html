@@ -106,7 +106,7 @@
 
                             <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
                                 alt="icono estacionamiento">
-                            <p th:text="${propiedad.estacionamiento}"></p>
+                            <p th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></p>
 
                         </div>
 
