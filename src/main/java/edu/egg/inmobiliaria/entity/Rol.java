@@ -17,7 +17,7 @@ public class Rol {
     @Column(name = "rol_id")
     private Long id;
 
-    @Column(name = "rol_nombre", length = 30, nullable = false)
+    @Column(name = "rol_nombre", length = 30, unique = true ,nullable = false)
     private String nombre;
 
     @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")

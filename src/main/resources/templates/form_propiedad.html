@@ -26,6 +26,7 @@
         <a th:href="@{/usuarios/perfil}">Mi perfil</a>
         <a href="">Iniciar sesión</a>
         <a href="">Registrarse</a>
+        <a th:href="@{/logout}">Salir</a>
     </nav>
 </header>
 
@@ -113,7 +114,7 @@
 
                 <div class="input_group">
                     <label for="photo">Subir imagen</label>
-                    <input class="boton_submit" type="file" name="photo[]" accept="image/*" multiple>
+                    <input class="boton_submit" type="file" name="photo" accept="image/*" multiple>
                 </div>
 
 

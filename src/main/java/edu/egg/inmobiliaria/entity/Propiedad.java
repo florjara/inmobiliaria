@@ -30,7 +30,7 @@ public class Propiedad {
     @Column(name = "banos", length = 100)
     private Integer banos;
 
-    @Column(name = "descripcion", length = 100)
+    @Column(name = "descripcion", length = 255)
     private String descripcion;
 
     @Column(name = "tipo", nullable = false)

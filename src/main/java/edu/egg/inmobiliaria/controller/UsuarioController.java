@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -35,16 +34,23 @@ public class UsuarioController {
     public ModelAndView login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
         ModelAndView mav = new ModelAndView("login_usuario");
 
-        if (error != null) mav.addObject("error", "Correo o contraseña erroneos");
-        if (logout != null) mav.addObject("logout", "Saliste satisfactoriamente de la sesion");
-        if (principal != null) mav.setViewName("redirect:/");
+        if (error != null) {
+            mav.addObject("error", "Correo o contraseña erroneos");
+        }
+        if (logout != null) {
+            mav.addObject("logout", "Saliste satisfactoriamente de la sesion");
+        }
+        if (principal != null) {
+            mav.setViewName("redirect:/");
+        }
 
         return mav;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ModelAndView getUsuarios(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("index"); // armar html con tabla para q el admin vea los usuarios
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (inputFlashMap != null) {
@@ -55,6 +61,7 @@ public class UsuarioController {
         return mav;
     }
 
+   
     @GetMapping("/sign-up")
     public ModelAndView signup(HttpServletRequest solicitud, Principal principal) {
         ModelAndView mav = new ModelAndView("form_usuario");
@@ -74,10 +81,12 @@ public class UsuarioController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/form/{id}")
-    public ModelAndView getForm(@PathVariable Long id, HttpSession session) {
-        if (!session.getId().equals(id)) return new ModelAndView("redirect:/");
-
+    public ModelAndView formActualizar(@PathVariable Long id, HttpSession session) {
+        if (!session.getAttribute("id").equals(id)) {
+            return new ModelAndView("redirect:/");
+        }
 
         ModelAndView mav = new ModelAndView("form_usuario");
         mav.addObject("usuario", usuarioService.getById(id));
@@ -85,15 +94,17 @@ public class UsuarioController {
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/perfil")
     public ModelAndView obtenerPerfilUsuario(HttpSession session) {
         ModelAndView mav = new ModelAndView("perfil");
-        Long idUsuario = 1L;//session.getId();
+        Long idUsuario = (Long) session.getAttribute("id");
         mav.addObject("usuario", usuarioService.getById(idUsuario));
-        mav.addObject("propiedad", propiedadService.obtenerPorIdUsuario(idUsuario));
+        mav.addObject("propiedades", propiedadService.obtenerPorIdUsuario(idUsuario));
         return mav;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/perfil/{id}")
     public ModelAndView obtenerUsuarioPorId(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("perfil");
@@ -103,11 +114,11 @@ public class UsuarioController {
     }
 
     @PostMapping("/registrar")
-    public RedirectView signup(Usuario usuarioDto, RedirectAttributes atributos) {
+    public RedirectView signup(Usuario usuarioDto,@RequestParam(required = false) MultipartFile photo ,RedirectAttributes atributos) {
         RedirectView redireccion = new RedirectView("/login");
 
         try {
-            usuarioService.create(usuarioDto);
+            usuarioService.create(usuarioDto, photo );
         } catch (IllegalArgumentException e) {
             atributos.addFlashAttribute("usuario", usuarioDto);
             atributos.addFlashAttribute("excepcion", e.getMessage());
@@ -117,17 +128,22 @@ public class UsuarioController {
         return redireccion;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/actualizar")
-    public RedirectView actualizar(Usuario usuarioDto, RedirectAttributes attributes) {
-        RedirectView redirect = new RedirectView("/usuarios");
-        usuarioService.update(usuarioDto);
+    public RedirectView actualizar(Usuario usuarioDto, @RequestParam(required = false) MultipartFile photo,RedirectAttributes attributes) {
+        
+        RedirectView redirect = new RedirectView("/usuarios/perfil");
+        usuarioService.update(usuarioDto,photo);
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/eliminar/{id}")
-    public RedirectView eliminar(@PathVariable Long id) {
+    public RedirectView eliminar(@PathVariable Long id, HttpSession session) {
+        if (!session.getAttribute("id").equals(id)) {
+            return new RedirectView("/");
+        }
         RedirectView redirect = new RedirectView("/usuarios");
         usuarioService.deleteById(id);
         return redirect;
