@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 
 <head th:fragment="head">
     <meta charset="UTF-8">
@@ -22,10 +22,11 @@
     <nav class="nav">
         <a th:href="@{/}">Home</a>
         <a th:href="@{/propiedades}">Explorar</a>
-        <a th:href="@{/propiedades/form}">Vender</a>
-        <a th:href="@{/usuarios/perfil}">Mi perfil</a>
-        <a href="">Iniciar sesión</a>
-        <a href="">Registrarse</a>
+
+        <a sec:authorize="hasRole('USUARIO')" th:href="@{/propiedades/form}">Vender</a>
+        <a sec:authorize="hasRole('USUARIO')" th:href="@{/usuarios/perfil}">Mi perfil</a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/login}">Iniciar sesión</a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/sign-up}">Registrarse</a>
         <a th:href="@{/logout}">Salir</a>
     </nav>
 </header>
@@ -109,7 +110,7 @@
         <div class="area_1">
 
             <div class="logofooter">
-                <img th:src="@{/imagenes/logo.jpg}" width="150" height="150">
+                <img th:src="@{/imagenes/logo3Egg.gif}" width="150px" height="150px"
                 <h2>Your perfect home is waiting for you</h2>
             </div>
 

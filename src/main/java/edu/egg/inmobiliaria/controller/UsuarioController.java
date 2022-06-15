@@ -130,10 +130,12 @@ public class UsuarioController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/actualizar")
+
     public RedirectView actualizar(Usuario usuarioDto, @RequestParam(required = false) MultipartFile photo,RedirectAttributes attributes) {
         
         RedirectView redirect = new RedirectView("/usuarios/perfil");
         usuarioService.update(usuarioDto,photo);
+
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }

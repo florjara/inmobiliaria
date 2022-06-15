@@ -36,7 +36,8 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .authorizeRequests()
-                    .antMatchers("/usuarios/sign-up", "/propiedades/{id}", "/propiedades","/usuarios/registrar", "/","/css/*", "/js/*").permitAll()
+
+                    .antMatchers("/usuarios/sign-up", "/propiedades/{id}", "/propiedades","/imagenes/*","/usuarios/registrar", "/","/css/*", "/js/*").permitAll()
                     .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
@@ -50,7 +51,7 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/usuarios/login?logout=true")
+                        .logoutSuccessUrl("/?logout=true")
                         .permitAll()
                 .and()
                     .csrf()

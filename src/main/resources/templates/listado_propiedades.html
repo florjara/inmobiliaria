@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
     <meta charset="UTF-8">
@@ -70,15 +70,15 @@
     </div>
 
     <div th:unless="${propiedades.isEmpty()}">
-
-
-
         <div class="anuncio">
             <div th:each="propiedad : ${propiedades}">
                 <div class="anuncio-contenido">
                     <div class="imagen">
-                        <img
-                            th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}">
+                       <!--Si tengo imagen ejecuta each, caso contrario no hace nada-->
+                        <img th:if="${iterador.index} == 0" th:each="img ,iterador : ${propiedad.image}" th:src="'/uploads/'+${img}">
+                        
+                        <!--Si NO tengo imagen muestro img por default -->
+                        <img th:if="!${propiedad.image.size}" th:src="'/uploads/default-image.png'">
                     </div>
 
                     <div class="anuncio-informacion">
@@ -107,7 +107,7 @@
 
                             <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
                                 alt="icono estacionamiento">
-                            <p th:text="${propiedad.estacionamiento}"></p>
+                            <p th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></p>
 
                         </div>
 

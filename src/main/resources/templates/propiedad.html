@@ -1,68 +1,43 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/head :: head"></head> 
+ 
+    <head th:replace="fragments/head :: head"></head>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
 
     <header th:replace="fragments/header :: header"></header>
-
+    
     <body>
-        <main class="main">
 
-
-
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner" th:each="propiedad : ${propiedades}">
-                    <div class="carousel-item active">
-                        <img th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}">
+        <div class="container" >
+        
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" >
+                        <div class="carousel-inner">
+                            <div th:each="img ,iterador : ${propiedad.image}" th:class="${iterador.index} == 0 ? 'item active' : 'item'">
+                                <img th:src="'/uploads/'+${img}" alt="3EG" style="width:100%; height: 200px;">
+                            </div>
+                        </div>    
+                
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                          <span class="glyphicon glyphicon-chevron-left"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                          <span class="glyphicon glyphicon-chevron-right"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
                     </div>
-
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-
-
-
-            <div class="container">
-
-                <h3 th:text="${propiedad.titulo}">(Título de la propiedad) Ej:Departamento</h3>
-                <h2 th:text="${propiedad.ciudad}">Zona | Ubicación</h2>
-                <h3 th:text="${propiedad.precio}">(Precio) Ej:$26.000</h3>
-                <h2 th:text="${propiedad.ambiente}">(Características) 2 dormitorios | 1 baño | Amueblado</h2>
-
-                <ul class="carrusel">
-                    <li id="foto1" th:each="img : ${propiedad.image}">
-                        <img th:src="${img}">
-                    </li>
-                    <li id="foto2">
-                        <img src="https://arquitecturaviva.com/assets/uploads/articulos/71318/av_182046.jpeg?h=87ae05d2">
-                    </li>
-
-                </ul>
-
-                <ul class="menu-carrusel">
-                    <li>
-                        <a href="#foto1">
-                            Foto1</a>
-                    </li>
-                    <li>
-                        <a href="#foto2">Foto2...</a>
-                    </li>
-                </ul>
+                
+               <!-- </div></div></main>-->
+            
 
                 <h5>DESCRIPCIÓN DE LA PROPIEDAD</h5>
 
                 <p th:text="${propiedad.descripcion}"></p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit sapiente provident et exercitationem quae
-                    dolorem, fugiat dignissimos consequatur ipsum tempore deleniti neque sunt praesentium dolorum minus,
-                    nisi aliquid possimus dolor.</p>
-                <br>
-
+                
                 <div class="box">
                     <h5>DETALLES:</h5>
                     <span th:text="${propiedad.precio}">Precio: ($15.000) </span><br>      
@@ -80,15 +55,15 @@
 
                     <p>Contactar:</p>
                     <span th:text="${propiedad.usuario.telefono}"></span>
-                    <div>
-                        <a href="https://api.whatsapp.com/send?phone=5493764756578&text=Hola, Nececito más informacion sobre ésta propiedad! https://www.remax.com.ar/listings/alquiler-ph-3-ambientes-en-1er-piso-munro" target="_blank">
+                        <div>
+                            <a href="https://api.whatsapp.com/send?phone=5493764756578&text=Hola, Nececito más informacion sobre ésta propiedad! https://www.remax.com.ar/listings/alquiler-ph-3-ambientes-en-1er-piso-munro" target="_blank">
 
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/240px-WhatsApp.svg.png"
                                  width="50" height="50"></a>
-                    </div>
+                        </div>
                 </div>
-            </div>
-        </main>
+       </div>
+      
     </body>
 
     <footer th:replace="fragments/footer :: footer"></footer>

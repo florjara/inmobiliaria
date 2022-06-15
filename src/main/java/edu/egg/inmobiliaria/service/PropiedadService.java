@@ -47,8 +47,6 @@ public class PropiedadService {
         propiedad.setEliminado(Boolean.FALSE);
         propiedad.setDireccion(dto.getDireccion());
 
-
-
         if (!listaFotos.get(0).getOriginalFilename().isEmpty()) {
             List<String> lista = new ArrayList<>();
             if (!listaFotos.isEmpty()) {
