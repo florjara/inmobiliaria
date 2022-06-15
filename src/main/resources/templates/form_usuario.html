@@ -14,6 +14,7 @@
 
 <body>
     <main>
+        
         <div class="car-sign-up">
 
             <div class="fondo-sign-up">
@@ -22,11 +23,11 @@
                 <h1>Bienvenido</h1>
                 <p class="descripcion">¡Estamos emocionados de verte!</p>
 
-                <form class="form" th:action="@{/usuarios/__${action}__}" method="post" th:object="${usuario}">
+                <form enctype="multipart/form-data" class="form" th:action="@{/usuarios/__${action}__}" method="post" th:object="${usuario}">
                     <div class="form-sign-up">
 
-                       <input type="hidden" th:field="${usuario.id}">
-                      
+                        <input type="hidden" th:field="*{id}">
+
                         <div class="input_group">
                             <label  for="nombre">Nombre:</label>
                             <input  id="nombre" type="text" name="nombre" placeholder="Juan"
@@ -55,6 +56,11 @@
                                 <label for="contrasena"> Contraseña:</label>
                                 <input  id="contrasena" type="password" name="contrasena" placeholder="*****"
                                     th:field="*{contrasena}" required>
+                        </div>
+
+                        <div class="input_group">
+                            <label for="photo">Subir imagen</label>
+                            <input class="boton_submit" type="file" name="photo" accept="image/*" multiple>
                         </div>
         
                         <button class="boton_submit" type="submit"> Registrar</button>

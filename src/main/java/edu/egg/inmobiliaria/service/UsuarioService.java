@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -30,18 +31,20 @@ public class UsuarioService implements UserDetailsService {
     private final UsuarioRepository usuarioRepository;
     private final BCryptPasswordEncoder encriptador;
     private final RolRepository rolRepository;
+    private ImageService imageService;
 
     @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder encriptador, RolRepository rolRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder encriptador, RolRepository rolRepository, ImageService imageService) {
         this.usuarioRepository = usuarioRepository;
         this.encriptador = encriptador;
         this.rolRepository = rolRepository;
+        this.imageService = imageService;
     }
 
 
     //crea un usuario
     @Transactional
-    public void create (Usuario dto){
+    public void create (Usuario dto, MultipartFile photo){
 
         if (usuarioRepository.existsByCorreo(dto.getCorreo()))
             throw new IllegalArgumentException("Este correo ya fue registrado con aterioridad");
@@ -55,6 +58,10 @@ public class UsuarioService implements UserDetailsService {
         usuario.setTelefono(dto.getTelefono());
         usuario.setEliminado(Boolean.FALSE);
 
+        if (!photo.isEmpty()) {
+            usuario.setImage(imageService.copy(photo));
+        }
+
         if (dto.getRol() == null)
             usuario.setRol(rolRepository.findByNombre("USUARIO").orElseThrow(() -> new IllegalArgumentException("Error")));
 
@@ -63,7 +70,7 @@ public class UsuarioService implements UserDetailsService {
 
     //actualiza un usuario
     @Transactional
-    public void update (Usuario dto){
+    public void update (Usuario dto, MultipartFile photo){
 
         Usuario usuario = usuarioRepository.findById(dto.getId()).get();
 
@@ -72,6 +79,10 @@ public class UsuarioService implements UserDetailsService {
         usuario.setContrasena(encriptador.encode(dto.getContrasena()));
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
+
+        if (!photo.isEmpty()) {
+            usuario.setImage(imageService.copy(photo));
+        }
 
         usuarioRepository.save(usuario);
 

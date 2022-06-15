@@ -36,6 +36,7 @@ public class AppSecurity extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .authorizeRequests()
+
                     .antMatchers("/usuarios/sign-up", "/propiedades/{id}", "/propiedades","/imagenes/*","/usuarios/registrar", "/","/css/*", "/js/*").permitAll()
                     .antMatchers("/**").authenticated()
                 .and()

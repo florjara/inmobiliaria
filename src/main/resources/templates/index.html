@@ -22,10 +22,12 @@
     <nav class="nav">
         <a th:href="@{/}">Home</a>
         <a th:href="@{/propiedades}">Explorar</a>
+
         <a sec:authorize="hasRole('USUARIO')" th:href="@{/propiedades/form}">Vender</a>
         <a sec:authorize="hasRole('USUARIO')" th:href="@{/usuarios/perfil}">Mi perfil</a>
         <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/login}">Iniciar sesión</a>
         <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/sign-up}">Registrarse</a>
+        <a th:href="@{/logout}">Salir</a>
     </nav>
 </header>
 

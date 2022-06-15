@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
-
 import javax.servlet.http.HttpServletRequest;
-
 import java.security.Principal;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -115,11 +114,11 @@ public class UsuarioController {
     }
 
     @PostMapping("/registrar")
-    public RedirectView signup(Usuario usuarioDto, RedirectAttributes atributos) {
+    public RedirectView signup(Usuario usuarioDto,@RequestParam(required = false) MultipartFile photo ,RedirectAttributes atributos) {
         RedirectView redireccion = new RedirectView("/login");
 
         try {
-            usuarioService.create(usuarioDto);
+            usuarioService.create(usuarioDto, photo );
         } catch (IllegalArgumentException e) {
             atributos.addFlashAttribute("usuario", usuarioDto);
             atributos.addFlashAttribute("excepcion", e.getMessage());
@@ -131,10 +130,12 @@ public class UsuarioController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/actualizar")
-    public RedirectView actualizar(Usuario usuarioDto, RedirectAttributes attributes) {
+
+    public RedirectView actualizar(Usuario usuarioDto, @RequestParam(required = false) MultipartFile photo,RedirectAttributes attributes) {
         
-        RedirectView redirect = new RedirectView("/usuarios");
-        usuarioService.update(usuarioDto);
+        RedirectView redirect = new RedirectView("/usuarios/perfil");
+        usuarioService.update(usuarioDto,photo);
+
         attributes.addFlashAttribute("success", "The operation has been carried out successfully");
         return redirect;
     }

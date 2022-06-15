@@ -183,6 +183,7 @@ body {
     background: #7bc6d3;
     margin-top: 30px;
     margin-left: 25%;
+    margin-bottom: 50px;
 
 
 }
@@ -220,7 +221,7 @@ body {
 .nav {
     width: 800px;
     display: grid;
-    grid-template-columns: repeat(6, auto);
+    grid-template-columns: repeat(7, auto);
     grid-template-rows: auto;
     grid-column-gap: 10px;
     text-align: center;
@@ -319,6 +320,7 @@ body {
 
 /* Estilo al formulario de propiedad */
 
+
 .form-contenedor{
     border-radius: 20px;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
@@ -326,6 +328,8 @@ body {
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;    
 }
+
+
 
 .formulario{
     margin-left:20px;
@@ -335,13 +339,11 @@ body {
 
 .fondo-form-propiedad{
     border-radius: 20px;
-  
     margin-top: 20px;
     width: 98%;
     height: 97%;
     background-image: url(../imagenes/Casa\ de\ Lago.jpg);
     background-size: cover;
-    
     background-repeat: no-repeat ;
 }
 
@@ -485,7 +487,7 @@ body {
     grid-row-gap: 30px;
     border-radius: 10px;
     height: 40px;
-    width: 50%;
+    width: 60%;
     color: black;
     border: none;
     text-decoration: none;
@@ -518,6 +520,24 @@ body {
 .contacto *{
     color: #707070;
 }
+
+.mis-propiedades{
+    margin-top: 250px;
+}
+
+.mis-propiedades h2{
+    color: #707070;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contenedor-perfil-foto img{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+
 
 
 

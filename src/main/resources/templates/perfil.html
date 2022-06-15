@@ -26,6 +26,7 @@
             <a th:href="@{/usuarios/perfil}">Mi perfil</a>
             <a href="">Iniciar sesión</a>
             <a href="">Registrarse</a>
+            <a th:href="@{/logout}">Salir</a>
         </nav>
     </header>
 
@@ -39,6 +40,8 @@
         <section class="perfil">
             <div class="contenedor-perfil">
                 <div class="contenedor-perfil-foto">
+                    <img
+                            th:src="${usuario.image} ? @{/uploads/__${usuario.image}__} : @{/uploads/default-image.png}" width="150" height="150">
                 </div>
                 <h1 th:text="|${usuario.nombre}  ${usuario.apellido} |" ></h1>
                 <div class="perfil-informacion">
@@ -58,12 +61,62 @@
                         </div>
                     </div>
                         <div class="botones-perfil">
-                            <a class="perfil-link" th:href="@{/usuario/__${usuario.id}__}">Actualizar perfil</a>
-                            <a class="perfil-link" th:href="@{/propiedades/form}">Ver Propiedad</a>
+                            <a class="perfil-link" th:href="@{/usuarios/form/__${usuario.id}__}">Actualizar perfil</a>
+                            <a class="perfil-link" th:href="@{/propiedades/form}">Cargar Propiedad</a>
                         </div>
                     
                    
                     
+                </div>
+            </div>
+        </section>
+        <section class="mis-propiedades">
+            <h2>Mis propiedades</h2>
+            <div class="anuncio">
+                <div th:each="propiedad : ${propiedades}">
+                    <div class="anuncio-contenido">
+                        <div class="imagen">
+                            <img
+                                th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}">
+                        </div>
+    
+                        <div class="anuncio-informacion">
+    
+                            <dvi class="anuncio-titu">
+                                <h3 th:text="${propiedad.titulo}">Titulo</h3>
+                            </dvi>
+    
+                            <div class="anuncio-descr">
+                                <p th:text="${propiedad.descripcion}"></p>
+                            </div>
+    
+                            <div class="anuncio-precio">
+                                <span>$</span>
+                                <h4 th:text="${propiedad.precio}"></h4>
+                            </div>
+    
+    
+                            <div class="anuncio-iconos">
+                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_wc.svg}" alt="icono baño">
+                                <p th:text="${propiedad.banos}"></p>
+    
+                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_dormitorio.svg}"
+                                    alt="icono estacionamiento">
+                                <p th:text="${propiedad.ambiente}"></p>
+    
+                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
+                                    alt="icono estacionamiento">
+                                <p th:text="${propiedad.estacionamiento}"></p>
+    
+                            </div>
+    
+                            <div class="anuncio-verPropiedad">
+    
+                                <a class="anuncio-link" th:href="@{/propiedades/__${propiedad.id}__}">Ver Propiedad</a>
+                                <input class="buscador-boton" type="submit" value="Buscar">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
