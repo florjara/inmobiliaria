@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 
 <head th:fragment="head">
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@
     <nav class="nav">
         <a th:href="@{/}">Home</a>
         <a th:href="@{/propiedades}">Explorar</a>
-        <a th:href="@{/propiedades/form}">Vender</a>
+        <a sec:authorize="hasRole('USUARIO')" th:href="@{/propiedades/form}">Vender</a>
         <a th:href="@{/usuarios/perfil}">Mi perfil</a>
         <a href="">Iniciar sesión</a>
         <a href="">Registrarse</a>
