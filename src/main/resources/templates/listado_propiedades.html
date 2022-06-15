@@ -69,15 +69,15 @@
     </div>
 
     <div th:unless="${propiedades.isEmpty()}">
-
-
-
         <div class="anuncio">
             <div th:each="propiedad : ${propiedades}">
                 <div class="anuncio-contenido">
                     <div class="imagen">
-                        <img
-                            th:src="${propiedad.image} ? @{/uploads/__${propiedad.image}__} : @{/uploads/default-image.png}">
+                       <!--Si tengo imagen ejecuta each, caso contrario no hace nada-->
+                        <img th:if="${iterador.index} == 0" th:each="img ,iterador : ${propiedad.image}" th:src="'/uploads/'+${img}">
+                        
+                        <!--Si NO tengo imagen muestro img por default -->
+                        <img th:if="!${propiedad.image.size}" th:src="'/uploads/default-image.png'">
                     </div>
 
                     <div class="anuncio-informacion">
