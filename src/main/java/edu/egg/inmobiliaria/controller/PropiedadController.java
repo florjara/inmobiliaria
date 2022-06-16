@@ -44,7 +44,7 @@ public class PropiedadController {
         if (inputFlashMap != null) {
             mav.addObject("success", inputFlashMap.get("success"));
         }
-
+       
         mav.addObject("propiedades", propiedadService.getAll(ciudad, tipo, tipoTransaccion, min, max));
 
         return mav;
