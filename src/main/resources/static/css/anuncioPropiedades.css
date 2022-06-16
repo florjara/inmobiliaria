@@ -116,18 +116,22 @@ body {
 
 .anuncio-titu h3 {
     font-family: 'Poppins', sans-serif;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .anuncio-descr {
     grid-area: 2 / 1 / 3 / 4;
-    width: 100%;
     padding-left: 10px;
-
+    display: flex;
+    align-items: center;
 }
 
+
+
 .anuncio-descr p {
-    color: gray;
+    
+    margin-left: 10px;
+    font-size: 18px;
 }
 
 
@@ -170,38 +174,81 @@ body {
 
 .anuncio-verPropiedad {
     grid-area: 5 / 1 / 6 / 4;
-    display: grid;
     width: 50%;
     border-radius: 10px;
-    height: 40px;
+    height: 30px;
     color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    align-items: center;
-    justify-items: center;
     background: #7bc6d3;
-    margin-top: 30px;
-    margin-left: 25%;
-    margin-bottom: 50px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
 
+}
 
+.anuncio-verPropiedad-perfil {
+    grid-area: 5 / 1 / 6 / 4;
+    width: 50%;
+    border-radius: 10px;
+    height: 30px;
+    color: #fff;
+    background: #7bc6d3;
+    margin: 0 auto;
+    text-align: center;
+    
+
+}
+
+.anuncio-verPropiedad:hover {
+    opacity: 0.5;
 }
 
 .anuncio-link {
     background: #7bc6d3;
+    width: 100%;
     text-decoration: none;
     color: #fff;
     border: none;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    transition: all 0.3s ease
+    transition: all 0.3s ease;
 }
 
-.anuncio-verPropiedad:hover {
-    opacity: 0.5;
+.editar-propiedad{
+    width: 100%;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: center;
+   
 }
+
+
+
+
+.boton-editar{
+    
+    width: 80%;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    border-radius: 10px;
+    background: #f1f1f1;
+    background: #7bc6d3;
+}
+
+.boton-editar:hover {
+    background: red;
+    
+    
+}
+
+
 
 .logo {
     margin-left: 50px;
@@ -253,7 +300,7 @@ body {
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
     background: #f4fafa;
     width: 100%;
-    
+
     margin-top: 50px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -282,7 +329,7 @@ body {
     margin-bottom: 50px;
 }
 
-.logofooter *{
+.logofooter * {
     font-family: 'Poppins', sans-serif;
     font-size: 30px;
 }
@@ -299,21 +346,24 @@ body {
     margin-bottom: 20px;
 }
 
-.contactos *{
+.contactos * {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     text-decoration: none;
     border: none;
 }
-.facebook a{
+
+.facebook a {
     text-decoration: none;
     border: none;
 }
-.instagram  a{
+
+.instagram a {
     text-decoration: none;
     border: none;
 }
-.whatsapp{
+
+.whatsapp {
     text-decoration: none;
     border: none;
 }
@@ -321,37 +371,37 @@ body {
 /* Estilo al formulario de propiedad */
 
 
-.form-contenedor{
+.form-contenedor {
     border-radius: 20px;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr;    
+    grid-template-rows: 1fr;
 }
 
 
 
-.formulario{
-    margin-left:20px;
+.formulario {
+    margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.fondo-form-propiedad{
+.fondo-form-propiedad {
     border-radius: 20px;
     margin-top: 20px;
     width: 98%;
     height: 97%;
     background-image: url(../imagenes/Casa\ de\ Lago.jpg);
     background-size: cover;
-    background-repeat: no-repeat ;
+    background-repeat: no-repeat;
 }
 
- h1{
+h1 {
     color: #707070;
     text-align: center;
-    
- }
+
+}
 
 .formulario .input_group input {
     font-family: 'Poppins', sans-serif;
@@ -402,6 +452,7 @@ body {
     display: block;
     margin-bottom: 8px;
 }
+
 .input_group {
     margin-bottom: 25px;
 }
@@ -430,59 +481,60 @@ body {
 
 /* Estilos al perfil */
 
-.fondo  {
+.fondo {
     background-image: url(../imagenes/header.jpg);
-    height:40rem;
+    height: 40rem;
     border-radius: 50px;
     background-size: cover;
-    background-repeat: no-repeat ;
+    background-repeat: no-repeat;
     display: grid;
     align-items: end;
     justify-items: center;
     font-size: 40px;
-    color: white
+    color: white;
+   
 }
 
-.perfil{
+.perfil {
     display: grid;
     align-items: center;
     justify-items: center;
 }
 
-.contenedor-perfil{
+.contenedor-perfil {
     width: 300px;
     height: 400px;
-    border-radius:30px;
+    border-radius: 30px;
     background-color: #fff;
     margin: -8rem auto 0 auto;
     position: absolute;
-	z-index: 2;
+    z-index: 2;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
-    
-    
+
+
 }
 
-.contenedor-perfil h1{
-    margin-top:25px;
+.contenedor-perfil h1 {
+    margin-top: 25px;
 }
 
-.contenedor-perfil-foto{
+.contenedor-perfil-foto {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background-color:#fff;
+    background-color: #fff;
     margin: -4rem auto 0 auto;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
 }
 
-.botones-perfil{
+.botones-perfil {
     display: grid;
     align-items: center;
     justify-items: center;
     margin-top: 30px;
 }
 
-.botones-perfil a{
+.botones-perfil a {
     display: grid;
     grid-row-gap: 30px;
     border-radius: 10px;
@@ -495,50 +547,44 @@ body {
     transition: all 0.3s ease;
     align-items: center;
     justify-items: center;
-    margin-bottom:20px;
+    margin-bottom: 20px;
     background: #f1f1f1;
-    
-    
-    
+
+
+
 }
 
-.botones-perfil a:hover{
+.botones-perfil a:hover {
     background: #7bc6d3;
 }
 
 
 
-.perfil-informacion{
+.perfil-informacion {
     margin-left: 20px;
     margin-right: 20px;
 }
 
-.contacto{
+.contacto {
     margin-top: 13px;
 }
 
-.contacto *{
+.contacto * {
     color: #707070;
 }
 
-.mis-propiedades{
+.mis-propiedades {
     margin-top: 250px;
 }
 
-.mis-propiedades h2{
+.mis-propiedades h2 {
     color: #707070;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.contenedor-perfil-foto img{
+.contenedor-perfil-foto img {
     border-radius: 50%;
     width: 100%;
     height: 100%;
 }
-
-
-
-
-
-
