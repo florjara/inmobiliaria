@@ -15,21 +15,7 @@
     <title> Inmobiliaria </title>
 </head>
 
-<header class="encabezado">
-    <div class="logo">
-        <!-- <img th:src="@{/imagenes/logo.jpg}" width="100" height="100"> -->
-    </div>
-    <nav class="nav">
-        <a th:href="@{/}">Home</a>
-        <a th:href="@{/propiedades}">Explorar</a>
-
-        <a sec:authorize="hasRole('USUARIO')" th:href="@{/propiedades/form}">Vender</a>
-        <a sec:authorize="hasRole('USUARIO')" th:href="@{/usuarios/perfil}">Mi perfil</a>
-        <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/login}">Iniciar sesión</a>
-        <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/sign-up}">Registrarse</a>
-        <a th:href="@{/logout}">Salir</a>
-    </nav>
-</header>
+<header th:replace="fragments/header :: header"></header>
 
 
 
