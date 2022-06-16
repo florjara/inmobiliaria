@@ -1,10 +1,16 @@
 package edu.egg.inmobiliaria.entity;
 
+import java.util.List;
+import org.hibernate.annotations.SQLDelete;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "propiedad", indexes = {
+    @Index(name = "idx_titulo", columnList = "titulo")})
+@SQLDelete(sql = "UPDATE propiedad SET eliminado = true WHERE id = ?")
 public class Propiedad {
 
     @Id
@@ -18,13 +24,13 @@ public class Propiedad {
     @Column(name = "precio", length = 100, nullable = false)
     private Double precio;
 
-    @Column(name = "ambiente", length = 100, nullable = false)
+    @Column(name = "ambiente", length = 100)
     private Integer ambiente;
 
-    @Column(name = "banos", length = 100, nullable = false)
+    @Column(name = "banos", length = 100)
     private Integer banos;
 
-    @Column(name = "descripcion", length = 100)
+    @Column(name = "descripcion", length = 255)
     private String descripcion;
 
     @Column(name = "tipo", nullable = false)
@@ -33,20 +39,24 @@ public class Propiedad {
     @Column(name = "tipo_transaccion", nullable = false)
     private String tipoTransaccion;
 
-    @Column(name = "estacionamiento")
+    @Column(name = "estacionamiento", columnDefinition = "BOOLEAN")
     private Boolean estacionamiento;
 
-    @Column(name = "patio")
+    @Column(name = "patio", columnDefinition = "BOOLEAN")
     private Boolean patio;
 
-    @Column(name = "eliminado", nullable = false, columnDefinition = "BOOLEAN")
+    @Column(name = "eliminado",  columnDefinition = "BOOLEAN")
     private Boolean eliminado;
 
     @Column(name = "direccion")
     private String direccion;
 
-    //@Column(name = "imagen")
-    //private String imagen;
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "image")
+    private List<String> image;
+
+    @Column(name = "Ciudad")
+    private String ciudad;
 
     @ManyToOne
     @JoinColumn(name = "Usuario", referencedColumnName = "id")
@@ -55,7 +65,7 @@ public class Propiedad {
     public Propiedad() {
     }
 
-    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, Boolean eliminado, String direccion, Usuario usuario) {
+    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, Boolean eliminado, String direccion, List<String> image, String ciudad, Usuario usuario) {
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
@@ -68,6 +78,8 @@ public class Propiedad {
         this.patio = patio;
         this.eliminado = eliminado;
         this.direccion = direccion;
+        this.image = image;
+        this.ciudad = ciudad;
         this.usuario = usuario;
     }
 
@@ -151,10 +163,6 @@ public class Propiedad {
         this.patio = patio;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
     public Boolean getEliminado() {
         return eliminado;
     }
@@ -169,6 +177,26 @@ public class Propiedad {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public List<String> getImage() {
+        return image;
+    }
+
+    public void setImage(List<String> image) {
+        this.image = image;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public void setUsuario(Usuario usuario) {

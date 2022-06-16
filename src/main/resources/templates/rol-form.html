@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<header th:replace="fragments/header :: header"></header>
+
+
+<body>
+<div class="container-fluid text-center">
+  <h1>Crear Rol</h1>
+  <br>
+  <form th:action="@{/roles/create}" th:object="${rol}" method="post" style="max-width:350px; margin: 0 auto;"
+        class="needs-validation" novalidate>
+
+    <div class="border border-secondary p-3 rounded">
+
+
+      <input type="hidden" th:field="*{id}">
+
+      <br>
+      <div>
+        <input type="text" th:field="*{nombre}" id="nombre" class="form-control" placeholder="USER" required>
+        <label for="nombre">Nombre</label>
+        <div class="invalid-feedback">El nombre es requerido</div>
+      </div>
+
+      <br>
+      <div>
+        <button class="btn btn-primary" type="submit">Crear</button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</html>
