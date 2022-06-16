@@ -1,69 +1,69 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
- 
+
     <head th:replace="fragments/head :: head"></head>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+
 
     <header th:replace="fragments/header :: header"></header>
-    
+
     <body>
 
         <div class="container" >
-        
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel" >
-                        <div class="carousel-inner">
-                            <div th:each="img ,iterador : ${propiedad.image}" th:class="${iterador.index} == 0 ? 'item active' : 'item'">
-                                <img th:src="'/uploads/'+${img}" alt="3EG" style="width:100%; height: 200px;">
-                            </div>
-                        </div>    
-                
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
+
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" >
+                <div class="carousel-inner">
+                    <div th:each="img ,iterador : ${propiedad.image}" th:class="${iterador.index} == 0 ? 'item active' : 'item'">
+                        <img th:src="'/uploads/'+${img}" alt="3EG" style="width:100%; height: 200px;">
                     </div>
-                
-               <!-- </div></div></main>-->
-            
+                </div>    
 
-                <h5>DESCRIPCIÓN DE LA PROPIEDAD</h5>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
 
-                <p th:text="${propiedad.descripcion}"></p>
-                
-                <div class="box">
-                    <h5>DETALLES:</h5>
-                    <span th:text="${propiedad.precio}">Precio: ($15.000) </span><br>      
-                    <span th:text="${propiedad.tipo}">Tipo: (Alquiler/Venta)</span><br>              
-                    <span th:text="${propiedad.direccion}">Dirección: (...)</span><br>  
-                    <span th:text="${propiedad.ambiente}">Ambientes: (1..2..)</span><br>  
-                    <span th:text="${propiedad.banos}">Baños: (1..2..)</span><br>  
-                    <span th:text="${propiedad.estacionamiento}">Estacionamiento: Si/No</span>></span><br>  
-                    <span th:text="${propiedad.patio}">Patio: Si/No</span><br>  
-                    <span th:text="${propiedad.usuario.nombre}">Propietario: (Nombre del usuario)</span><br>  
+            <!-- </div></div></main>-->
 
-                    <div>
-                        <button class="btn btn-primary" ><a th:href="@{/usuarios/perfil/__${propiedad.usuario.id}__}" > PERFIL DEL PROPIETARIO</a></button>
-                    </div>
 
-                    <p>Contactar:</p>
-                    <span th:text="${propiedad.usuario.telefono}"></span>
-                        <div>
-                            <a href="https://api.whatsapp.com/send?phone=5493764756578&text=Hola, Nececito más informacion sobre ésta propiedad! https://www.remax.com.ar/listings/alquiler-ph-3-ambientes-en-1er-piso-munro" target="_blank">
+            <h5>DESCRIPCIÓN DE LA PROPIEDAD</h5>
 
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/240px-WhatsApp.svg.png"
-                                 width="50" height="50"></a>
-                        </div>
+            <p th:text="${propiedad.descripcion}"></p>
+
+            <div class="box">
+                <h5>DETALLES:</h5>
+                <span th:text="${propiedad.precio}"></span><br>      
+                <span th:text="${propiedad.tipo}"></span><br>              
+                <span th:text="${propiedad.direccion}"></span><br>  
+                <span th:text="${propiedad.ambiente}"></span><br>  
+                <span th:text="${propiedad.banos}"></span><br>  
+                <span th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></span><br>  
+                <span th:text="${propiedad.patio} ? 'Sí' : 'No'"></span><br>  
+                <span th:text="|${propiedad.usuario.nombre} ${propiedad.usuario.apellido}|"></span><br>  
+
+                <div>
+                    <button class="btn btn-primary" ><a th:href="@{/usuarios/perfil/__${propiedad.usuario.id}__}" > PERFIL DEL PROPIETARIO</a></button>
                 </div>
-       </div>
-      
+
+                <p>Contactar:</p>
+                <span th:text="${propiedad.usuario.telefono}"></span>
+                <div>
+                    <a href="https://api.whatsapp.com/send?phone=5493764756578&text=Hola, Nececito más informacion sobre ésta propiedad! https://www.remax.com.ar/listings/alquiler-ph-3-ambientes-en-1er-piso-munro" target="_blank">
+
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/240px-WhatsApp.svg.png"
+                             width="50" height="50"></a>
+                </div>
+            </div>
+        </div>
+
     </body>
 
     <footer th:replace="fragments/footer :: footer"></footer>
