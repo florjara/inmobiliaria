@@ -100,15 +100,16 @@ public class PropiedadController {
     public RedirectView actualizar(Propiedad propiedadDto, @RequestParam(required = false) List<MultipartFile> photo, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/propiedades");
         propiedadService.update(propiedadDto, photo);
-        attributes.addFlashAttribute("success", "The operation has been carried out successfully");
+        attributes.addFlashAttribute("success", "La propiedad se actualizo correctamente.");
         return redirect;
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/eliminar/{id}")
-    public RedirectView eliminar(@PathVariable Long id) {
+    public RedirectView eliminar(@PathVariable Long id, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/propiedades");
         propiedadService.deleteById(id);
+        attributes.addFlashAttribute("success", "La propiedad se elimino correctamente.");
         return redirect;
     }
 

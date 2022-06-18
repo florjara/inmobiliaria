@@ -97,7 +97,7 @@
 
                 <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
                     alt="icono estacionamiento">
-                <p th:text="${propiedad.estacionamiento}"></p>
+              <p th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></p>
             </div>
 
             <div class="contenedor-informacion-descripcion">
@@ -118,7 +118,7 @@
                 
                 <p th:text="|${propiedad.usuario.nombre}  ${propiedad.usuario.apellido}"></p>
                 <p>Propietario</p>
-                <a class="link-card-verPropietario" sec:authorize="hasRole('USUARIO')" th:href="@{/usuarios/perfil}">Ver perfil</a>
+                <a class="link-card-verPropietario" sec:authorize="hasRole('USUARIO')" th:href="@{/usuarios/perfil/__${propiedad.usuario.id}__}">Ver perfil</a>
             </div>
 
         </section>
