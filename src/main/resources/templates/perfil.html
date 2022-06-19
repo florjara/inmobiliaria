@@ -48,15 +48,16 @@
                             </div>
                         </div>
                         <span th:if="${session.id == __${usuario.id}__}"><div class="botones-perfil">
-                            <a class="perfil-link" th:href="@{/usuarios/form/__${usuario.id}__}">Actualizar perfil</a>
-                            <a class="perfil-link" th:href="@{/propiedades/form}">Cargar Propiedad</a>
-                        </div></span>
+                                <a class="perfil-link" th:href="@{/usuarios/form/__${usuario.id}__}">Actualizar perfil</a>
+                                <a class="perfil-link" th:href="@{/propiedades/form}">Cargar Propiedad</a>
+                            </div></span>
                     </div>
                 </div>
                 </div>
             </section>
             <section class="mis-propiedades">
                 <h2>Mis propiedades</h2>
+                <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
                 <div class="anuncio">
                     <div th:each="propiedad : ${propiedades}">
                         <div class="anuncio-contenido">

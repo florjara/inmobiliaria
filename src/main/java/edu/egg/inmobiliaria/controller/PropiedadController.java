@@ -44,7 +44,7 @@ public class PropiedadController {
         if (inputFlashMap != null) {
             mav.addObject("success", inputFlashMap.get("success"));
         }
-       
+
         mav.addObject("propiedades", propiedadService.getAll(ciudad, tipo, tipoTransaccion, min, max));
 
         return mav;
@@ -81,7 +81,7 @@ public class PropiedadController {
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/crear")
     public RedirectView crear(Propiedad propiedadDto, @RequestParam(required = false) List<MultipartFile> photo, RedirectAttributes attributes, HttpSession session) {
-        RedirectView redirect = new RedirectView("/propiedades");
+        RedirectView redirect = new RedirectView("/usuarios/perfil");
 
         try {
             propiedadService.crear(propiedadDto, photo, session);
