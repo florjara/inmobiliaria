@@ -1,6 +1,7 @@
 package edu.egg.inmobiliaria.service;
 
 import edu.egg.inmobiliaria.entity.Propiedad;
+import edu.egg.inmobiliaria.entity.PropiedadFiltro;
 import edu.egg.inmobiliaria.entity.Usuario;
 import edu.egg.inmobiliaria.repository.PropiedadRepository;
 import edu.egg.inmobiliaria.repository.UsuarioRepository;
@@ -18,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PropiedadService {
 
     private final PropiedadRepository propiedadRepository;
-    private final UsuarioRepository usuarioRepository; 
+    private final UsuarioRepository usuarioRepository;
     private ImageService imageService;
 
     @Autowired
@@ -58,7 +59,7 @@ public class PropiedadService {
             }
         }
 
-        Usuario usuario = usuarioRepository.findById((Long)session.getAttribute("id")).get();
+        Usuario usuario = usuarioRepository.findById((Long) session.getAttribute("id")).get();
         propiedad.setUsuario(usuario);
         propiedadRepository.save(propiedad);
 
@@ -102,20 +103,25 @@ public class PropiedadService {
         return propiedadRepository.findById(id).get();
     }
 
-        @Transactional(readOnly = true)
-    public List<Propiedad> getAll(String ciudad, String tipo, String tipoTransaccion, Double min, Double max) {
-
-        Optional<String> ciudadOpt = Optional.ofNullable(ciudad);
-        Optional<String> tipoOpt = Optional.ofNullable(tipo);
-        Optional<String> transaccionOpt = Optional.ofNullable(tipoTransaccion);
-        Optional<Double> minOpt = Optional.ofNullable(min);
-        Optional<Double> maxOpt = Optional.ofNullable(max);
-
-        if (minOpt.isPresent() || maxOpt.isPresent()) {
-            return propiedadRepository.findAll(ciudad, tipo, tipoTransaccion, minOpt.orElse(0d), maxOpt.orElse(Double.MAX_VALUE));
+    @Transactional(readOnly = true)
+    public List<Propiedad> getAll(PropiedadFiltro p) {
+        if (p.getTipo() == null && p.getTipoTransaccion() == null) {
+            return propiedadRepository.findAll();
         }
 
-        return propiedadRepository.findAll(ciudadOpt.orElse(""), tipoOpt.orElse(""), transaccionOpt.orElse(""));
+        Optional<String> ciudadOpt = Optional.ofNullable(p.getCiudad());
+        Optional<Double> minOpt = Optional.ofNullable(p.getPrecioMin());
+        Optional<Double> maxOpt = Optional.ofNullable(p.getPrecioMax());
+        Optional<Integer> ambienteOpt = Optional.ofNullable(p.getAmbiente());
+        Optional<Integer> banosOpt = Optional.ofNullable(p.getBanos());
+
+       if (minOpt.isPresent() || maxOpt.isPresent()|| banosOpt.isPresent() || ambienteOpt.isPresent()) {
+            return propiedadRepository.findAll(ciudadOpt.orElse(""),
+                    p.getTipo(), p.getTipoTransaccion(), minOpt.orElse(0d), maxOpt.orElse(Double.MAX_VALUE),
+                    banosOpt.orElse(0), ambienteOpt.orElse(0));
+        }
+
+        return propiedadRepository.findAll(ciudadOpt.orElse(""), p.getTipo(), p.getTipoTransaccion());
     }
 
     @Transactional

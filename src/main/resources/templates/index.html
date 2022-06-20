@@ -27,19 +27,19 @@
         </div>
           
         <div class="contenedor-form">
-            <form th:action="@{propiedades}" class="buscador-form">
+            <form th:action="@{propiedades/filtro}" th:object="${prop}" method="post" class="buscador-form">
 
 
-                <input class="buscador-input" type="text" name="ciudad" id="ciudad" th:value="${ciudad}"
+                <input class="buscador-input" type="text" name="ciudad" id="ciudad" th:field="${prop.ciudad}"
                     placeholder="Ciudad">
 
-                <select class="buscador-select" name="tipo" id="tipo" th:value="${tipo}" >
+                <select class="buscador-select" name="tipo" id="tipo" th:field="${prop.tipo}" >
                     <option value="casa">Casa</option>
                     <option value="departamento">Departamento</option>
                 </select>
 
                 <select class="buscador-select" name="tipoTransaccion" id="tipoTransaccion"
-                    th:value="${tipoTransaccion}">
+                    th:field="${prop.tipoTransaccion}">
                     <option value="alquiler">Alquiler</option>
                     <option value="venta">Venta</option>
                 </select>

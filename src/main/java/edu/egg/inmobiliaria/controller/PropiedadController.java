@@ -1,6 +1,7 @@
 package edu.egg.inmobiliaria.controller;
 
 import edu.egg.inmobiliaria.entity.Propiedad;
+import edu.egg.inmobiliaria.entity.PropiedadFiltro;
 
 import edu.egg.inmobiliaria.service.PropiedadService;
 import edu.egg.inmobiliaria.service.UsuarioService;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
-import org.springframework.data.repository.query.Param;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,18 +37,31 @@ public class PropiedadController {
     private UsuarioService usuarioService;
 
     @GetMapping//("/lista-propiedades")
-    public ModelAndView getAllPropiedades(HttpServletRequest request, @Param("ciudad") String ciudad, @Param("tipo") String tipo, @Param("tipoTransaccion") String tipoTransaccion, @Param("min") Double min, @Param("max") Double max) {
+    public ModelAndView getAllPropiedades(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("listado_propiedades");
 
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (inputFlashMap != null) {
-            mav.addObject("success", inputFlashMap.get("success"));
+            mav.addObject("prop", inputFlashMap.get("prop"));
+            mav.addObject("propiedades", inputFlashMap.get("propiedades"));
+        } else {
+            PropiedadFiltro p = new PropiedadFiltro();
+            mav.addObject("prop", p);
+            mav.addObject("propiedades", propiedadService.getAll(p));
         }
 
-        mav.addObject("propiedades", propiedadService.getAll(ciudad, tipo, tipoTransaccion, min, max));
-
         return mav;
+    }
+
+    @PostMapping("/filtro")
+    public RedirectView filtrarPropiedades(PropiedadFiltro propiedad, RedirectAttributes attributes) {
+        RedirectView rv = new RedirectView("/propiedades");
+
+        attributes.addFlashAttribute("prop", propiedad);
+        attributes.addFlashAttribute("propiedades", propiedadService.getAll(propiedad));
+
+        return rv;
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
@@ -70,7 +84,6 @@ public class PropiedadController {
         return mav;
     }
 
- 
     @GetMapping("/{id}")
     public ModelAndView obtenerPropiedad(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("propiedad");

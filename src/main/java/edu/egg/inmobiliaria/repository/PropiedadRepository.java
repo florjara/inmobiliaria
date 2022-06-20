@@ -8,14 +8,17 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PropiedadRepository extends JpaRepository<Propiedad, Long> {
-    
-    @Query("SELECT p FROM Propiedad p WHERE p.ciudad LIKE %?1% AND p.tipo LIKE %?2% AND p.tipoTransaccion LIKE %?3%" )
-    public List<Propiedad> findAll (String ciudad, String tipo, String tipoTransaccion);
-    
-    @Query("SELECT p FROM Propiedad p WHERE (p.ciudad LIKE %?1% AND p.tipo LIKE %?2% AND p.tipoTransaccion LIKE %?3%) AND (p.precio BETWEEN ?4 AND ?5)" )
-    public List<Propiedad> findAll (String ciudad, String tipo, String tipoTransaccion, Double min, Double max);
-    
-    @Query("SELECT p FROM Propiedad p WHERE p.usuario.id = ?1" )
-    public List<Propiedad> obtenerPorIdUsuario (Long id);
-    
+
+    @Query("SELECT p FROM Propiedad p")
+    public List<Propiedad> findAll();
+
+    @Query("SELECT p FROM Propiedad p WHERE p.ciudad LIKE %?1% AND p.tipo LIKE %?2% AND p.tipoTransaccion LIKE %?3%")
+    public List<Propiedad> findAll(String ciudad, String tipo, String tipoTransaccion);
+
+    @Query("SELECT p FROM Propiedad p WHERE (p.ciudad LIKE %?1% AND p.tipo LIKE %?2% AND p.tipoTransaccion LIKE %?3%) AND (p.precio BETWEEN ?4 AND ?5) AND (p.banos >= ?6) AND (p.ambiente >= ?7)")
+    public List<Propiedad> findAll(String ciudad, String tipo, String tipoTransaccion, Double min, Double max, Integer banos, Integer ambiente);
+
+    @Query("SELECT p FROM Propiedad p WHERE p.usuario.id = ?1")
+    public List<Propiedad> obtenerPorIdUsuario(Long id);
+
 }

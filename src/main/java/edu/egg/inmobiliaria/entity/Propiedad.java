@@ -51,7 +51,7 @@ public class Propiedad {
     @Column(name = "direccion")
     private String direccion;
 
-    @ElementCollection(targetClass = String.class)
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "image")
     private List<String> image;
 
