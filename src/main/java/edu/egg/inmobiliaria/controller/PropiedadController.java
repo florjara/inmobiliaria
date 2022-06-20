@@ -105,7 +105,7 @@ public class PropiedadController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
-    @PostMapping("/eliminar/{id}")
+    @GetMapping("/eliminar/{id}")
     public RedirectView eliminar(@PathVariable Long id, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/propiedades");
         propiedadService.deleteById(id);
