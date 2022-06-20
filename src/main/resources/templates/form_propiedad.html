@@ -11,7 +11,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
               rel="stylesheet">
         <link rel="stylesheet" href="../static/css/anuncioPropiedades.css">
-
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
         <title> Registro de propiedad </title>
     </head>
 
@@ -22,14 +22,15 @@
             <h1>Formulario de registro de propiedades</h1>
             <div class="form-contenedor">
 
-                <form class="formulario" th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post"
-                      autocomplete="off"  enctype="multipart/form-data" novalidate>
+                <form class="formulario needs-validation" th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post"
+                      autocomplete="off"  enctype="multipart/form-data" novalidate >
                     <input type="hidden" th:field="*{id}">
                     
                     <div class="input_group">
                         <label for="titulo">Titulo</label>
                         <input type="text" maxlength="25" class="form-control" th:field="*{titulo}" id="titulo" required
                                placeholder="Casa a estrenar">
+                        <div class="invalid-feedback">Ingrese un título.</div>
                     </div>
 
                     <div class="input_group">
@@ -38,6 +39,7 @@
                             <option value="Venta"> Venta </option>
                             <option value="Alquiler"> Alquiler</option>
                         </select>
+                        <div class="invalid-feedback">Ingrese un tipo de transaccion.</div>
                     </div>
 
                     <div class="input_group">
@@ -48,19 +50,20 @@
                             <option value="Local"> Local</option>
                             <option value="Terreno"> Terreno</option>
                         </select>
+                        <div class="invalid-feedback">Ingrese un tipo de propiedad.</div>
                     </div>
 
                     <div class="input_group">
                         <label for="ambientes">Ambientes</label>
-                        <input placeholder="1" type="number" max="10" min="1" class="form-control" th:field="*{ambiente}"
-                               id="ambientes" required>
+                        <input placeholder="0" type="number" max="10" min="1" class="form-control" th:field="*{ambiente}"
+                               id="ambientes">
                         <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('ambientes')}" th:errors="*{ambientes}"></div>-->
                     </div>
 
                     <div class="input_group">
                         <label for="banio">Baños</label>
-                        <input placeholder="1" type="number" max="10" min="1" class="form-control" th:field="*{banos}"
-                               id="banio" required>
+                        <input placeholder="0" type="number" max="10" min="0" class="form-control" th:field="*{banos}"
+                               id="banio">
                         <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('banio')}" th:errors="*{banio}"></div>-->
                     </div>
 
@@ -84,12 +87,14 @@
                         <label for="precio">Precio de la propiedad</label>
                         <input placeholder="$10000000" type="number" maxlength="15" class="form-control"
                                th:field="*{precio}" id="precio" required>
+                        <div class="invalid-feedback">Ingrese el precio de la propiedad.</div>
                     </div>
 
                     <div class="input_group">
                         <label for="ciudad">Ciudad</label>
                         <input placeholder="Posadas" type="text" maxlength="30" class="form-control" th:field="*{ciudad}"
-                               id="ciudad">
+                               id="ciudad" required>
+                        <div class="invalid-feedback">Ingrese la ciudad.</div>
                     </div>
                     
                     <div class="input_group">
@@ -118,8 +123,8 @@
             </div>
 
         </main>
-
-        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+         <script th:src="@{/js/validation.js}"></script>
+        <!--<script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
     </body>
     <footer th:replace="fragments/footer :: footer"></footer>
   
