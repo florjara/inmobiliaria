@@ -70,7 +70,7 @@ public class PropiedadController {
         return mav;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
+ 
     @GetMapping("/{id}")
     public ModelAndView obtenerPropiedad(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("propiedad");
