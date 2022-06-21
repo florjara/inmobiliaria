@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head >
         <meta charset="UTF-8">
@@ -47,67 +47,75 @@
                                 <span th:text="${usuario.correo}" ></span>
                             </div>
                         </div>
-                        <div class="botones-perfil">
-                            <span th:if="${session.id == __${usuario.id}__}"><a class="perfil-link" th:href="@{/usuarios/form/__${usuario.id}__}">Actualizar perfil</a></span>
-                            <span th:if="${session.id == __${usuario.id}__}"><a class="perfil-link" th:href="@{/propiedades/form}">Cargar Propiedad</a></span>
-                        </div>
+                        <span th:if="${session.id == __${usuario.id}__}"><div class="botones-perfil">
+                                <a class="perfil-link" th:href="@{/usuarios/form/__${usuario.id}__}">Actualizar perfil</a>
+                                <a class="perfil-link" th:href="@{/propiedades/form}">Cargar Propiedad</a>
+                            </div></span>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="mis-propiedades">
-            <h2>Mis propiedades</h2>
-            <div class="anuncio">
-                <div th:each="propiedad : ${propiedades}">
-                    <div class="anuncio-contenido">
-                        <div class="imagen">
-                            <!--Si tengo imagen ejecuta each, caso contrario no hace nada-->
-                             <img th:if="${iterador.index} == 0" th:each="img ,iterador : ${propiedad.image}" th:src="'/uploads/'+${img}">
-                             
-                             <!--Si NO tengo imagen muestro img por default -->
-                             <img th:if="!${propiedad.image.size}" th:src="'/uploads/default-image.png'">
-                         </div>
-    
-                        <div class="anuncio-informacion">
-    
-                            <dvi class="anuncio-titu">
-                                <h3 th:text="${propiedad.titulo}">Titulo</h3>
-                            </dvi>
-    
-                            <div class="anuncio-descr">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                </div>
+            </section>
+            <section class="mis-propiedades">
+                <h2>Mis propiedades</h2>
+                <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
+                <div class="anuncio">
+                    <div th:each="propiedad : ${propiedades}">
+                        <div class="anuncio-contenido">
+                            <div class="imagen">
+                                <!--Si tengo imagen ejecuta each, caso contrario no hace nada-->
+                                <img th:if="${iterador.index} == 0" th:each="img ,iterador : ${propiedad.image}" th:src="'/uploads/'+${img}">
+
+                                <!--Si NO tengo imagen muestro img por default -->
+                                <img th:if="!${propiedad.image.size}" th:src="'/uploads/default-image.png'">
+                            </div>
+
+                            <div class="anuncio-informacion">
+
+                                <dvi class="anuncio-titu">
+                                    <h3 th:text="${propiedad.titulo}">Titulo</h3>
+                                </dvi>
+
+                                <div class="anuncio-descr">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
                                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
                                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                  </svg>
-                                <p th:text="${propiedad.ciudad}"></p>
+                                    </svg>
+                                    <p th:text="${propiedad.ciudad.nombre}"></p>
+                                </div>
+
+                                <div class="anuncio-precio">
+                                    <span>$</span>
+                                    <h4 th:text="${propiedad.precio}"></h4>
+                                </div>
+
+
+                                <div class="anuncio-iconos">
+                                    <img class="icono" loading="lazy" th:src="@{/imagenes/icono_wc.svg}" alt="icono baño">
+                                    <p th:text="${propiedad.banos}"></p>
+
+                                    <img class="icono" loading="lazy" th:src="@{/imagenes/icono_dormitorio.svg}"
+                                         alt="icono estacionamiento">
+                                    <p th:text="${propiedad.ambiente}"></p>
+
+                                    <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
+                                         alt="icono estacionamiento">
+                                    <p th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></p>
+
+                                </div>
+
+                                <div class="anuncio-verPropiedad-perfil">
+
+                                    <a class="anuncio-link-perfil" th:href="@{/propiedades/__${propiedad.id}__}">Ver Propiedad</a>
+                                </div>
+
                             </div>
-    
-                            <div class="anuncio-precio">
-                                <span>$</span>
-                                <h4 th:text="${propiedad.precio}"></h4>
-                            </div>
-    
-    
-                            <div class="anuncio-iconos">
-                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_wc.svg}" alt="icono baño">
-                                <p th:text="${propiedad.banos}"></p>
-    
-                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_dormitorio.svg}"
-                                    alt="icono estacionamiento">
-                                <p th:text="${propiedad.ambiente}"></p>
-    
-                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
-                                    alt="icono estacionamiento">
-                                <p th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></p>
-    
-                            </div>
-    
-                            <div class="anuncio-verPropiedad-perfil">
-    
-                                <a class="anuncio-link-perfil" th:href="@{/propiedades/__${propiedad.id}__}">Ver Propiedad</a>
-                            </div>
-                          
+                            <span th:if="${session.id == __${usuario.id}__}"><div class="editar-propiedad">
+                                    <a class="boton-editar"  th:href="@{/propiedades/form/__${propiedad.id}__}">Editar</a>
+                                    <a class="boton-editar" th:href="@{/propiedades/eliminar/__${propiedad.id}__}">Borrar</a>
+                                </div></span>
+
                         </div>
+
                         <div class="editar-propiedad">
                           <a class="boton-editar"  th:href="@{/propiedades/form/__${propiedad.id}__}">Editar</a>
                           <button class="boton-editar"  type="submit">Borrar</button>
@@ -119,7 +127,8 @@
             </div>
            </section>
 
+
         </main>
     </body>
-<footer th:replace="fragments/footer :: footer"></footer>
+    <footer th:replace="fragments/footer :: footer"></footer>
 </html>

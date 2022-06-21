@@ -38,7 +38,7 @@
         <a sec:authorize="hasRole('USUARIO')" th:href="@{/usuarios/perfil}">Mi perfil</a>
         <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/login}">Iniciar sesión</a>
         <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/sign-up}">Registrarse</a>
-        <a th:href="@{/logout}">Salir</a>
+        <a sec:authorize="hasRole('USUARIO')" th:href="@{/logout}">Salir</a>
     </div>
 
 </header>
@@ -66,12 +66,12 @@
 
             <div class="informacion-tipo-venta">
                 <p>Transacción:</p>
-                <p th:text="${propiedad.tipoTransaccion}"></p>
+                <p th:text="${propiedad.tipoTransaccion.nombre}"></p>
             </div>
 
             <div class="informacion-tipo-propiedad">
                 <p>Propiedad:</p>
-                <p th:text="${propiedad.tipo}"></p>
+                <p th:text="${propiedad.tipo.nombre}"></p>
             </div>
 
             <div class="informacion-precio">
@@ -87,8 +87,11 @@
                         d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                 </svg>
-                <p th:text="${propiedad.ciudad}"></p>
-
+                <p th:text="${propiedad.ciudad.nombre}"></p>
+                <!--<p th:text="${propiedad.direccion}" sec:authorize="hasRole('USUARIO')"></p>-->
+                <!--<p th:text="${propiedad.patio}" ></p>     patio??-->
+                <!--<p th:text="${propiedad.usuario.telefono}" sec:authorize="hasRole('USUARIO')"></p> nro de contacto mas a la mano-->
+                
                 <img class="icono" loading="lazy" th:src="@{/imagenes/icono_wc.svg}" alt="icono baño">
                 <p th:text="${propiedad.banos}"></p>
 
@@ -98,12 +101,12 @@
 
                 <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
                     alt="icono estacionamiento">
-                <p th:text="${propiedad.estacionamiento}"></p>
+              <p th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></p>
             </div>
 
             <div class="contenedor-informacion-descripcion">
                 <span class="descripcion">Descripcion</span>
-                <p th:text="${propiedad.descripcion}"></p>
+                <p th:text="${propiedad.descripcion.isEmpty()} ? 'El propietario no ha agregado una descripción.' : ${propiedad.descripcion}"></p>
             </div>
             
         </div>
@@ -119,7 +122,7 @@
                 
                 <p th:text="|${propiedad.usuario.nombre}  ${propiedad.usuario.apellido}"></p>
                 <p>Propietario</p>
-                <a class="link-card-verPropietario" sec:authorize="hasRole('USUARIO')" th:href="@{/usuarios/perfil}">Ver perfil</a>
+                <a class="link-card-verPropietario" th:href="@{/usuarios/perfil/__${propiedad.usuario.id}__}">Ver perfil</a>
             </div>
 
         </section>
