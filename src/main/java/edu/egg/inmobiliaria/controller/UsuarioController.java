@@ -83,7 +83,7 @@ public class UsuarioController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/form/{id}")
-    public ModelAndView formActualizar(@PathVariable Long id, HttpSession session) {
+    public ModelAndView formActualizar(@PathVariable Long id, HttpSession session) throws Exception {
         if (!session.getAttribute("id").equals(id)) {
             return new ModelAndView("redirect:/");
         }
@@ -96,7 +96,7 @@ public class UsuarioController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/perfil")
-    public ModelAndView obtenerPerfilUsuario(HttpSession session) {
+    public ModelAndView obtenerPerfilUsuario(HttpSession session) throws Exception {
         ModelAndView mav = new ModelAndView("perfil");
         Long idUsuario = (Long) session.getAttribute("id");
         mav.addObject("usuario", usuarioService.getById(idUsuario));
@@ -106,7 +106,7 @@ public class UsuarioController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/perfil/{id}")
-    public ModelAndView obtenerUsuarioPorId(@PathVariable Long id) {
+    public ModelAndView obtenerUsuarioPorId(@PathVariable Long id) throws Exception {
         ModelAndView mav = new ModelAndView("perfil");
         mav.addObject("usuario", usuarioService.getById(id));
         mav.addObject("propiedades", propiedadService.obtenerPorIdUsuario(id));

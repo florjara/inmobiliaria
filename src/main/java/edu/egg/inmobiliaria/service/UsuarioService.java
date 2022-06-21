@@ -47,7 +47,7 @@ public class UsuarioService implements UserDetailsService {
     public void create (Usuario dto, MultipartFile photo){
 
         if (usuarioRepository.existsByCorreo(dto.getCorreo()))
-            throw new IllegalArgumentException("Este correo ya fue registrado con aterioridad");
+            throw new IllegalArgumentException("Este correo ya fue registrado con anterioridad.");
 
         Usuario usuario = new Usuario();
 
@@ -90,8 +90,8 @@ public class UsuarioService implements UserDetailsService {
 
     //busca un usuario por id
     @Transactional(readOnly = true)
-    public Usuario getById(Long id){
-        return usuarioRepository.findById(id).get();
+    public Usuario getById(Long id) throws Exception {
+        return usuarioRepository.findById(id).orElseThrow(()-> new Exception("Este usuario no existe."));
     }
 
     //devuelve la lista de todos los usuarios

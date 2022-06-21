@@ -85,7 +85,7 @@ public class PropiedadController {
         ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("propiedad", new Propiedad());
         mav.addObject("usuarios", usuarioService.getAll());
-        mav.addObject("action", "crear");
+        mav.addObject("boton", "crear");
         mav.addObject("ciudades", Ciudad.values());
         mav.addObject("tipoPropiedad", TipoPropiedad.values());
         mav.addObject("transacciones", Transaccion.values());
@@ -98,7 +98,7 @@ public class PropiedadController {
         ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("propiedad", propiedadService.getById(id));
-        mav.addObject("action", "actualizar");
+        mav.addObject("boton", "Actualizar");
         mav.addObject("ciudades", Ciudad.values());
         mav.addObject("tipoPropiedad", TipoPropiedad.values());
         mav.addObject("transacciones", Transaccion.values());

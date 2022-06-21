@@ -109,23 +109,19 @@
                                 </div>
 
                             </div>
-                            <span th:if="${session.id == __${usuario.id}__}"><div class="editar-propiedad">
+                            <span th:if="${session.id == __${usuario.id}__}">
+                                <div class="editar-propiedad">
                                     <a class="boton-editar"  th:href="@{/propiedades/form/__${propiedad.id}__}">Editar</a>
                                     <a class="boton-editar" th:href="@{/propiedades/eliminar/__${propiedad.id}__}">Borrar</a>
-                                </div></span>
+                                </div>
+                            </span>
 
                         </div>
 
-                        <div class="editar-propiedad">
-                          <a class="boton-editar"  th:href="@{/propiedades/form/__${propiedad.id}__}">Editar</a>
-                          <button class="boton-editar"  type="submit">Borrar</button>
-                          
-                      </div>
-                      
-                   </div>
-               </div>
-            </div>
-           </section>
+                    </div>
+                </div>
+                </div>
+            </section>
 
 
         </main>
