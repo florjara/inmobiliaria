@@ -43,8 +43,16 @@ public class PropiedadController {
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (inputFlashMap != null) {
-            mav.addObject("prop", inputFlashMap.get("prop"));
-            mav.addObject("propiedades", inputFlashMap.get("propiedades"));
+            mav.addObject("success", inputFlashMap.get("success"));
+            if (inputFlashMap.containsKey("prop")) {
+                mav.addObject("prop", inputFlashMap.get("prop"));
+                mav.addObject("propiedades", inputFlashMap.get("propiedades"));
+            } else {
+                PropiedadFiltro p = new PropiedadFiltro();
+                mav.addObject("prop", p);
+                mav.addObject("propiedades", propiedadService.getAll(p));
+            }
+
         } else {
             PropiedadFiltro p = new PropiedadFiltro();
             mav.addObject("prop", p);
@@ -111,7 +119,7 @@ public class PropiedadController {
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/actualizar")
     public RedirectView actualizar(Propiedad propiedadDto, @RequestParam(required = false) List<MultipartFile> photo, RedirectAttributes attributes) {
-        RedirectView redirect = new RedirectView("/propiedades");
+        RedirectView redirect = new RedirectView("/usuarios/perfil");
         propiedadService.update(propiedadDto, photo);
         attributes.addFlashAttribute("success", "La propiedad se actualizo correctamente.");
         return redirect;
@@ -120,7 +128,7 @@ public class PropiedadController {
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/eliminar/{id}")
     public RedirectView eliminar(@PathVariable Long id, RedirectAttributes attributes) {
-        RedirectView redirect = new RedirectView("/propiedades");
+        RedirectView redirect = new RedirectView("/usuarios/perfil");
         propiedadService.deleteById(id);
         attributes.addFlashAttribute("success", "La propiedad se elimino correctamente.");
         return redirect;
