@@ -1,6 +1,10 @@
 package edu.egg.inmobiliaria.controller;
 
 import edu.egg.inmobiliaria.entity.Propiedad;
+import edu.egg.inmobiliaria.entity.PropiedadFiltro;
+import edu.egg.inmobiliaria.enums.Ciudad;
+import edu.egg.inmobiliaria.enums.TipoPropiedad;
+import edu.egg.inmobiliaria.enums.Transaccion;
 
 import edu.egg.inmobiliaria.service.PropiedadService;
 import edu.egg.inmobiliaria.service.UsuarioService;
@@ -19,7 +23,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
-import org.springframework.data.repository.query.Param;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,18 +40,43 @@ public class PropiedadController {
     private UsuarioService usuarioService;
 
     @GetMapping//("/lista-propiedades")
-    public ModelAndView getAllPropiedades(HttpServletRequest request, @Param("ciudad") String ciudad, @Param("tipo") String tipo, @Param("tipoTransaccion") String tipoTransaccion, @Param("min") Double min, @Param("max") Double max) {
+    public ModelAndView getAllPropiedades(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("listado_propiedades");
 
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (inputFlashMap != null) {
             mav.addObject("success", inputFlashMap.get("success"));
-        }
+            if (inputFlashMap.containsKey("prop")) {
+                mav.addObject("prop", inputFlashMap.get("prop"));
+                mav.addObject("propiedades", inputFlashMap.get("propiedades"));
+            } else {
+                PropiedadFiltro p = new PropiedadFiltro();
+                mav.addObject("prop", p);
+                mav.addObject("propiedades", propiedadService.getAll(p));
+            }
 
-        mav.addObject("propiedades", propiedadService.getAll(ciudad, tipo, tipoTransaccion, min, max));
+        } else {
+            PropiedadFiltro p = new PropiedadFiltro();
+            mav.addObject("prop", p);
+            mav.addObject("propiedades", propiedadService.getAll(p));
+        }
+        
+        mav.addObject("ciudades", Ciudad.values());
+        mav.addObject("tipoPropiedad", TipoPropiedad.values());
+        mav.addObject("transacciones", Transaccion.values());
 
         return mav;
+    }
+
+    @PostMapping("/filtro")
+    public RedirectView filtrarPropiedades(PropiedadFiltro propiedad, RedirectAttributes attributes) {
+        RedirectView rv = new RedirectView("/propiedades");
+
+        attributes.addFlashAttribute("prop", propiedad);
+        attributes.addFlashAttribute("propiedades", propiedadService.getAll(propiedad));
+
+        return rv;
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
@@ -57,6 +86,9 @@ public class PropiedadController {
         mav.addObject("propiedad", new Propiedad());
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("action", "crear");
+        mav.addObject("ciudades", Ciudad.values());
+        mav.addObject("tipoPropiedad", TipoPropiedad.values());
+        mav.addObject("transacciones", Transaccion.values());
         return mav;
     }
 
@@ -67,10 +99,13 @@ public class PropiedadController {
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("propiedad", propiedadService.getById(id));
         mav.addObject("action", "actualizar");
+        mav.addObject("ciudades", Ciudad.values());
+        mav.addObject("tipoPropiedad", TipoPropiedad.values());
+        mav.addObject("transacciones", Transaccion.values());
+
         return mav;
     }
 
- 
     @GetMapping("/{id}")
     public ModelAndView obtenerPropiedad(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("propiedad");
@@ -98,7 +133,7 @@ public class PropiedadController {
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @PostMapping("/actualizar")
     public RedirectView actualizar(Propiedad propiedadDto, @RequestParam(required = false) List<MultipartFile> photo, RedirectAttributes attributes) {
-        RedirectView redirect = new RedirectView("/propiedades");
+        RedirectView redirect = new RedirectView("/usuarios/perfil");
         propiedadService.update(propiedadDto, photo);
         attributes.addFlashAttribute("success", "La propiedad se actualizo correctamente.");
         return redirect;
@@ -107,7 +142,7 @@ public class PropiedadController {
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/eliminar/{id}")
     public RedirectView eliminar(@PathVariable Long id, RedirectAttributes attributes) {
-        RedirectView redirect = new RedirectView("/propiedades");
+        RedirectView redirect = new RedirectView("/usuarios/perfil");
         propiedadService.deleteById(id);
         attributes.addFlashAttribute("success", "La propiedad se elimino correctamente.");
         return redirect;

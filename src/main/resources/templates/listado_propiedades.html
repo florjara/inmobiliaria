@@ -1,122 +1,136 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:fragment="head">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/anuncioPropiedades.css}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/anuncioPropiedades.css">
+    <head th:fragment="head">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/anuncioPropiedades.css}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
+              rel="stylesheet">
+        <link rel="stylesheet" href="../static/css/anuncioPropiedades.css">
 
-    <title>Listado de propiedades</title>
-</head>
+        <title>Listado de propiedades</title>
+    </head>
 
-<header th:replace="fragments/header :: header"></header>
-<body>
+    <header th:replace="fragments/header :: header"></header>
+    <body>
 
-    <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
+        <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
 
-    <form th:action="@{propiedades}" class="buscador-form">
+        <form th:action="@{propiedades/filtro}" th:object="${prop}" method="post" class="buscador-form">
 
-        <div class="buscador">
+            <div class="buscador"
+                 <div>
+                    <select class="buscador-select" name="ciudad" id="ciudad" th:field="${prop.ciudad}" >
+                        <option
+                            th:each="ciudad : ${ciudades}"
+                            th:text="${ciudad.nombre}"
+                            th:value="${ciudad}"
+                            ></option>
+                    </select>
+                </div>
+                <div>
+                   <select class="buscador-select" name="tipo" id="tipo" th:field="${prop.tipo}">
+                        <option
+                            th:each="tipo : ${tipoPropiedad}"
+                            th:text="${tipo.nombre}"
+                            th:value="${tipo}"
+                            ></option>
+                    </select>
+                </div>
+                <div>
+                    <select class="buscador-select" name="tipoTransaccion" id="tipoTransaccion" th:field="${prop.tipoTransaccion}">
+                        <option
+                            th:each="transaccion : ${transacciones}"
+                            th:text="${transaccion.nombre}"
+                            th:value="${transaccion}"
+                            ></option>
+                    </select>
+                </div>
 
-            <input class="buscador-input" type="text" name="ciudad" id="ciudad" th:value="${ciudad}"
-                placeholder="Ciudad">
+                <input class="buscador-input" type="number" name="min" id="min" th:field="${prop.precioMin}"
+                       placeholder="Precio minimo">
+                <input class="buscador-input" type="number" name="max" id="max" th:field="${prop.precioMax}"
+                       placeholder="Precio maximo">
 
-            <select class="buscador-select" name="tipo" id="tipo" th:value="${tipo}">
-                <option value="casa">Casa</option>
-                <option value="departamento">Departamento</option>
-            </select>
+                <input class="buscador-boton" type="submit" value="Buscar">
+                <input class="buscador-boton" type="button" value="Limpiar" onclick="limpiarCampos()">
+            </div>
 
-            <select class="buscador-select" name="tipoTransaccion" id="tipoTransaccion" th:value="${tipoTransaccion}">
-                <option value="alquiler">Alquiler</option>
-                <option value="venta">Venta</option>
-            </select>
 
-            <input class="buscador-input" type="number" name="min" id="min" th:value="${precio}"
-                placeholder="Precio minimo">
-            <input class="buscador-input" type="number" name="max" id="max" th:value="${precio}"
-                placeholder="Precio maximo">
+        </form>
 
-            <input class="buscador-boton" type="submit" value="Buscar">
-            <input class="buscador-boton" type="button" value="Limpiar" onclick="limpiarCampos()">
+        <div th:if="${propiedades.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
+            Debe subir una propiedad.
+            <a th:href="@{/propiedades/form}" class="alert-link">Subir Propiedad.</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
+        <div th:unless="${propiedades.isEmpty()}">
+            <div class="anuncio">
+                <div th:each="propiedad : ${propiedades}">
+                    <div class="anuncio-contenido">
+                        <div class="imagen">
+                            <!--Si tengo imagen ejecuta each, caso contrario no hace nada-->
+                            <img th:if="${iterador.index} == 0" th:each="img ,iterador : ${propiedad.image}" th:src="'/uploads/'+${img}">
 
-    </form>
+                            <!--Si NO tengo imagen muestro img por default -->
+                            <img th:if="!${propiedad.image.size}" th:src="'/uploads/default-image.png'">
+                        </div>
 
-    <div th:if="${propiedades.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
-        Debe subir una propiedad.
-        <a th:href="@{/propiedades/form}" class="alert-link">Subir Propiedad.</a>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+                        <div class="anuncio-informacion">
 
-    <div th:unless="${propiedades.isEmpty()}">
-        <div class="anuncio">
-            <div th:each="propiedad : ${propiedades}">
-                <div class="anuncio-contenido">
-                    <div class="imagen">
-                       <!--Si tengo imagen ejecuta each, caso contrario no hace nada-->
-                        <img th:if="${iterador.index} == 0" th:each="img ,iterador : ${propiedad.image}" th:src="'/uploads/'+${img}">
-                        
-                        <!--Si NO tengo imagen muestro img por default -->
-                        <img th:if="!${propiedad.image.size}" th:src="'/uploads/default-image.png'">
-                    </div>
+                            <dvi class="anuncio-titu">
+                                <h3 th:text="${propiedad.titulo}">Titulo</h3>
+                            </dvi>
 
-                    <div class="anuncio-informacion">
-
-                        <dvi class="anuncio-titu">
-                            <h3 th:text="${propiedad.titulo}">Titulo</h3>
-                        </dvi>
-
-                        <div class="anuncio-descr">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                            <div class="anuncio-descr">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
                                 <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
                                 <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                              </svg>
-                            <p th:text="${propiedad.ciudad}"></p>
-                        </div>
+                                </svg>
+                                <p th:text="${propiedad.ciudad.nombre}"></p>
+                            </div>
 
-                        <div class="anuncio-precio">
-                            <span>$</span>
-                            <h4 th:text="${propiedad.precio}"></h4>
-                        </div>
+                            <div class="anuncio-precio">
+                                <span>$</span>
+                                <h4 th:text="${propiedad.precio}"></h4>
+                            </div>
 
 
-                        <div class="anuncio-iconos">
-                            <img class="icono" loading="lazy" th:src="@{/imagenes/icono_wc.svg}" alt="icono baño">
-                            <p th:text="${propiedad.banos}"></p>
+                            <div class="anuncio-iconos">
+                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_wc.svg}" alt="icono baño">
+                                <p th:text="${propiedad.banos}"></p>
 
-                            <img class="icono" loading="lazy" th:src="@{/imagenes/icono_dormitorio.svg}"
-                                alt="icono estacionamiento">
-                            <p th:text="${propiedad.ambiente}"></p>
+                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_dormitorio.svg}"
+                                     alt="icono estacionamiento">
+                                <p th:text="${propiedad.ambiente}"></p>
 
-                            <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
-                                alt="icono estacionamiento">
-                            <p th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></p>
+                                <img class="icono" loading="lazy" th:src="@{/imagenes/icono_estacionamiento.svg}"
+                                     alt="icono estacionamiento">
+                                <p th:text="${propiedad.estacionamiento} ? 'Sí' : 'No'"></p>
 
-                        </div>
+                            </div>
 
-                        <div class="anuncio-verPropiedad">
+                            <div class="anuncio-verPropiedad">
 
-                            <a class="anuncio-link" th:href="@{/propiedades/__${propiedad.id}__}">Ver Propiedad</a>
+                                <a class="anuncio-link" th:href="@{/propiedades/__${propiedad.id}__}">Ver Propiedad</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
     </div>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
     <script type="text/javascript">
         function limpiarCampos() {
-            window.location = 'propiedades';
+        window.location = 'propiedades';
         }
     </script>
 </body>

@@ -25,7 +25,7 @@
                 <form class="formulario" th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post"
                       autocomplete="off"  enctype="multipart/form-data" novalidate>
                     <input type="hidden" th:field="*{id}">
-                    
+
                     <div class="input_group">
                         <label for="titulo">Titulo</label>
                         <input type="text" maxlength="25" class="form-control" th:field="*{titulo}" id="titulo" required
@@ -35,18 +35,22 @@
                     <div class="input_group">
                         <label for="tipo_trans">Tipo de transacción</label>
                         <select name="tipo_trans" th:field="*{tipoTransaccion}" id="tipo_trans">
-                            <option value="Venta"> Venta </option>
-                            <option value="Alquiler"> Alquiler</option>
+                            <option
+                                th:each="transaccion : ${transacciones}"
+                                th:text="${transaccion.nombre}"
+                                th:value="${transaccion}"
+                                ></option>
                         </select>
                     </div>
 
                     <div class="input_group">
                         <label for="tipo_propiedad">Tipo de propiedad</label>
                         <select name="tipo_propiedad" id="tipo_propiedad" th:field="*{tipo}" required>
-                            <option value="Casa"> Casa </option>
-                            <option value="Departamento"> Departamento</option>
-                            <option value="Local"> Local</option>
-                            <option value="Terreno"> Terreno</option>
+                            <option
+                                th:each="tipo : ${tipoPropiedad}"
+                                th:text="${tipo.nombre}"
+                                th:value="${tipo}"
+                                ></option>
                         </select>
                     </div>
 
@@ -82,16 +86,21 @@
 
                     <div class="input_group">
                         <label for="precio">Precio de la propiedad</label>
-                        <input placeholder="$10000000" type="number" maxlength="15" class="form-control"
+                        <input placeholder="$1000000" type="number" maxlength="15" class="form-control"
                                th:field="*{precio}" id="precio" required>
                     </div>
 
                     <div class="input_group">
                         <label for="ciudad">Ciudad</label>
-                        <input placeholder="Posadas" type="text" maxlength="30" class="form-control" th:field="*{ciudad}"
-                               id="ciudad">
+                        <select name="ciudad" th:field="*{ciudad}" id="ciudad">
+                            <option
+                                th:each="ciudad : ${ciudades}"
+                                th:text="${ciudad.nombre}"
+                                th:value="${ciudad}"
+                                ></option>
+                        </select>
                     </div>
-                    
+
                     <div class="input_group">
                         <label for="direccion">Ubicación de la propiedad</label>
                         <input placeholder="Av. Uruguay 1230" type="text" maxlength="35" class="form-control" th:field="*{direccion}"
@@ -122,5 +131,5 @@
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     </body>
     <footer th:replace="fragments/footer :: footer"></footer>
-  
+
 </html>
