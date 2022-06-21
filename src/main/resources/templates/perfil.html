@@ -28,7 +28,7 @@
                 <div class="contenedor-perfil">
                     <div class="contenedor-perfil-foto">
                         <img
-                            th:src="${usuario.image} ? @{/uploads/__${usuario.image}__} : @{/uploads/default-image.png}" width="150" height="150">
+                            th:src="${usuario.image} ? @{/uploads/__${usuario.image}__} : @{/uploads/img_person.png}" width="150" height="150">
                     </div>
                     <h1 th:text="|${usuario.nombre}  ${usuario.apellido} |" ></h1>
                     <div class="perfil-informacion">
@@ -115,8 +115,18 @@
                                 </div></span>
 
                         </div>
-                    </div>
-            </section>
+
+                        <div class="editar-propiedad">
+                          <a class="boton-editar"  th:href="@{/propiedades/form/__${propiedad.id}__}">Editar</a>
+                          <button class="boton-editar"  type="submit">Borrar</button>
+                          
+                      </div>
+                      
+                   </div>
+               </div>
+            </div>
+           </section>
+
 
         </main>
     </body>
