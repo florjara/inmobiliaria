@@ -55,15 +55,19 @@
 
                     <div class="input_group">
                         <label for="ambientes">Ambientes</label>
-                        <input placeholder="0" type="number" max="10" min="1" class="form-control" th:field="*{ambiente}"
-                               id="ambientes">
+
+                        <input placeholder="cantidad de ambientes" type="number" max="10" min="1" class="form-control" th:field="*{ambiente}"
+                               id="ambientes" required>
+
                         <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('ambientes')}" th:errors="*{ambientes}"></div>-->
                     </div>
 
                     <div class="input_group">
                         <label for="banio">Baños</label>
-                        <input placeholder="0" type="number" max="10" min="0" class="form-control" th:field="*{banos}"
-                               id="banio">
+
+                        <input placeholder="cantidad de baños" type="number" max="10" min="1" class="form-control" th:field="*{banos}"
+                               id="banio" required>
+
                         <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('banio')}" th:errors="*{banio}"></div>-->
                     </div>
 
