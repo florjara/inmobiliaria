@@ -28,7 +28,7 @@
                 <div class="contenedor-perfil">
                     <div class="contenedor-perfil-foto">
                         <img
-                            th:src="${usuario.image} ? @{/uploads/__${usuario.image}__} : @{/uploads/default-image.png}" width="150" height="150">
+                            th:src="${usuario.image} ? @{/uploads/__${usuario.image}__} : @{/uploads/img_person.png}" width="150" height="150">
                     </div>
                     <h1 th:text="|${usuario.nombre}  ${usuario.apellido} |" ></h1>
                     <div class="perfil-informacion">

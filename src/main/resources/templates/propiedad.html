@@ -45,13 +45,14 @@
 
 <body>
     <h1 th:text="${propiedad.titulo}"></h1>
-    <div class="contenedor">
+    <div class="contenedor" th:if="${propiedad.image.size}">
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <div class="carousel center-align">
+                    <div class="carousel center-align"> 
                         <div class="carousel-item" th:each="img ,iterador : ${propiedad.image}">
                             <img th:src="'/uploads/'+${img}">
+                            
                         </div>
                     </div>
                 </div>
