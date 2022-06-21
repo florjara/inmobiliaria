@@ -23,42 +23,40 @@
 
         <form th:action="@{propiedades/filtro}" th:object="${prop}" method="post" class="buscador-form">
 
-            <div class="buscador"
-                 <div>
-                    <select class="buscador-select" name="ciudad" id="ciudad" th:field="${prop.ciudad}" >
-                        <option
-                            th:each="ciudad : ${ciudades}"
-                            th:text="${ciudad.nombre}"
-                            th:value="${ciudad}"
-                            ></option>
-                    </select>
-                </div>
-                <div>
-                   <select class="buscador-select" name="tipo" id="tipo" th:field="${prop.tipo}">
-                        <option
-                            th:each="tipo : ${tipoPropiedad}"
-                            th:text="${tipo.nombre}"
-                            th:value="${tipo}"
-                            ></option>
-                    </select>
-                </div>
-                <div>
-                    <select class="buscador-select" name="tipoTransaccion" id="tipoTransaccion" th:field="${prop.tipoTransaccion}">
-                        <option
-                            th:each="transaccion : ${transacciones}"
-                            th:text="${transaccion.nombre}"
-                            th:value="${transaccion}"
-                            ></option>
-                    </select>
-                </div>
+            
+            <div class="buscador">
+                <select class="buscador-select" name="ciudad" id="ciudad" th:field="${prop.ciudad}" >
+                    <option
+                        th:each="ciudad : ${ciudades}"
+                        th:text="${ciudad.nombre}"
+                        th:value="${ciudad}"
+                        ></option>
+                </select>
+
+                <select class="buscador-select" name="tipo" id="tipo" th:field="${prop.tipo}">
+                    <option
+                        th:each="tipo : ${tipoPropiedad}"
+                        th:text="${tipo.nombre}"
+                        th:value="${tipo}"
+                        ></option>
+                </select>
+
+                <select class="buscador-select" name="tipoTransaccion" id="tipoTransaccion" th:field="${prop.tipoTransaccion}">
+                    <option
+                        th:each="transaccion : ${transacciones}"
+                        th:text="${transaccion.nombre}"
+                        th:value="${transaccion}"
+                        ></option>
+                </select>
 
                 <input class="buscador-input" type="number" name="min" id="min" th:field="${prop.precioMin}"
-                       placeholder="Precio minimo">
+                placeholder="Precio minimo">
                 <input class="buscador-input" type="number" name="max" id="max" th:field="${prop.precioMax}"
-                       placeholder="Precio maximo">
+                placeholder="Precio maximo">
 
                 <input class="buscador-boton" type="submit" value="Buscar">
                 <input class="buscador-boton" type="button" value="Limpiar" onclick="limpiarCampos()">
+
             </div>
 
 
