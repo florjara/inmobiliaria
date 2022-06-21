@@ -305,6 +305,49 @@ h1 {
     border-radius: 50%;
 }
 
+
+/* Estilo al mapa */
+
+.contenedor-mapa{
+    text-align: center;
+    margin: 0 auto;
+    margin-top:10px;
+    width: 830px;
+    height: 620px;
+    border-radius: 20px;
+    background: #f1f1f1;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
+}
+
+.ubicacion{
+    display: flex;
+    gap: 10px;
+  
+    justify-content: center;
+    margin-top:50px;
+    
+}
+
+.ubicacion *{
+   font-size: 20px;
+    background: none;
+    color: #707070;
+}
+
+.contenedor-mapa iframe{
+    border-radius:20px;
+}
+
+.contenedor-mapa *{
+    background: none;
+}
+
+
+
+
 /* estilo footer */
 .contenedor-footer {
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
