@@ -51,6 +51,7 @@
                                     th:field="*{correo}" required>
                                 <div class="invalid-feedback">Ingrese un correo electronico</div>
                         </div>
+                        <div th:if="${excepcion}" th:text="${excepcion}" class="alert alert-danger" role="alert"></div>
         
                         <div class="input_group">
                                 <label  for="telefono"> Teléfono:</label>

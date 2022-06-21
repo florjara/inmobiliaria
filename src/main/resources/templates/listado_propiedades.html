@@ -64,22 +64,6 @@
 
         </form>
 
-        <div th:if="${propiedades.isEmpty()}" class="alert alert-info alert-dismissible fade show" role="alert">
-            Debe subir una propiedad.
-            <a th:href="@{/propiedades/form}" class="alert-link">Subir Propiedad.</a>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-        <div th:unless="${propiedades.isEmpty()}">
-            <div class="anuncio">
-                <div th:each="propiedad : ${propiedades}">
-                    <div class="anuncio-contenido">
-                        <div class="imagen">
-                            <!--Si tengo imagen ejecuta each, caso contrario no hace nada-->
-                            <img th:if="${iterador.index} == 0" th:each="img ,iterador : ${propiedad.image}" th:src="'/uploads/'+${img}">
-
-
-    </form>
 
     <div th:if="${propiedades.isEmpty()}" class="error-filtro" role="alert">
         <span class="error-ubicacion">No encontramos ninguna propiedad con esa especificación</span>

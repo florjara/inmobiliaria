@@ -19,7 +19,7 @@
 
     <body>
         <main>
-            <h1>Formulario de registro de propiedades</h1>
+            <h1 th:text="${boton}=='Actualizar' ? 'Actualizar propiedad': 'Formulario de registro de propiedades'">Formulario de registro de propiedades</h1>
             <div class="form-contenedor">
 
                 <form class="formulario needs-validation" th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post"
@@ -128,7 +128,7 @@
                     </div>
 
 
-                    <button class="boton_submit" type="submit">Cargar Propiedad</button>
+                    <button class="boton_submit" type="submit" th:text="${boton}=='Actualizar' ? 'Actualizar Propiedad' : 'Cargar Propiedad' "></button>
                 </form>
 
                 <div class="fondo-form-propiedad">
