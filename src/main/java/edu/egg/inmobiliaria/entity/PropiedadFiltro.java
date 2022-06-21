@@ -1,8 +1,12 @@
 package edu.egg.inmobiliaria.entity;
 
-//import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;
 
-//@Component
+import edu.egg.inmobiliaria.enums.Ciudad;
+import edu.egg.inmobiliaria.enums.TipoPropiedad;
+import edu.egg.inmobiliaria.enums.Transaccion;
+
+@Component
 public class PropiedadFiltro {
 
     private Double precioMin;
@@ -13,20 +17,20 @@ public class PropiedadFiltro {
 
     private Integer banos;
 
-    private String tipo;
+    private TipoPropiedad tipo;
 
-    private String tipoTransaccion;
+    private Transaccion tipoTransaccion;
 
     private Boolean estacionamiento;
 
     private Boolean patio;
 
-    private String ciudad;
+    private Ciudad ciudad;
 
     public PropiedadFiltro() {
     }
 
-    public PropiedadFiltro(Double precioMin, Double precioMax, Integer ambiente, Integer banos, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, String ciudad) {
+    public PropiedadFiltro(Double precioMin, Double precioMax, Integer ambiente, Integer banos, TipoPropiedad tipo, Transaccion tipoTransaccion, Boolean estacionamiento, Boolean patio, Ciudad ciudad) {
         this.precioMin = precioMin;
         this.precioMax = precioMax;
         this.ambiente = ambiente;
@@ -70,19 +74,19 @@ public class PropiedadFiltro {
         this.banos = banos;
     }
 
-    public String getTipo() {
+    public TipoPropiedad getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoPropiedad tipo) {
         this.tipo = tipo;
     }
 
-    public String getTipoTransaccion() {
+    public Transaccion getTipoTransaccion() {
         return tipoTransaccion;
     }
 
-    public void setTipoTransaccion(String tipoTransaccion) {
+    public void setTipoTransaccion(Transaccion tipoTransaccion) {
         this.tipoTransaccion = tipoTransaccion;
     }
 
@@ -102,11 +106,11 @@ public class PropiedadFiltro {
         this.patio = patio;
     }
 
-    public String getCiudad() {
+    public Ciudad getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(String ciudad) {
+    public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
    

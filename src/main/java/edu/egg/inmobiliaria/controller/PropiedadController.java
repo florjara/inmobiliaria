@@ -2,6 +2,9 @@ package edu.egg.inmobiliaria.controller;
 
 import edu.egg.inmobiliaria.entity.Propiedad;
 import edu.egg.inmobiliaria.entity.PropiedadFiltro;
+import edu.egg.inmobiliaria.enums.Ciudad;
+import edu.egg.inmobiliaria.enums.TipoPropiedad;
+import edu.egg.inmobiliaria.enums.Transaccion;
 
 import edu.egg.inmobiliaria.service.PropiedadService;
 import edu.egg.inmobiliaria.service.UsuarioService;
@@ -58,6 +61,10 @@ public class PropiedadController {
             mav.addObject("prop", p);
             mav.addObject("propiedades", propiedadService.getAll(p));
         }
+        
+        mav.addObject("ciudades", Ciudad.values());
+        mav.addObject("tipoPropiedad", TipoPropiedad.values());
+        mav.addObject("transacciones", Transaccion.values());
 
         return mav;
     }
@@ -79,6 +86,9 @@ public class PropiedadController {
         mav.addObject("propiedad", new Propiedad());
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("action", "crear");
+        mav.addObject("ciudades", Ciudad.values());
+        mav.addObject("tipoPropiedad", TipoPropiedad.values());
+        mav.addObject("transacciones", Transaccion.values());
         return mav;
     }
 
@@ -89,6 +99,10 @@ public class PropiedadController {
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("propiedad", propiedadService.getById(id));
         mav.addObject("action", "actualizar");
+        mav.addObject("ciudades", Ciudad.values());
+        mav.addObject("tipoPropiedad", TipoPropiedad.values());
+        mav.addObject("transacciones", Transaccion.values());
+
         return mav;
     }
 

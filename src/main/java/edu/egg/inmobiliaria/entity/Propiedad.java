@@ -1,5 +1,8 @@
 package edu.egg.inmobiliaria.entity;
 
+import edu.egg.inmobiliaria.enums.Ciudad;
+import edu.egg.inmobiliaria.enums.TipoPropiedad;
+import edu.egg.inmobiliaria.enums.Transaccion;
 import java.util.List;
 import org.hibernate.annotations.SQLDelete;
 
@@ -34,10 +37,12 @@ public class Propiedad {
     private String descripcion;
 
     @Column(name = "tipo", nullable = false)
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoPropiedad tipo;
 
     @Column(name = "tipo_transaccion", nullable = false)
-    private String tipoTransaccion;
+    @Enumerated(EnumType.STRING)
+    private Transaccion tipoTransaccion;
 
     @Column(name = "estacionamiento", columnDefinition = "BOOLEAN")
     private Boolean estacionamiento;
@@ -56,7 +61,8 @@ public class Propiedad {
     private List<String> image;
 
     @Column(name = "Ciudad")
-    private String ciudad;
+    @Enumerated(EnumType.STRING)
+    private Ciudad ciudad;
 
     @ManyToOne
     @JoinColumn(name = "Usuario", referencedColumnName = "id")
@@ -65,7 +71,7 @@ public class Propiedad {
     public Propiedad() {
     }
 
-    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, String tipo, String tipoTransaccion, Boolean estacionamiento, Boolean patio, Boolean eliminado, String direccion, List<String> image, String ciudad, Usuario usuario) {
+    public Propiedad(Long id, String titulo, Double precio, Integer ambiente, Integer banos, String descripcion, TipoPropiedad tipo, Transaccion tipoTransaccion, Boolean estacionamiento, Boolean patio, Boolean eliminado, String direccion, List<String> image, Ciudad ciudad, Usuario usuario) {
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
@@ -131,19 +137,19 @@ public class Propiedad {
         this.descripcion = descripcion;
     }
 
-    public String getTipo() {
+    public TipoPropiedad getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoPropiedad tipo) {
         this.tipo = tipo;
     }
 
-    public String getTipoTransaccion() {
+    public Transaccion getTipoTransaccion() {
         return tipoTransaccion;
     }
 
-    public void setTipoTransaccion(String tipoTransaccion) {
+    public void setTipoTransaccion(Transaccion tipoTransaccion) {
         this.tipoTransaccion = tipoTransaccion;
     }
 
@@ -187,11 +193,11 @@ public class Propiedad {
         this.image = image;
     }
 
-    public String getCiudad() {
+    public Ciudad getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(String ciudad) {
+    public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
 

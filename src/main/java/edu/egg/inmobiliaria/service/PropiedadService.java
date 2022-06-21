@@ -3,6 +3,7 @@ package edu.egg.inmobiliaria.service;
 import edu.egg.inmobiliaria.entity.Propiedad;
 import edu.egg.inmobiliaria.entity.PropiedadFiltro;
 import edu.egg.inmobiliaria.entity.Usuario;
+import edu.egg.inmobiliaria.enums.Ciudad;
 import edu.egg.inmobiliaria.repository.PropiedadRepository;
 import edu.egg.inmobiliaria.repository.UsuarioRepository;
 import java.util.ArrayList;
@@ -109,19 +110,19 @@ public class PropiedadService {
             return propiedadRepository.findAll();
         }
 
-        Optional<String> ciudadOpt = Optional.ofNullable(p.getCiudad());
+        Optional<Ciudad> ciudadOpt = Optional.ofNullable(p.getCiudad());
         Optional<Double> minOpt = Optional.ofNullable(p.getPrecioMin());
         Optional<Double> maxOpt = Optional.ofNullable(p.getPrecioMax());
         Optional<Integer> ambienteOpt = Optional.ofNullable(p.getAmbiente());
         Optional<Integer> banosOpt = Optional.ofNullable(p.getBanos());
 
        if (minOpt.isPresent() || maxOpt.isPresent()|| banosOpt.isPresent() || ambienteOpt.isPresent()) {
-            return propiedadRepository.findAll(ciudadOpt.orElse(""),
+            return propiedadRepository.findAll(ciudadOpt.get(),
                     p.getTipo(), p.getTipoTransaccion(), minOpt.orElse(0d), maxOpt.orElse(Double.MAX_VALUE),
                     banosOpt.orElse(0), ambienteOpt.orElse(0));
         }
 
-        return propiedadRepository.findAll(ciudadOpt.orElse(""), p.getTipo(), p.getTipoTransaccion());
+        return propiedadRepository.findAll(ciudadOpt.get(), p.getTipo(), p.getTipoTransaccion());
     }
 
     @Transactional
