@@ -86,6 +86,7 @@ public class PropiedadController {
         mav.addObject("propiedad", new Propiedad());
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("boton", "crear");
+        mav.addObject("action", "crear");
         mav.addObject("ciudades", Ciudad.values());
         mav.addObject("tipoPropiedad", TipoPropiedad.values());
         mav.addObject("transacciones", Transaccion.values());
@@ -99,6 +100,7 @@ public class PropiedadController {
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("propiedad", propiedadService.getById(id));
         mav.addObject("boton", "Actualizar");
+        mav.addObject("action", "Actualizar");
         mav.addObject("ciudades", Ciudad.values());
         mav.addObject("tipoPropiedad", TipoPropiedad.values());
         mav.addObject("transacciones", Transaccion.values());
