@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/login.css}">
     <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
         rel="stylesheet">
     <title> Inmobiliaria </title>
@@ -24,44 +25,50 @@
                 <h1>Bienvenido</h1>
                 <p class="descripcion">¡Estamos emocionados de verte!</p>
 
-                <form enctype="multipart/form-data" class="form" th:action="@{/usuarios/__${action}__}" method="post" th:object="${usuario}">
+                <form enctype="multipart/form-data" class="form needs-validation" th:action="@{/usuarios/__${action}__}" method="post" th:object="${usuario}" novalidate>
                     <div class="form-sign-up">
 
                         <input type="hidden" th:field="*{id}">
 
                         <div class="input_group">
                             <label  for="nombre">Nombre:</label>
-                            <input  id="nombre" type="text" name="nombre" placeholder="Juan"
+                            <input  id="nombre" type="text" class="form-control" name="nombre" placeholder="Juan"
                                 th:field="*{nombre}" required>
+                                <div class="invalid-feedback">Ingrese un nombre</div>
                         </div>
+                       
         
                         <div class="input_group">
                                 <label for="apellido">Apellido:</label>
-                                <input  id="apellido" type="text" name="apellido" placeholder="Perez"
+                                <input  id="apellido" type="text" class="form-control" name="apellido" placeholder="Perez"
                                     th:field="*{apellido}" required>
+                                <div class="invalid-feedback">Ingrese un apellido</div>
                         </div>
         
                         <div class="input_group">
                                 <label  for="correo"> Email:</label>
-                                <input  id="correo" type="email" name="correo" placeholder="ejemplo@hotmail.com"
+                                <input  id="correo" type="email" name="correo" class="form-control" placeholder="ejemplo@hotmail.com"
                                     th:field="*{correo}" required>
+                                <div class="invalid-feedback">Ingrese un correo electronico</div>
                         </div>
         
                         <div class="input_group">
                                 <label  for="telefono"> Teléfono:</label>
-                                <input  id="telefono" type="number" name="telefono" placeholder="3764-953174"
+                                <input  id="telefono" type="number" class="form-control" name="telefono" placeholder="3764-953174"
                                     th:field="*{telefono}" required>
+                                <div class="invalid-feedback">Ingrese un número de telefono</div>
                         </div>
     
                         <div class="input_group">
                                 <label for="contrasena"> Contraseña:</label>
-                                <input  id="contrasena" type="password" name="contrasena" placeholder="*****"
+                                <input  id="contrasena" type="password" class="form-control" name="contrasena" placeholder="*****"
                                     th:field="*{contrasena}" required>
+                                <div class="invalid-feedback">Ingrese una contraseña</div>
                         </div>
 
                         <div class="input_group">
                             <label for="photo">Subir imagen</label>
-                            <input class="boton_submit" type="file" name="photo" accept="image/*" multiple>
+                            <input class="boton_submit form-control" type="file" name="photo" accept="image/*" multiple>
                         </div>
         
                         <button class="boton_submit" type="submit"> Registrar</button>
@@ -75,6 +82,7 @@
 
         </div>
     </main>
+    <script th:src="@{/js/validation.js}"></script>
 </body>
 
 
