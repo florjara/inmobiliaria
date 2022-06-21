@@ -100,7 +100,7 @@ public class PropiedadController {
         mav.addObject("usuarios", usuarioService.getAll());
         mav.addObject("propiedad", propiedadService.getById(id));
         mav.addObject("boton", "Actualizar");
-        mav.addObject("action", "Actualizar");
+        mav.addObject("action", "actualizar");
         mav.addObject("ciudades", Ciudad.values());
         mav.addObject("tipoPropiedad", TipoPropiedad.values());
         mav.addObject("transacciones", Transaccion.values());
