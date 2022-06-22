@@ -17,11 +17,11 @@ Terreno de 505m2 !!","La Paz 500",0,1,1,9797775,"CASA","VENTA","Venta Casa con P
 y cochera","Luchessi 2748. Entre Gomez portinho y Sebastopol",
 0,1,1,70000,"CASA","ALQUILER","Casa de 2 Dorm. Luchessi",2),
 
-(1,7,1,"OBERA", "Casa amplia en barrio muy tranquilo, 3 dormitorios, cocina, comedor, living, cochera techada
+(2,7,1,"OBERA", "Casa amplia en barrio muy tranquilo, 3 dormitorios, cocina, comedor, living, cochera techada
  para 4 autos, quincho, pileta, muros perimetrales, sobre calle asfaltada con buena iluminación",
 "Olavarria 1254",0,1,1,9225089,"CASA","VENTA","Amplia Casa",2),
 
-(6,3,1,"POSADAS", "Departamento sobre calle Mbororé Nº2635 casi calle Iguazú. a pasos del centro de Posadas.
+(3,3,1,"POSADAS", "Departamento sobre calle Mbororé Nº2635 casi calle Iguazú. a pasos del centro de Posadas.
 Cuenta con dos habitaciones, cocina con alacena y bajo mesada, sector de lavadero, amplio baño, aire acondicionado, 
 placard.","Avenida Quaranta 235",0,1,0,70000,"DEPARTAMENTO","ALQUILER","Departamento de 2 Dorm. El Brete",2),
 
