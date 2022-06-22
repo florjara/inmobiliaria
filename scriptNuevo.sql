@@ -2,7 +2,7 @@ use inmobiliaria;
 INSERT INTO rol (rol_id, eliminado, rol_nombre) VALUES (NULL, 0, "ADMIN"),
 (NULL, 0, "USUARIO");
 
-INSERT INTO images(propiedad_id,imagen)VALUES(1,'casa1a.jpg'),(1,'casa1b.jpg'),(1,'casa1c.jpg'),(2,'casa2a.jpg'),(2,'casa2b.jpg'),(2,'casa2c.jpg'),
+INSERT INTO image(propiedad_id,image)VALUES(1,'casa1.jpg'),(1,'casa1a.jpg'),(1,'casa1b.jpg'),(1,'casa1c.jpg'),(2,'casa2a.jpg'),(2,'casa2b.jpg'),(2,'casa2c.jpg'),
 (3,'casa3a.jpg'),(3,'casa3b.jpg'),(3,'casa3b.jpg'),(4,'casa4a.jpg'),(4,'casa4b.jpg'),(4,'casa4c.jpg'),(5,'casa5a.jpg'),(5,'casa5b.jpg'),
 (5,'casa5c.jpg'),(6,'casa6a.jpg'),(6,'casa6b.jpg'),(6,'casa6c.jpg'),(7,'casa7a.jpg'),(7,'casa7b.jpg'),(7,'casa7c.jpg'),(8,'casa8a.jpg'),(8,'casa8b.jpg'),
 (8,'casa8c.jpg');
