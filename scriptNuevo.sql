@@ -5,33 +5,32 @@ INSERT INTO rol (rol_id, eliminado, rol_nombre) VALUES (1, 0, "ADMIN"),
 INSERT INTO propiedad(id,ambiente,banos,ciudad,descripcion,direccion,eliminado,estacionamiento,patio,precio,tipo,tipo_transaccion,titulo,usuario) VALUES 
 
 (1,2,1,"POSADAS", "flexible, que se adecua a tus necesidades de hoy y mañana.","Avenida Quaranta 235",0,0,0,4500000,
-"DEPARTAMENTO","VENTA","Departamento dos ambientes",1),
+"DEPARTAMENTO","VENTA","Casa a estrenar",1),
 
-(5,3,1,"POSADAS", "Alquiler de Casa 3 DORMITORIOS en Las Orquideas","Av Urquiza 4600. Entre Las araucarias y Av las heras",
+(5,3,1,"POSADAS", "Alquiler de Casa 3 DORMITORIOS en Las Orquideas","Av Urquiza 4600",
 0,1,1,100000,"CASA","ALQUILER","Casa en Barrio Las Orquideas",2),
 
 (7,6,3,"OBERA", "Preciosa casa desarrollada en dos plantas, con piscina en un entorno inmejorable.
-Terreno de 505m2 !!","La Paz 500",0,1,1,9797775,"CASA","VENTA","Venta Casa con Pileta Oberá Misiones",2),
+Terreno de 505m2 !!","La Paz 500",0,1,1,9797775,"CASA","VENTA","Venta casa de campo",2),
 
 (9,3,1,"POSADAS", "Consta de dos dormitorios (uno con aire acondicionado), baño, Cocina-comedor, galerias al frente y al costado, 
-y cochera","Luchessi 2748. Entre Gomez portinho y Sebastopol",
-0,1,1,70000,"CASA","ALQUILER","Casa de 2 Dorm. Luchessi",2),
+y cochera","Luchessi 2748",
+0,1,1,70000,"CASA","ALQUILER","Lujosa casa a estrenar",2),
 
 (2,7,1,"OBERA", "Casa amplia en barrio muy tranquilo, 3 dormitorios, cocina, comedor, living, cochera techada
  para 4 autos, quincho, pileta, muros perimetrales, sobre calle asfaltada con buena iluminación",
-"Olavarria 1254",0,1,1,9225089,"CASA","VENTA","Amplia Casa",2),
+"Olavarria 1254",0,1,1,9225089,"CASA","VENTA","Oficina de lujo",2),
 
-(3,3,1,"POSADAS", "Departamento sobre calle Mbororé Nº2635 casi calle Iguazú. a pasos del centro de Posadas.
+(3,3,1,"POSADAS", "Departamento a pasos del centro de Posadas.
 Cuenta con dos habitaciones, cocina con alacena y bajo mesada, sector de lavadero, amplio baño, aire acondicionado, 
-placard.","Avenida Quaranta 235",0,1,0,70000,"DEPARTAMENTO","ALQUILER","Departamento de 2 Dorm. El Brete",2),
+placard.","Calle Mbororé Nº2635",0,1,0,70000,"DEPARTAMENTO","ALQUILER","Departamento de 2 Dormitorios",2),
 
-(4,4,2,"POSADAS", "HERMOSA PROPIEDAD EN VENTA EN BARRIO SAN MARTIN.","Padre Serrano 2909. Entre Antonio de llamas y
- Av blas parera",0,1,1,85000,"DEPARTAMENTO","ALQUILER","Hermoso monoambiente!",2),
+(4,4,2,"POSADAS", "HERMOSA PROPIEDAD EN VENTA EN BARRIO SAN MARTIN.","Padre Serrano 2909",0,1,1,85000,"DEPARTAMENTO","ALQUILER","Hermoso monoambiente!",2),
 
-(6,7,2,"OBERA", "","Chubut 100",0,1,1,1000000,"DEPARTAMENTO","VENTA","En Venta, Departamento Espectacular En Oberá",1),
+(6,7,2,"OBERA", "","Chubut 100",0,1,1,1000000,"DEPARTAMENTO","VENTA","Departamento Espectacular",1),
 
 (8,2,1,"POSADAS", "flexible, que se adecua a tus necesidades de hoy y mañana.","Avenida Quaranta 235",0,0,0,7500000,
-"DEPARTAMENTO","VENTA","Departamento con balcon",1);
+"DEPARTAMENTO","VENTA","Departamento de lujo",1);
 
 INSERT INTO image(propiedad_id,image)VALUES
 (1,'casa1a.jpg'),(1,'casa1b.jpg'),(1,'casa1c.jpg'),(1,'casa1d.jpg'),
