@@ -1,9 +1,12 @@
 package edu.egg.inmobiliaria.entity;
 
-import java.util.List;
-import org.hibernate.annotations.SQLDelete;
+
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -12,6 +15,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "usuario", indexes = {
     @Index(name = "idx_correo", columnList = "correo")})
 @SQLDelete(sql = "UPDATE usuario SET eliminado = true WHERE id = ?")
+@FilterDef(name = "filtroUsuarioEliminado", parameters = @ParamDef(name = "eliminado", type = "boolean"))
+@Filters (@Filter(name = "filtroUsuarioEliminado", condition = "eliminado = :eliminado"))
 public class Usuario {
 
     @Id

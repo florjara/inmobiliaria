@@ -4,9 +4,13 @@ import edu.egg.inmobiliaria.enums.Ciudad;
 import edu.egg.inmobiliaria.enums.TipoPropiedad;
 import edu.egg.inmobiliaria.enums.Transaccion;
 import java.util.List;
-import org.hibernate.annotations.SQLDelete;
+
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -14,6 +18,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "propiedad", indexes = {
     @Index(name = "idx_titulo", columnList = "titulo")})
 @SQLDelete(sql = "UPDATE propiedad SET eliminado = true WHERE id = ?")
+@FilterDef(name = "filtroPropiedadEliminada", parameters = @ParamDef(name = "eliminado", type = "boolean"))
+@Filters(@Filter(name = "filtroPropiedadEliminada", condition = "eliminado = :eliminado"))
 public class Propiedad {
 
     @Id

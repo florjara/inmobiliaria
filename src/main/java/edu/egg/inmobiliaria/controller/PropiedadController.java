@@ -22,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.Objects;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +41,8 @@ public class PropiedadController {
     private UsuarioService usuarioService;
 
     @GetMapping//("/lista-propiedades")
-    public ModelAndView getAllPropiedades(HttpServletRequest request) {
+    public ModelAndView getAllPropiedades(HttpServletRequest request, @RequestParam(value = "eliminado", required = false, defaultValue = "false") boolean eliminado) {
+
         ModelAndView mav = new ModelAndView("listado_propiedades");
 
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
@@ -53,15 +55,15 @@ public class PropiedadController {
             } else {
                 PropiedadFiltro p = new PropiedadFiltro();
                 mav.addObject("prop", p);
-                mav.addObject("propiedades", propiedadService.getAll(p));
+                mav.addObject("propiedades", propiedadService.getAll(p, eliminado));
             }
 
         } else {
             PropiedadFiltro p = new PropiedadFiltro();
             mav.addObject("prop", p);
-            mav.addObject("propiedades", propiedadService.getAll(p));
+            mav.addObject("propiedades", propiedadService.getAll(p, eliminado));
         }
-        
+
         mav.addObject("ciudades", Ciudad.values());
         mav.addObject("tipoPropiedad", TipoPropiedad.values());
         mav.addObject("transacciones", Transaccion.values());
@@ -84,7 +86,7 @@ public class PropiedadController {
     public ModelAndView formCrearPropiedad() {
         ModelAndView mav = new ModelAndView("form_propiedad");
         mav.addObject("propiedad", new Propiedad());
-        mav.addObject("usuarios", usuarioService.getAll());
+        mav.addObject("usuarios", usuarioService.getUsuariosDisponibles());
         mav.addObject("boton", "crear");
         mav.addObject("action", "crear");
         mav.addObject("ciudades", Ciudad.values());
@@ -97,10 +99,12 @@ public class PropiedadController {
     @GetMapping("/form/{id}")
     public ModelAndView formActualizarPropiedad(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("form_propiedad");
-        mav.addObject("usuarios", usuarioService.getAll());
+        mav.addObject("usuarios", usuarioService.getUsuariosDisponibles());
         mav.addObject("propiedad", propiedadService.getById(id));
         mav.addObject("boton", "Actualizar");
+
         mav.addObject("action", "actualizar");
+
         mav.addObject("ciudades", Ciudad.values());
         mav.addObject("tipoPropiedad", TipoPropiedad.values());
         mav.addObject("transacciones", Transaccion.values());

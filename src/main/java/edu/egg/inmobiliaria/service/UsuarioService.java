@@ -3,6 +3,8 @@ package edu.egg.inmobiliaria.service;
 import edu.egg.inmobiliaria.entity.Usuario;
 import edu.egg.inmobiliaria.repository.RolRepository;
 import edu.egg.inmobiliaria.repository.UsuarioRepository;
+import org.hibernate.Filter;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +19,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.function.Supplier;
@@ -27,6 +31,8 @@ import static java.util.Collections.singletonList;
 @Service
 public class UsuarioService implements UserDetailsService {
 
+    @PersistenceContext
+    private final EntityManager usuarioManager;
 
     private final UsuarioRepository usuarioRepository;
     private final BCryptPasswordEncoder encriptador;
@@ -34,7 +40,8 @@ public class UsuarioService implements UserDetailsService {
     private ImageService imageService;
 
     @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder encriptador, RolRepository rolRepository, ImageService imageService) {
+    public UsuarioService(EntityManager usuarioManager, UsuarioRepository usuarioRepository, BCryptPasswordEncoder encriptador, RolRepository rolRepository, ImageService imageService) {
+        this.usuarioManager = usuarioManager;
         this.usuarioRepository = usuarioRepository;
         this.encriptador = encriptador;
         this.rolRepository = rolRepository;
@@ -96,10 +103,19 @@ public class UsuarioService implements UserDetailsService {
 
     //devuelve la lista de todos los usuarios
     @Transactional(readOnly = true)
-    public List<Usuario> getAll(){
+    public List<Usuario> getUsuariosDisponibles(){
         return usuarioRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public List<Usuario> getUsuariosDisponibles(Boolean eliminado){
+        Filter filtro =  usuarioManager.unwrap(Session.class).enableFilter("filtroUsuarioEliminado");
+        filtro.setParameter("eliminado", eliminado);
+        List<Usuario> usuariosDisponibles = usuarioRepository.findAll();
+        usuarioManager.unwrap(Session.class).disableFilter("filtroUsuarioEliminado");
+
+        return usuariosDisponibles;
+    }
     //habilita un usuario
     @Transactional
     public void enableById(Long id){
