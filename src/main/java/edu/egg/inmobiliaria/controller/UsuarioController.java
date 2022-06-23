@@ -48,19 +48,33 @@ public class UsuarioController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping
-    public ModelAndView getUsuarios(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("index"); // armar html con tabla para q el admin vea los usuarios
+    @GetMapping("/todoslosusuarios")
+    public ModelAndView getUsuarios(HttpServletRequest request, @RequestParam(value = "eliminado", required = false, defaultValue = "false") boolean eliminado){
+        ModelAndView mav = new ModelAndView("lista_usuarios"); // armar html con tabla para q el admin vea los usuarios
         Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (inputFlashMap != null) {
             mav.addObject("success", inputFlashMap.get("success"));
         }
 
-        mav.addObject("usuarios", usuarioService.getAll());
+        mav.addObject("usuarios", usuarioService.getUsuariosDisponibles(eliminado));
         return mav;
     }
+/*
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/todoslosusuarios/{eliminado}")
+    public ModelAndView getUsuarios(HttpServletRequest request, @PathVariable Boolean eliminado) {
+        ModelAndView mav = new ModelAndView("lista_usuarios"); // armar html con tabla para q el admin vea los usuarios
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 
+        if (inputFlashMap != null) {
+            mav.addObject("success", inputFlashMap.get("success"));
+        }
+
+        mav.addObject("usuarios", usuarioService.getUsuariosDisponibles(eliminado));
+        return mav;
+    }
+    */
    
     @GetMapping("/sign-up")
     public ModelAndView signup(HttpServletRequest solicitud, Principal principal) {
@@ -96,20 +110,20 @@ public class UsuarioController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/perfil")
-    public ModelAndView obtenerPerfilUsuario(HttpSession session) throws Exception {
+    public ModelAndView obtenerPerfilUsuario(HttpSession session, @RequestParam(value = "eliminado", required = false, defaultValue = "false") boolean eliminado) throws Exception {
         ModelAndView mav = new ModelAndView("perfil");
         Long idUsuario = (Long) session.getAttribute("id");
         mav.addObject("usuario", usuarioService.getById(idUsuario));
-        mav.addObject("propiedades", propiedadService.obtenerPorIdUsuario(idUsuario));
+        mav.addObject("propiedades", propiedadService.obtenerPorIdUsuario(idUsuario, eliminado));
         return mav;
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     @GetMapping("/perfil/{id}")
-    public ModelAndView obtenerUsuarioPorId(@PathVariable Long id) throws Exception {
+    public ModelAndView obtenerUsuarioPorId(@PathVariable Long id, @RequestParam(value = "eliminado", required = false, defaultValue = "false") boolean eliminado) throws Exception {
         ModelAndView mav = new ModelAndView("perfil");
         mav.addObject("usuario", usuarioService.getById(id));
-        mav.addObject("propiedades", propiedadService.obtenerPorIdUsuario(id));
+        mav.addObject("propiedades", propiedadService.obtenerPorIdUsuario(id, eliminado));
         return mav;
     }
 
