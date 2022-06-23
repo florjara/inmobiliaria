@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+  <link rel="stylesheet" href="../static/css/login.css">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
+        rel="stylesheet">
+  <title> Inmobiliaria </title>
+</head>
+
+
+<body>
+<div class="container-fluid text-center">
+  <h1>Crear Rol</h1>
+  <br>
+  <form th:action="@{/roles/create}" th:object="${rol}" method="post" style="max-width:350px; margin: 0 auto;"
+        class="needs-validation" novalidate>
+
+    <div class="border border-secondary p-3 rounded">
+
+
+      <input type="hidden" th:field="*{id}">
+
+      <br>
+      <div>
+        <input type="text" th:field="*{nombre}" id="nombre" class="form-control" placeholder="USER" required>
+        <label for="nombre">Nombre</label>
+        <div class="invalid-feedback">El nombre es requerido</div>
+      </div>
+
+      <br>
+      <div>
+        <button class="btn btn-primary" type="submit">Crear</button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

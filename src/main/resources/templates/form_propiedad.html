@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head >
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/anuncioPropiedades.css}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,200;1,500&display=swap"
+              rel="stylesheet">
+        <link rel="stylesheet" href="../static/css/anuncioPropiedades.css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <title> Registro de propiedad </title>
+    </head>
+
+    <header th:replace="fragments/header :: header"></header>
+
+    <body>
+        <main>
+            <h1 th:text="${boton}=='Actualizar' ? 'Actualizar propiedad': 'Formulario de registro de propiedades'">Formulario de registro de propiedades</h1>
+            <div class="form-contenedor">
+
+                <form class="formulario needs-validation" th:action="@{/propiedades/__${action}__}" th:object="${propiedad}" method="post"
+                      autocomplete="off"  enctype="multipart/form-data" novalidate >
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="input_group">
+                        <label for="titulo">Titulo</label>
+                        <input type="text" maxlength="25" class="form-control" th:field="*{titulo}" id="titulo" required
+                               placeholder="Casa a estrenar">
+                        <div class="invalid-feedback">Ingrese un título.</div>
+                    </div>
+
+                    <div class="input_group">
+                        <label for="tipo_trans">Tipo de transacción</label>
+                        <select name="tipo_trans" th:field="*{tipoTransaccion}" id="tipo_trans">
+                            <option
+                                th:each="transaccion : ${transacciones}"
+                                th:text="${transaccion.nombre}"
+                                th:value="${transaccion}"
+                                ></option>
+                        </select>
+                        <div class="invalid-feedback">Ingrese un tipo de transaccion.</div>
+                    </div>
+
+                    <div class="input_group">
+                        <label for="tipo_propiedad">Tipo de propiedad</label>
+                        <select name="tipo_propiedad" id="tipo_propiedad" th:field="*{tipo}" required>
+                            <option
+                                th:each="tipo : ${tipoPropiedad}"
+                                th:text="${tipo.nombre}"
+                                th:value="${tipo}"
+                                ></option>
+                        </select>
+                        <div class="invalid-feedback">Ingrese un tipo de propiedad.</div>
+                    </div>
+
+                    <div class="input_group">
+                        <label for="ambientes">Ambientes</label>
+
+                        <input placeholder="cantidad de ambientes" type="number" max="10" min="1" class="form-control" th:field="*{ambiente}"
+                               id="ambientes" required>
+
+                        <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('ambientes')}" th:errors="*{ambientes}"></div>-->
+                    </div>
+
+                    <div class="input_group">
+                        <label for="banio">Baños</label>
+
+                        <input placeholder="cantidad de baños" type="number" max="10" min="1" class="form-control" th:field="*{banos}"
+                               id="banio" required>
+
+                        <!--<div class="text-danger mt-2" th:if="${#fields.hasErrors('banio')}" th:errors="*{banio}"></div>-->
+                    </div>
+
+                    <div class="input_group">
+                        <label for="garage">Garage/Estacionamiento</label>
+                        <select name="garage" id="garage" th:field="*{estacionamiento}">
+                            <option value="1"> Si </option>
+                            <option value="0"> No</option>
+                        </select>
+                    </div>
+
+                    <div class="input_group">
+                        <label for="patio">Patio/Balcon</label>
+                        <select name="patio" th:field="*{patio}" id="patio">
+                            <option value="1"> Si </option>
+                            <option value="0"> No</option>
+                        </select>
+                    </div>
+
+                    <div class="input_group">
+                        <label for="precio">Precio de la propiedad</label>
+                        <input placeholder="$1000000" type="number" maxlength="15" class="form-control"
+                               th:field="*{precio}" id="precio" required>
+                        <div class="invalid-feedback">Ingrese el precio de la propiedad.</div>
+                    </div>
+
+                    <div class="input_group">
+                        <label for="ciudad">Ciudad</label>
+
+                        <select class="form-control" name="ciudad" th:field="*{ciudad}" id="ciudad" required>
+                            <option
+                                th:each="ciudad : ${ciudades}"
+                                th:text="${ciudad.nombre}"
+                                th:value="${ciudad}"
+                                ></option>
+                        </select>
+                      <div class="invalid-feedback">Ingrese la ciudad.</div>
+                    </div>
+
+                    <div class="input_group">
+                        <label for="direccion">Ubicación de la propiedad</label>
+                        <input placeholder="Av. Uruguay 1230" type="text" maxlength="35" class="form-control" th:field="*{direccion}"
+                               id="direccion">
+                    </div>
+
+                    <div class="input_group">
+                        <label for="descripcion">Descripción extra de la propiedad</label> <br>
+                        <textarea cols="25" rows="5" th:field="*{descripcion}" id="descripcion" maxlength="225"></textarea>
+                    </div>
+
+                    <div class="input_group">
+                        <label for="photo">Subir imagen</label>
+                        <input class="boton_submit" type="file" name="photo" accept="image/*" multiple>
+                    </div>
+
+
+                    <button class="boton_submit" type="submit" th:text="${boton}=='Actualizar' ? 'Actualizar Propiedad' : 'Cargar Propiedad' "></button>
+                </form>
+
+                <div class="fondo-form-propiedad">
+
+                </div>
+            </div>
+
+        </main>
+         <script th:src="@{/js/validation.js}"></script>
+        <!--<script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
+    </body>
+    <footer th:replace="fragments/footer :: footer"></footer>
+
+</html>
