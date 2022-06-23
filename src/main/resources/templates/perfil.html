@@ -57,7 +57,8 @@
             </section>
             <section class="mis-propiedades">
                 <h2>Propiedades</h2>
-                <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
+                <div th:if="${success}" th:text="${success}" class="error-filtro" role="alert"></div>
+                <br>
                 <div class="anuncio">
                     <div th:each="propiedad : ${propiedades}">
                         <div class="anuncio-contenido">

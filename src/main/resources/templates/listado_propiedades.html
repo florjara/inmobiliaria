@@ -19,7 +19,8 @@
     <header th:replace="fragments/header :: header"></header>
     <body>
 
-        <div th:if="${success}" th:text="${success}" class="alert alert-success" role="alert"></div>
+        <div th:if="${success}" th:text="${success}" class="error-filtro" role="alert"></div>
+        <br>
 
         <form th:action="@{propiedades/filtro}" th:object="${prop}" method="post" class="buscador-form">
 

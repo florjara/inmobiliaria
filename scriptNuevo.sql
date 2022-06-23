@@ -11,15 +11,15 @@ INSERT INTO propiedad(id,ambiente,banos,ciudad,descripcion,direccion,eliminado,e
 0,1,1,100000,"CASA","ALQUILER","Casa en Barrio Las Orquideas",2),
 
 (7,6,3,"OBERA", "Preciosa casa desarrollada en dos plantas, con piscina en un entorno inmejorable.
-Terreno de 505m2 !!","La Paz 500",0,1,1,9797775,"CASA","VENTA","Venta Casa con Pileta Oberá Misiones",2),
+Terreno de 505m2 !!","La Paz 500",0,1,1,9797775,"CASA","VENTA","Venta Casa con Pileta Oberá",2),
 
 (9,3,1,"POSADAS", "Consta de dos dormitorios (uno con aire acondicionado), baño, Cocina-comedor, galerias al frente y al costado, 
 y cochera","Luchessi 2748. Entre Gomez portinho y Sebastopol",
 0,1,1,70000,"CASA","ALQUILER","Casa de 2 Dorm. Luchessi",2),
 
-(2,7,1,"OBERA", "Casa amplia en barrio muy tranquilo, 3 dormitorios, cocina, comedor, living, cochera techada
- para 4 autos, quincho, pileta, muros perimetrales, sobre calle asfaltada con buena iluminación",
-"Olavarria 1254",0,1,1,9225089,"CASA","VENTA","Amplia Casa",2),
+(2,7,1,"OBERA", "Hermosa oficina a estrenar, ubicada en el macrocentro. Edificio equipado con ascensor 
+de ultima generación, porteros con apertura de puerta de entrada al edificio",
+"Olavarria 1254",0,1,1,9225089,"OFICINA","VENTA","Amplia Casa",2),
 
 (3,3,1,"POSADAS", "Departamento sobre calle Mbororé Nº2635 casi calle Iguazú. a pasos del centro de Posadas.
 Cuenta con dos habitaciones, cocina con alacena y bajo mesada, sector de lavadero, amplio baño, aire acondicionado, 
@@ -43,3 +43,5 @@ INSERT INTO image(propiedad_id,image)VALUES
 (7,'casa7a.jpg'),(7,'casa7b.jpg'),(7,'casa7c.jpg'),(7,'casa7d.jpg'),
 (8,'casa8a.jpg'),(8,'casa8b.jpg'),(8,'casa8c.jpg'),
 (9,'casa9a.jpg'),(9,'casa9b.jpg'),(9,'casa9c.jpg'),(9,'casa9d.jpg');
+
+UPDATE usuario SET image ='marta.jpg' WHERE id=1;
