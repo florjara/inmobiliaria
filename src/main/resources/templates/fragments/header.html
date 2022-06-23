@@ -2,7 +2,7 @@
     <div class="logo">
         <!-- <img th:src="@{/imagenes/logo.jpg}" width="100" height="100"> -->
     </div>
-    <nav class="nav">
+    <div class="navegador">
         <a th:href="@{/}">Home</a>
         <a th:href="@{/propiedades}">Explorar</a>
 
@@ -11,5 +11,5 @@
         <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/login}">Iniciar sesión</a>
         <a sec:authorize="!isAuthenticated()" th:href="@{/usuarios/sign-up}">Registrarse</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Salir</a>
-    </nav>
+    </div>
 </header>

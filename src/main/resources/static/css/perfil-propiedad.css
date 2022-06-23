@@ -13,6 +13,7 @@ body {
 h1 {
 
     text-align: center;
+    color: #707070;
 }
 
 
@@ -22,26 +23,19 @@ h1 {
     grid-template-rows: 1f;
     padding-top: 10px;
     height: 100px;
-    margin-bottom: 50px;
 }
 
-.logo {
-    margin-left: 50px;
-    background: none;
-}
-
-#navegador {
-    width: 800px;
+.navegador {
     display: grid;
-    grid-template-columns: repeat(7, auto);
-    grid-template-rows: 1;
+    grid-template-columns: repeat(5, auto);
+    grid-template-rows: auto;
     grid-column-gap: 10px;
     text-align: center;
     align-items: center;
     padding-right: 40px;
 }
 
-#navegador a {
+.navegador a {
     background: #f1f1f1;
     border-radius: 10px;
     height: 40px;
@@ -57,7 +51,11 @@ h1 {
     text-align: center;
 }
 
-.link-card-verPropietario{
+.navegador a:hover {
+    background: #7bc6d3;
+}
+
+.link-card-verPropietario {
     background: #7bc6d3;
     border-radius: 10px;
     height: 40px;
@@ -146,7 +144,7 @@ h1 {
 
 .contenedor-informacion {
     width: 95%;
-    height: 350px;
+    height: 450px;
     margin: auto;
     margin-top: 50px;
     border-radius: 20px;
@@ -160,8 +158,8 @@ h1 {
 
 }
 
-.contenedor-informacion-propiedad{
-    grid-area: 1 / 1 / 2 / 2; 
+.contenedor-informacion-propiedad {
+    grid-area: 1 / 1 / 2 / 2;
     margin-top: 20px;
     margin-left: 20px;
     margin-bottom: 20px;
@@ -169,19 +167,19 @@ h1 {
     width: 80%;
 }
 
-.contenedor-informacion-propiedad *{
+.contenedor-informacion-propiedad * {
     background: none;
 }
 
 
 
-.contenedor-informacion-propiedad h4{
-    font-size:16px;
-   
+.contenedor-informacion-propiedad h4 {
+    font-size: 16px;
+
 }
 
-.informacion-tipo-venta{
-    display:grid;
+.informacion-tipo-venta {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 10px;
@@ -192,13 +190,13 @@ h1 {
     background: #f1f1f1;
 }
 
-.informacion-tipo-venta p{
+.informacion-tipo-venta p {
     font-size: 20px;
     color: #707070;
 }
 
-.informacion-tipo-propiedad{
-    display:grid;
+.informacion-tipo-propiedad {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 10px;
@@ -207,16 +205,16 @@ h1 {
     width: 30%;
     margin-bottom: 15px;
     background: #f1f1f1;
-    
+
 }
 
-.informacion-tipo-propiedad p{
+.informacion-tipo-propiedad p {
     font-size: 20px;
     color: #707070;
 }
 
-.informacion-precio{
-    display:grid;
+.informacion-precio {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     justify-items: center;
@@ -226,33 +224,55 @@ h1 {
     background: #f1f1f1;
 }
 
-.informacion-precio p{
+.informacion-precio p {
     font-size: 28px;
+    color: #707070;
 }
 
-.icono{
-    display:grid;
+.iconos {
+    display: grid;
     grid-template-columns: repeat(8, auto);
     grid-template-rows: 1fr;
-    width:60%;
+    width: 60%;
     background: #f1f1f1;
 }
 
-.icono *{
+.iconos * {
     background: none;
     font-size: 20px;
 }
 
-.contenedor-informacion-descripcion{
+.iconos img{
+    width: 25px;
+    height: 25px;
+}
+
+.ubicacion {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+    width: 40%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.ubicacion *{
+    color: #707070;
+    font-size: 20px;
+}
+
+
+.contenedor-informacion-descripcion {
     overflow: hidden;
     margin-top: 15px;
 }
 
-.contenedor-informacion-descripcion span{
-    font-size:18px;
+.contenedor-informacion-descripcion span {
+    font-size: 18px;
 }
 
-.contenedor-informacion-descripcion p{
+.contenedor-informacion-descripcion p {
     color: #707070;
     font-size: 16px;
 }
@@ -260,7 +280,7 @@ h1 {
 
 
 
-.perfil{
+.perfil {
     grid-area: 1 / 2 / 2 / 3;
     display: grid;
     justify-items: center;
@@ -269,7 +289,7 @@ h1 {
     margin-right: 100px;
     margin-bottom: 20px;
     background: #f1f1f1;
-    
+
 }
 
 .contenedor-perfil {
@@ -285,8 +305,8 @@ h1 {
     align-items: center;
 }
 
-.contenedor-perfil p{
-    
+.contenedor-perfil p {
+
     background: #f1f1f1;
 }
 
@@ -301,49 +321,17 @@ h1 {
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
 }
 
-.contenedor-perfil-foto img{
+.contenedor-perfil-foto img {
     border-radius: 50%;
 }
 
 
-/* Estilo al mapa */
-
-.contenedor-mapa{
-    text-align: center;
-    margin: 0 auto;
-    margin-top:10px;
-    width: 830px;
-    height: 620px;
-    border-radius: 20px;
-    background: #f1f1f1;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.35);
-}
-
-.ubicacion{
-    display: flex;
-    gap: 10px;
-  
-    justify-content: center;
-    margin-top:50px;
-    
-}
-
-.ubicacion *{
-   font-size: 20px;
+.ubicacion * {
+    font-size: 20px;
     background: none;
     color: #707070;
 }
 
-.contenedor-mapa iframe{
-    border-radius:20px;
-}
-
-.contenedor-mapa *{
-    background: none;
-}
 
 
 
