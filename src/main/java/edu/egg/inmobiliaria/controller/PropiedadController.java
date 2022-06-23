@@ -72,11 +72,11 @@ public class PropiedadController {
     }
 
     @PostMapping("/filtro")
-    public RedirectView filtrarPropiedades(PropiedadFiltro propiedad, RedirectAttributes attributes) {
+    public RedirectView filtrarPropiedades(PropiedadFiltro propiedad, RedirectAttributes attributes, @RequestParam(value = "eliminado", required = false, defaultValue = "false") boolean eliminado) {
         RedirectView rv = new RedirectView("/propiedades");
 
         attributes.addFlashAttribute("prop", propiedad);
-        attributes.addFlashAttribute("propiedades", propiedadService.getAll(propiedad));
+        attributes.addFlashAttribute("propiedades", propiedadService.getAll(propiedad,eliminado));
 
         return rv;
     }

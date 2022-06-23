@@ -17,12 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PropiedadService {
 
+    @PersistenceContext
     private final EntityManager propiedadManager;
 
     private final PropiedadRepository propiedadRepository;
@@ -123,7 +125,7 @@ public class PropiedadService {
         Optional<Integer> ambienteOpt = Optional.ofNullable(p.getAmbiente());
         Optional<Integer> banosOpt = Optional.ofNullable(p.getBanos());
 
-       if (minOpt.isPresent() || maxOpt.isPresent()|| banosOpt.isPresent() || ambienteOpt.isPresent()) {
+        if (minOpt.isPresent() || maxOpt.isPresent() || banosOpt.isPresent() || ambienteOpt.isPresent()) {
             return propiedadRepository.findAll(ciudadOpt.get(),
                     p.getTipo(), p.getTipoTransaccion(), minOpt.orElse(0d), maxOpt.orElse(Double.MAX_VALUE),
                     banosOpt.orElse(0), ambienteOpt.orElse(0));
@@ -134,12 +136,12 @@ public class PropiedadService {
 
     @Transactional(readOnly = true)
     public List<Propiedad> getAll(PropiedadFiltro p, Boolean eliminado) {
-        Filter filtro =  propiedadManager.unwrap(Session.class).enableFilter("filtroPropiedadEliminada");
+        Filter filtro = propiedadManager.unwrap(Session.class).enableFilter("filtroPropiedadEliminada");
         filtro.setParameter("eliminado", eliminado);
         if (p.getTipo() == null && p.getTipoTransaccion() == null) {
             List<Propiedad> propiedadesDisponibles = propiedadRepository.findAll();
             propiedadManager.unwrap(Session.class).disableFilter("filtroPropiedadEliminada");
-             return propiedadesDisponibles;
+            return propiedadesDisponibles;
         }
         Optional<Ciudad> ciudadOpt = Optional.ofNullable(p.getCiudad());
         Optional<Double> minOpt = Optional.ofNullable(p.getPrecioMin());
@@ -147,10 +149,11 @@ public class PropiedadService {
         Optional<Integer> ambienteOpt = Optional.ofNullable(p.getAmbiente());
         Optional<Integer> banosOpt = Optional.ofNullable(p.getBanos());
 
-        if (minOpt.isPresent() || maxOpt.isPresent()|| banosOpt.isPresent() || ambienteOpt.isPresent()) {
+        if (minOpt.isPresent() || maxOpt.isPresent() || banosOpt.isPresent() || ambienteOpt.isPresent()) {
             List<Propiedad> propiedadesDisponibles = propiedadRepository.findAll(ciudadOpt.get(),
                     p.getTipo(), p.getTipoTransaccion(), minOpt.orElse(0d), maxOpt.orElse(Double.MAX_VALUE),
                     banosOpt.orElse(0), ambienteOpt.orElse(0));
+            propiedadManager.unwrap(Session.class).disableFilter("filtroPropiedadEliminada");
             return propiedadesDisponibles;
         }
 
@@ -172,7 +175,7 @@ public class PropiedadService {
 
     @Transactional(readOnly = true)
     public List<Propiedad> obtenerPorIdUsuario(Long id, Boolean eliminado) {
-        Filter filtro =  propiedadManager.unwrap(Session.class).enableFilter("filtroPropiedadEliminada");
+        Filter filtro = propiedadManager.unwrap(Session.class).enableFilter("filtroPropiedadEliminada");
         filtro.setParameter("eliminado", eliminado);
         List<Propiedad> propiedadesDisponibles = propiedadRepository.obtenerPorIdUsuario(id);
         propiedadManager.unwrap(Session.class).disableFilter("filtroPropiedadEliminada");
